@@ -1,0 +1,46 @@
+{
+    "0": {"name":"startFunction","format":"32s"},
+    "1": {"name":"endFunction","format":""},
+    "2": {"name":"sprite","format":"32si"},
+    "3": {"name":"loopRest","format":""},
+    "4": {"name":"StartBlock","format":"ii"},
+    "5": {"name":"endBlock","format":""},
+    "6": {"name":"label","format":"i"},
+    "7": {"name":"gotoLabel","format":"i"},
+    "8": {"name":"defSubroutine","format":"32s"},
+    "9": {"name":"endSubroutine","format":""},
+    "10": {"format":"32s"},
+
+    "15": {"format":"i"},
+
+    "18": {"format":"iii"},
+
+    "26": {"format":"32s"},
+
+    "39": {"format":"iii"},
+
+    "41": {"format":"iiii"},
+
+    "4001": {"format":"32si"},
+
+    "7000": {"format":"32s"},
+
+    "7001": {"format":"iiii"},
+    "7003": {"format":"32s"},
+    "7004": {"format":"16s"},
+
+    "8011": {"format":"iii"},
+
+    "9002": {"name":"AttackLevel?","format":"i"},
+    "9003": {"name":"Damage","format":"i"},
+
+    "9274": {"format":"i"},
+
+
+    "11035": {"name":"HitLow?","format":"i"},
+    "11037": {"format":"i"},
+
+    "14068": {"name":"WhiffCancel","format":"32s"},
+    "14069": {"name":"HitCancel","format":"32s"}
+
+}
