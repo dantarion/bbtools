@@ -10,7 +10,8 @@ def sanitize(s):
 def parse_bbscript_routine(end = -1):
     global f
     currentCMD = -1
-    while currentCMD != 1 != f.tell() != end:
+    while currentCMD != 1 and f.tell() != end:
+        loc = f.tell()
         currentCMD, = struct.unpack("<I",f.read(4))
         if str(currentCMD) not in commandDB:
             print "\tUnknown_{0}('{1}')".format(currentCMD,f.read(commandSizeDB[str(currentCMD)]-4).encode("hex"))
@@ -20,17 +21,19 @@ def parse_bbscript_routine(end = -1):
                 dbData["name"] = "Unknown{0}".format(currentCMD)
 
             if "format" in dbData:
-                cmdData = struct.unpack(dbData["format"],f.read(struct.calcsize(dbData["format"])))
+                cmdData = list(struct.unpack(dbData["format"],f.read(struct.calcsize(dbData["format"]))))
             if currentCMD == 0:
-                print "@State"
+                print "@State(0x{0:X})".format(loc)
                 print "def {0}():".format(cmdData[0].strip("\x00"))
             elif currentCMD == 8:
-                print "\n@Subroutine"
+                print "\n@Subroutine(0x{0:X})".format(loc)
                 print "def {0}():".format(cmdData[0].strip("\x00"))
             elif currentCMD in [1,9]:
                 pass
             else:
                 print "\t{0}({1})".format(dbData["name"],",".join(map(sanitize,cmdData)))
+        if currentCMD in [14002]:
+            print
 
 
 def parse_bbscript(filename):
@@ -40,6 +43,8 @@ def parse_bbscript(filename):
     FUNCTION_COUNT, = struct.unpack("<I",f.read(4))
     f.seek(4+0x20)
     initEnd, = struct.unpack("<I",f.read(4))
+    initEnd = initEnd+4+0x24*FUNCTION_COUNT
+    print hex(initEnd)
     f.seek(4+0x24*(FUNCTION_COUNT))
     parse_bbscript_routine(initEnd)
     for i in range(0,FUNCTION_COUNT):

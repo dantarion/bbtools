@@ -16,31 +16,94 @@
     "18": {"format":"iii"},
 
     "26": {"format":"32s"},
+    "28": {"format":"i32s"},
+    "29": {"format":"ii"},
 
     "39": {"format":"iii"},
 
     "41": {"format":"iiii"},
+    "43": {"format":"i"},
+    "1013": {"name":"physicsXImpulse","format":"i"},
+    "1020": {"name":"physicsYImpulse","format":"i"},
 
+
+    "2042": {"format":"i"},
+
+    "4000": {"format":"32si"},
     "4001": {"format":"32si"},
 
     "7000": {"format":"32s"},
 
-    "7001": {"format":"iiii"},
+    "7001": {"format":"16s"},
     "7003": {"format":"32s"},
     "7004": {"format":"16s"},
+    "7006": {"format":"16s4i4i4i4i"},
+    "7010": {"format":"i16s"},
 
     "8011": {"format":"iii"},
 
     "9002": {"name":"AttackLevel?","format":"i"},
     "9003": {"name":"Damage","format":"i"},
 
+
+    "9070": {"name":"AirPushbackX","format":"i"},
+
+    "9082": {"name":"AirPushbackY","format":"i"},
+    "9084": {"format":"i"},
+
+    "9166": {"name":"AirUntechableTime","format":"i"},
+
+    "9214": {"name":"PushbackX","format":"i"},
     "9274": {"format":"i"},
 
+    "9322": {"name":"GroundedHitstunAnimation","format":"i"},
+    "9334": {"name":"AirHitstunAnimation","format":"i"},
 
+    "11000": {"name":"Hitstop","format":"i"},
     "11035": {"name":"HitLow?","format":"i"},
     "11037": {"format":"i"},
 
-    "14068": {"name":"WhiffCancel","format":"32s"},
-    "14069": {"name":"HitCancel","format":"32s"}
+    "12000": {"name":"WalkFSpeed","format":"i"},
+    "12001": {"name":"WalkBSpeed","format":"i"},
+    "12002": {"format":"i"},
+    "12003": {"format":"i"},
+    "12004": {"name":"DashFSpeed","format":"i"},
+    "12005": {"name":"JumpV","format":"i"},
+    "12006": {"format":"i"},
+    "12013": {"format":"i"},
 
+    "12015": {"name":"Health","format":"i"},
+
+    "12017": {"format":"i"},
+    "12018": {"format":"i32s"},
+
+    "12030": {"format":"i"},
+    "12031": {"format":"i"},
+
+    "12034": {"format":"i"},
+    "12035": {"name":"AirBDashDuration","format":"i"},
+
+    "12038": {"format":"i"},
+    "12039": {"name":"AirDashBSpeed","format":"i"},
+
+    "12053": {"format":"10i"},
+    "12054": {"format":"ii"},
+
+    "14001": {"name":"Move_Register", "format":"32si"},
+    "14003": {"name":"Move_AirGround?", "format":"i"},
+    "14012": {"name":"Move_Input?", "format":"i"},
+    "14015": {"format":"iiiiii"},
+    "14022": {"format":"i"},
+    "14027": {"format":"32s"},
+    "14048": {"format":"32sii"},
+    "14049": {"format":"32s32sii"},
+
+    "14068": {"name":"WhiffCancel","format":"32s"},
+    "14069": {"name":"HitCancel","format":"32s"},
+
+    "15024": {"format":"32s32si"},
+    "15021": {"format":"i"},
+
+    "23001": {"format":"ii"},
+    "23148": {"format":"32s"}
 }
