@@ -13,8 +13,8 @@ def parse_bbscript_routine(end = -1):
     while currentCMD != 1 and f.tell() != end:
         loc = f.tell()
         currentCMD, = struct.unpack("<I",f.read(4))
-        if str(currentCMD) not in commandDB:
-            print "\tUnknown_{0}('{1}')".format(currentCMD,f.read(commandSizeDB[str(currentCMD)]-4).encode("hex"))
+        if "format" not in commandDB[str(currentCMD)]:
+            print "\tUnknown_{0}('{1}')".format(currentCMD,f.read(commandSizeDB[str(currentCMD)]["size"]-4).encode("hex"))
         else:
             dbData = commandDB[str(currentCMD)]
             if "name" not in dbData:
