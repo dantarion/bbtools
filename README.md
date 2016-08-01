@@ -19,3 +19,12 @@ The goal here is analyze the game files of several games made by Arc System Work
 
 Arcana Heart doesn't use bbscript, but it does use the same sprite format that ArcSys developed games uses.
 The same may be true of Extreme Butoden. Might as well make the code for these tools flexible enough to dump information and sprites for those games too.
+
+
+# Credits
+* @dantarion, main developer
+* @appleken, for helping on twitter and giving tons of insight and knowledge about these games I don't actually play
+
+# Shoutouts
+* AltimorTASDK for creating Xrd hitbox tools and Xrd Decrypter
+* asmodean for creating exah3pac
