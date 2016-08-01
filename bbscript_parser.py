@@ -65,4 +65,4 @@ def parse_bbscript(filename):
 
 
 
-parse_bbscript("output/char_kk_scr.pac.extracted/scr_kk.bin")
+parse_bbscript("output/char_rg_scr.pac.extracted/scr_rg.bin")

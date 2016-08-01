@@ -15,6 +15,7 @@
 
     "18": {"format":"iii"},
 
+    "21": {"format":"32s"},
     "26": {"format":"32s"},
     "28": {"format":"i32s"},
     "29": {"format":"ii"},
