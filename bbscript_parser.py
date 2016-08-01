@@ -1,4 +1,9 @@
 import os, struct, json
+from collections import defaultdict
+
+commandCounts = defaultdict(int)
+commandCalls = defaultdict(list)
+
 json_data=open("commandDB.json").read()
 commandDB = json.loads(json_data)
 def sanitize(s):
@@ -9,9 +14,11 @@ def sanitize(s):
 def parse_bbscript_routine(end = -1):
     global f,log
     currentCMD = -1
+    currentIndicator = "_PRE"
     while currentCMD != 1 and f.tell() != end:
         loc = f.tell()
         currentCMD, = struct.unpack("<I",f.read(4))
+        commandCounts[currentCMD] += 1
         if "format" not in commandDB[str(currentCMD)]:
             if log: log.write("\tUnknown_{0}('{1}')\n".format(currentCMD,f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")))
         else:
@@ -24,13 +31,16 @@ def parse_bbscript_routine(end = -1):
             if currentCMD == 0:
                 if log: log.write("@State(0x{0:X})\n".format(loc))
                 if log: log.write("def {0}():\n".format(cmdData[0].strip("\x00")))
+                currentIndicator = cmdData[0].strip("\x00")
             elif currentCMD == 8:
                 if log: log.write("\n@Subroutine(0x{0:X})\n".format(loc))
                 if log: log.write("def {0}():\n".format(cmdData[0].strip("\x00")))
+                currentIndicator = cmdData[0].strip("\x00")
             elif currentCMD in [1,9]:
                 pass
             else:
                 if log: log.write("\t{0}({1})\n".format(dbData["name"],",".join(map(sanitize,cmdData))))
+                commandCalls[currentCMD].append((currentIndicator,"\t{0}({1})\n".format(dbData["name"],",".join(map(sanitize,cmdData)))))
         if currentCMD in [14002]:
             log.write("\n")
 
@@ -56,3 +66,8 @@ def parse_bbscript(filename, outfilename=None):
         f.seek(4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine()
 parse_bbscript("output/char_rg_scr.pac.extracted/scr_rg.bin")
+print sorted(commandCounts.items(),cmp=lambda x,y: cmp(x[0],y[0]))
+for k,v in sorted(commandCalls.items(),cmp=lambda x,y: cmp(x[0],y[0])):
+    print k
+    for vv in v:
+        print v
