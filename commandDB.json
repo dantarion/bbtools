@@ -940,8 +940,8 @@
         "size": 8
     },
     "3028": {
-        "format": "ii",
-        "size": 12
+		"name": "ScreenShake",
+        "format": "ii"
     },
     "3029": {
         "format": "i",
@@ -1263,6 +1263,7 @@
         "size": 8
     },
     "7000": {
+		"name": "PlaySound",
         "format": "32s"
     },
     "7001": {
@@ -1668,8 +1669,8 @@
         "size": 4
     },
     "9286": {
-        "format": "i",
-        "size": 8
+		"name": "AttackP2",
+        "format": "i"
     },
     "9287": {
         "size": 4
