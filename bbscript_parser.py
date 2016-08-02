@@ -6,10 +6,14 @@ commandCalls = defaultdict(list)
 
 json_data=open("commandDB.json").read()
 commandDB = json.loads(json_data)
-def sanitize(s):
-    if isinstance(s,str):
-        s = "'{0}'".format(s.strip("\x00"))
-    return str(s).strip("\x00")
+def sanitizer(command):
+    def sanitize(s):
+        if isinstance(s,str):
+            s = "'{0}'".format(s.strip("\x00"))
+        elif command and "hex" in commandDB[str(command)]:
+            s = hex(s)
+        return str(s).strip("\x00")
+    return sanitize
 
 def parse_bbscript_routine(end = -1):
     global f,log
@@ -21,9 +25,9 @@ def parse_bbscript_routine(end = -1):
 
         loc = f.tell()
         currentCMD, = struct.unpack("<I",f.read(4))
-        if currentCMD in [4,14001]:
+        if currentCMD in [4,6,15,14001]:
             log.write("\n")
-        if currentCMD in [1,5,9,14002]:
+        if currentCMD in [1,5,9,16,14002]:
             currentIndent -= 1
         indent = " "*4*currentIndent
         commandCounts[currentCMD] += 1
@@ -48,23 +52,23 @@ def parse_bbscript_routine(end = -1):
             elif currentCMD in [1,9]:
                 pass
             else:
-                if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitize,cmdData))))
-                commandCalls[currentCMD].append((currentIndicator,"    {0}({1})\n".format(dbData["name"],",".join(map(sanitize,cmdData)))))
+                if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
+                commandCalls[currentCMD].append((currentIndicator,"    {0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 2:
             if log:
-                log.seek(-2,1)
+                log.seek(-1,1)
                 log.write("#Frame {0}->{1}\n".format(currentFrame,currentFrame+cmdData[1]))
             currentFrame = currentFrame+cmdData[1]
-        if currentCMD in [5,14002]:
+        if currentCMD in [5,16,14002]:
             log.write("\n")
-        if currentCMD in [0,4,8,14001]:
+        if currentCMD in [0,4,8,15,14001]:
             currentIndent += 1
 
 def parse_bbscript(filename, outfilename=None):
     global commandDB,f,log
     log = None
     if outfilename:
-        log = open(outfilename,"w")
+        log = open(outfilename,"w+b")
     print "'''{0}'''".format(filename)
     if log: log.write("'''{0}'''\n".format(filename))
     f = open(filename,"rb")
@@ -81,8 +85,22 @@ def parse_bbscript(filename, outfilename=None):
         FUNCTION_OFFSET, = struct.unpack("<I",f.read(4))
         f.seek(4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine()
-parse_bbscript("output/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_ex.py")
-parse_bbscript("output2/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_cp.py")
+#    log.seek(0)
+#    data = log.read()
+#    log.seek(0)
+#    from pygments import highlight
+#    from pygments.lexers import PythonLexer
+#    from pygments.formatters import HtmlFormatter
+#    log.write("<style type='text/css'>\n")
+#    log.write(HtmlFormatter().get_style_defs('.highlight'))
+#    log.write("</style>\n")
+#    log.write(highlight(data, PythonLexer(), HtmlFormatter()))
+    log.close()
+
+#parse_bbscript("output/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_ex.py")
+#parse_bbscript("output2/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_cp.py")
+parse_bbscript("scr_kk.bin","kk_cp.txt")
+parse_bbscript("scr_rg.bin","kk_rg.txt")
 total = sum(commandCounts.values())
 tableCount = 0
 for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
