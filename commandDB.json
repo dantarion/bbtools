@@ -1263,22 +1263,24 @@
         "size": 8
     },
     "7000": {
-		"name": "PlaySound",
+        "name":"SFX_0",
         "format": "32s"
     },
     "7001": {
+        "name":"SFX_1",
         "format": "16s"
     },
     "7002": {
-        "auto": "autostr",
+        "name": "SFX_2",
         "format": "32s",
         "size": 36
     },
     "7003": {
-        "name": "playSE",
+        "name": "SFX_3",
         "format": "32s"
     },
     "7004": {
+        "name": "SFX_4",
         "format": "16s"
     },
     "7006": {
