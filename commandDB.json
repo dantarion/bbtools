@@ -40,6 +40,7 @@
         "format": ""
     },
     "10": {
+        "name":"runSubroutine",
         "format": "32s"
     },
     "11": {
@@ -188,10 +189,12 @@
         "size": 4
     },
     "56": {
-        "size": 4
+        "name":"else?",
+        "format":""
     },
     "57": {
-        "size": 4
+        "name":"endElse",
+        "format":""
     },
     "58": {
         "size": 44
@@ -2640,6 +2643,7 @@
         "size": 4
     },
     "14048": {
+        "hex":true,
         "format": "32sii"
     },
     "14049": {
@@ -3246,6 +3250,7 @@
         "size": 4
     },
     "23003": {
+        "format":"8i",
         "size": 36
     },
     "23004": {

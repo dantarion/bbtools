@@ -27,7 +27,7 @@ def parse_bbscript_routine(end = -1):
         currentCMD, = struct.unpack("<I",f.read(4))
         if currentCMD in [4,6,15,14001]:
             log.write("\n")
-        if currentCMD in [1,5,9,16,14002]:
+        if currentCMD in [1,5,9,16,57,14002]:
             currentIndent -= 1
         indent = " "*4*currentIndent
         commandCounts[currentCMD] += 1
@@ -59,9 +59,9 @@ def parse_bbscript_routine(end = -1):
                 log.seek(-1,1)
                 log.write("#Frame {0}->{1}\n".format(currentFrame,currentFrame+cmdData[1]))
             currentFrame = currentFrame+cmdData[1]
-        if currentCMD in [5,16,14002]:
+        if currentCMD in [5,16,57,14002]:
             log.write("\n")
-        if currentCMD in [0,4,8,15,14001]:
+        if currentCMD in [0,4,8,15,56,14001]:
             currentIndent += 1
 
 def parse_bbscript(filename, outfilename=None):
@@ -99,8 +99,8 @@ def parse_bbscript(filename, outfilename=None):
 
 #parse_bbscript("output/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_ex.py")
 #parse_bbscript("output2/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_cp.py")
-parse_bbscript("scr_kk.bin","kk_cp.txt")
-parse_bbscript("scr_rg.bin","kk_rg.txt")
+parse_bbscript("scr_kk.bin","kk_ex.txt")
+parse_bbscript("scr_rg.bin","rg_ex.txt")
 total = sum(commandCounts.values())
 tableCount = 0
 for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
