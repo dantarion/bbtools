@@ -130,9 +130,11 @@
         "size": 12
     },
     "39": {
+        "name":"random?",
         "format": "iii"
     },
     "40": {
+        "name":"if?",
         "size": 24,
         "format": "iiiii"
     },
@@ -143,6 +145,7 @@
         "size": 20
     },
     "43": {
+        "name":"case",
         "format": "i"
     },
     "44": {
@@ -182,11 +185,13 @@
         "size": 8
     },
     "54": {
+        "name":"cond3",
         "format": "ii",
         "size": 12
     },
     "55": {
-        "size": 4
+        "name":"endcond3",
+        "format":""
     },
     "56": {
         "name":"else?",
