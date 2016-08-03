@@ -316,8 +316,8 @@
         "size": 4
     },
     "1024": {
-        "format": "i",
-        "size": 8
+		"name": "YAccel",
+        "format": "i"
     },
     "1025": {
         "format": "ii",
@@ -358,8 +358,8 @@
         "size": 8
     },
     "1035": {
-        "format": "i",
-        "size": 8
+		"name": "PushY",
+        "format": "i"
     },
     "1036": {
         "format": "i",
