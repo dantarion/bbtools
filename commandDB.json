@@ -202,6 +202,7 @@
         "format":""
     },
     "58": {
+      "format":"32sii",
         "size": 44
     },
     "59": {
@@ -1369,6 +1370,7 @@
         "size": 16
     },
     "8011": {
+        "name":"SFX_FOOTSTEP?",
         "format": "iii"
     },
     "9000": {
@@ -3161,6 +3163,7 @@
         "size": 8
     },
     "22007": {
+        "name":"setInvincible",
         "format": "i",
         "size": 8
     },

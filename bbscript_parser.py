@@ -6,6 +6,9 @@ commandCalls = defaultdict(list)
 
 json_data=open("commandDB.json").read()
 commandDB = json.loads(json_data)
+
+json_data=open("characters.json").read()
+characters = json.loads(json_data)
 def sanitizer(command):
     def sanitize(s):
         if isinstance(s,str):
@@ -16,7 +19,7 @@ def sanitizer(command):
     return sanitize
 
 def parse_bbscript_routine(end = -1):
-    global f,log
+    global f,log,charName
     currentCMD = -1
     currentIndicator = "_PRE"
     currentFrame = 1
@@ -31,29 +34,28 @@ def parse_bbscript_routine(end = -1):
             currentIndent -= 1
         indent = " "*4*currentIndent
         commandCounts[currentCMD] += 1
+
+        dbData = commandDB[str(currentCMD)]
+        if "name" not in dbData:
+            dbData["name"] = "Unknown{0}".format(currentCMD)
         if "format" not in commandDB[str(currentCMD)]:
-            s = indent+"Unknown_{0}('{1}')\n".format(currentCMD,f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex"))
-            if log: log.write(s)
+            cmdData = [f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")]
         else:
-            dbData = commandDB[str(currentCMD)]
-            if "name" not in dbData:
-                dbData["name"] = "Unknown{0}".format(currentCMD)
-
             cmdData = list(struct.unpack(dbData["format"],f.read(struct.calcsize(dbData["format"]))))
+        commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
+        if currentCMD == 0:
+            if log: log.write(indent+"@State()\n".format(loc))
+            if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
+            currentIndicator = cmdData[0].strip("\x00")
+        elif currentCMD == 8:
+            if log: log.write(indent+"\n@Subroutine()\n".format(loc))
+            if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
+            currentIndicator = cmdData[0].strip("\x00")
+        elif currentCMD in [1,9]:
+            pass
+        else:
+            if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
 
-            if currentCMD == 0:
-                if log: log.write(indent+"@State()\n".format(loc))
-                if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
-                currentIndicator = cmdData[0].strip("\x00")
-            elif currentCMD == 8:
-                if log: log.write(indent+"\n@Subroutine()\n".format(loc))
-                if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
-                currentIndicator = cmdData[0].strip("\x00")
-            elif currentCMD in [1,9]:
-                pass
-            else:
-                if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
-                commandCalls[currentCMD].append((currentIndicator,"    {0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 2:
             if log:
                 log.seek(-1,1)
@@ -65,11 +67,12 @@ def parse_bbscript_routine(end = -1):
             currentIndent += 1
 
 def parse_bbscript(filename, outfilename=None):
-    global commandDB,f,log
+    global commandDB,f,log,charName
     log = None
     if outfilename:
         log = open(outfilename,"w+b")
     print "'''{0}'''".format(filename)
+    charName = filename[-6:-4]
     if log: log.write("'''{0}'''\n".format(filename))
     f = open(filename,"rb")
     FUNCTION_COUNT, = struct.unpack("<I",f.read(4))
@@ -96,18 +99,23 @@ def parse_bbscript(filename, outfilename=None):
 #    log.write("</style>\n")
 #    log.write(highlight(data, PythonLexer(), HtmlFormatter()))
     log.close()
+import glob
+for filename in glob.glob("output/char_*_scr.pac.extracted/scr_*.bin"):
+    parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
 
-#parse_bbscript("output/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_ex.py")
-#parse_bbscript("output2/char_kk_scr.pac.extracted/scr_kk.bin","scr/kk_cp.py")
-parse_bbscript("scr_kk.bin","kk_ex.txt")
-parse_bbscript("scr_kkea.bin","kkea_ex.txt")
 total = sum(commandCounts.values())
 tableCount = 0
-for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
+#for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
 
-    print "{4:3} {3:8.4f} {0:10} {1:10} {2}".format(k,v,commandDB[str(k)],float(v)/total*100,tableCount)
-    tableCount += 1
+#    print "{4:3} {3:8.4f} {0:10} {1:10} {2}".format(k,v,commandDB[str(k)],float(v)/total*100,tableCount)
+#    tableCount += 1
 #for k,v in sorted(commandCalls.items(),cmp=lambda x,y: cmp(x[0],y[0])):
-#    print k
+print "writing reports"
+for cmdId in commandCalls:
+    report = open("reports/"+str(cmdId)+".txt","w");
+    for thing in commandCalls[cmdId]:
+        report.write(str(thing)+"\n")
+    report.close()
+
 #    for vv in v:
 #        print v
