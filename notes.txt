@@ -1,0 +1,4 @@
+cond2(0)
+
+cond(2,54) = OVERDRIVE
+cond(2,112) = UNLIMITED CHARACTER

@@ -1,6 +1,5 @@
 import os, struct, json
-from collections import defaultdict
-
+from collections import defaultdict, OrderedDict
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 
@@ -19,7 +18,7 @@ def sanitizer(command):
     return sanitize
 
 def parse_bbscript_routine(end = -1):
-    global f,log,charName
+    global f,log,charName,j
     currentCMD = -1
     currentIndicator = "_PRE"
     currentFrame = 1
@@ -47,15 +46,19 @@ def parse_bbscript_routine(end = -1):
             if log: log.write(indent+"@State()\n".format(loc))
             if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
+            currentContainer = [cmdData[0].strip("\x00")]
+            j["States"].append(currentContainer)
         elif currentCMD == 8:
             if log: log.write(indent+"\n@Subroutine()\n".format(loc))
             if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
+            currentContainer = [cmdData[0].strip("\x00")]
+            j["Subroutines"].append(currentContainer)
         elif currentCMD in [1,9]:
             pass
         else:
             if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
-
+            currentContainer.append([dbData["name"]] + map(sanitizer(currentCMD),cmdData))
         if currentCMD == 2:
             if log:
                 log.seek(-1,1)
@@ -67,8 +70,11 @@ def parse_bbscript_routine(end = -1):
             currentIndent += 1
 
 def parse_bbscript(filename, outfilename=None):
-    global commandDB,f,log,charName
+    global commandDB,f,log,charName,j
     log = None
+    j = OrderedDict()
+    j["Subroutines"] = []
+    j["States"] = []
     if outfilename:
         log = open(outfilename,"w+b")
     print "'''{0}'''".format(filename)
@@ -99,8 +105,11 @@ def parse_bbscript(filename, outfilename=None):
 #    log.write("</style>\n")
 #    log.write(highlight(data, PythonLexer(), HtmlFormatter()))
     log.close()
+    jsonOut = open("scr/"+os.path.basename(filename).replace("bin","json"),"wb")
+    jsonOut.write(json.dumps(j,encoding='cp1252',indent=2))
+    jsonOut.close()
 import glob
-for filename in glob.glob("output/char_*_scr.pac.extracted/scr_*.bin"):
+for filename in glob.glob("dataSrc/scr_*.bin"):
     parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
 
 total = sum(commandCounts.values())
