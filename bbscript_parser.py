@@ -109,7 +109,8 @@ def parse_bbscript(filename, outfilename=None):
     jsonOut.write(json.dumps(j,encoding='cp1252',indent=2))
     jsonOut.close()
 import glob
-for filename in glob.glob("dataSrc/scr_*.bin"):
+for filename in glob.glob("output2/char_*/scr_*.bin"):
+    if "boss" in filename: continue
     parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
 
 total = sum(commandCounts.values())

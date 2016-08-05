@@ -1111,13 +1111,15 @@
         "size": 8
     },
     "4000": {
+        "name":"GFX_0",
         "format": "32si"
     },
     "4001": {
+      "name":"GFX_1",
         "format": "32si"
     },
     "4002": {
-        "auto": "autostr",
+        "name":"GFX_2",
         "format": "32s",
         "size": 36
     },
