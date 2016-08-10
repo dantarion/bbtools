@@ -15,14 +15,15 @@ Interceptor.attach(ptr("%s"), function(args) {
         if(cmd == 0)
             message = Memory.readCString(args[0].add(4));
         //if(cmd < 3 && cmd != 2)
-        if(this.context.ecx.toInt32() == 0x1FBF200C)
+        if(message != "")
             send([args[0].toInt32(),this.context.ecx.toInt32(),Memory.readUInt(args[0]),message]);
 });
 """ % 0x4D4870)
 
 def on_message(message, data):
     #print(message)
-    print("{1:X} {0:X} {2} >> {3}".format(*message["payload"]))
+    print("{1:X} {2} {3}".format(*message["payload"]))
 script.on('message', on_message)
 script.load()
+print("loaded")
 sys.stdin.read()
