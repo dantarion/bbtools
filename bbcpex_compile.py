@@ -20,7 +20,6 @@ bbscript_parser.commandDB = commandDB
 bbscript_parser.characters = characters
 if __name__ == "__main__":
     for character in characters:
-        if character != "kk": continue
         scr_filename = "input/bbcpex/char_{0}_scr.pac".format(character);
         if not os.path.isfile(scr_filename): continue
         print character

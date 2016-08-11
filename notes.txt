@@ -8,3 +8,5 @@ Unknown23036 physical vs projectile check
 cond2(41) = counter check
 Unknown30(17,15) LOOP
 cond(2,4)
+
+Unknown2000, 2006 has to do with multihit moves

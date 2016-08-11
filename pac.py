@@ -37,6 +37,8 @@ def iterpac(filename,func):
 
 #for filename in glob.glob("disc/P4AU/char/char_kk_*.pac"):
 if __name__ == "__main__":
-    for filename in glob.glob("out2/char_*_*.pac"):
-        iterpac(filename,dump_pac)
+    for filename in glob.glob("input/bbcpex/char_*_pal.pac"):
+        print filename
+        for thing in iterpac(filename,dump_pac):
+            print thing
     print "done"
