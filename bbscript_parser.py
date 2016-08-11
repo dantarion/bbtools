@@ -1,13 +1,9 @@
-import os, struct, json
+import os, struct, json, pac
 from collections import defaultdict, OrderedDict
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 
-json_data=open("commandDB.json").read()
-commandDB = json.loads(json_data)
 
-json_data=open("characters.json").read()
-characters = json.loads(json_data)
 def sanitizer(command):
     def sanitize(s):
         if isinstance(s,str):
@@ -17,8 +13,8 @@ def sanitizer(command):
         return str(s).strip("\x00")
     return sanitize
 
-def parse_bbscript_routine(end = -1):
-    global f,log,charName,j
+def parse_bbscript_routine(f,end = -1):
+    log,charName,j
     currentCMD = -1
     currentIndicator = "_PRE"
     currentFrame = 1
@@ -28,7 +24,7 @@ def parse_bbscript_routine(end = -1):
         loc = f.tell()
         currentCMD, = struct.unpack("<I",f.read(4))
         if currentCMD in [4,6,15,14001]:
-            log.write("\n")
+            if log: log.write("\n")
         if currentCMD in [1,5,9,16,55,57,14002]:
             currentIndent -= 1
         indent = " "*4*currentIndent
@@ -65,35 +61,35 @@ def parse_bbscript_routine(end = -1):
                 log.write("#Frame {0}->{1}\n".format(currentFrame,currentFrame+cmdData[1]))
             currentFrame = currentFrame+cmdData[1]
         if currentCMD in [5,16,57,14002]:
-            log.write("\n")
+            if log: log.write("\n")
         if currentCMD in [0,4,8,15,54,56,14001]:
             currentIndent += 1
 
-def parse_bbscript(filename, outfilename=None):
-    global commandDB,f,log,charName,j
+def parse_bbscript(f,basename,filename,filesize):
+    global commandDB,log,charName,j
+    BASE = f.tell()
     log = None
     j = OrderedDict()
     j["Subroutines"] = []
     j["States"] = []
+    outfilename = None
     if outfilename:
         log = open(outfilename,"w+b")
-    print "'''{0}'''".format(filename)
     charName = filename[-6:-4]
     if log: log.write("'''{0}'''\n".format(filename))
-    f = open(filename,"rb")
     FUNCTION_COUNT, = struct.unpack("<I",f.read(4))
-    f.seek(4+0x20)
+    f.seek(BASE+4+0x20)
     initEnd, = struct.unpack("<I",f.read(4))
     initEnd = initEnd+4+0x24*FUNCTION_COUNT
-    f.seek(4+0x24*(FUNCTION_COUNT))
-    parse_bbscript_routine(initEnd)
+    f.seek(BASE+4+0x24*(FUNCTION_COUNT))
+    parse_bbscript_routine(f,initEnd)
     for i in range(0,FUNCTION_COUNT):
-        f.seek(4+0x24*i)
+        f.seek(BASE+4+0x24*i)
         FUNCTION_NAME = f.read(0x20).split("\x00")[0]
         if log: log.write("\n#---------------{0} {1}/{2}\n".format(FUNCTION_NAME,i,FUNCTION_COUNT))
         FUNCTION_OFFSET, = struct.unpack("<I",f.read(4))
-        f.seek(4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
-        parse_bbscript_routine()
+        f.seek(BASE+4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
+        parse_bbscript_routine(f)
 #    log.seek(0)
 #    data = log.read()
 #    log.seek(0)
@@ -104,28 +100,26 @@ def parse_bbscript(filename, outfilename=None):
 #    log.write(HtmlFormatter().get_style_defs('.highlight'))
 #    log.write("</style>\n")
 #    log.write(highlight(data, PythonLexer(), HtmlFormatter()))
-    log.close()
-    jsonOut = open("scr/"+os.path.basename(filename).replace("bin","json"),"wb")
-    jsonOut.write(json.dumps(j,encoding='cp1252',indent=2))
-    jsonOut.close()
-import glob
-for filename in glob.glob("output2/char_*/scr_*.bin"):
-    if "boss" in filename: continue
-    parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
+    if log: log.close()
+    return filename,j
+#import glob
+#for filename in glob.glob("output2/char_*/scr_*.bin"):
+#    if "boss" in filename: continue
+#    parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
 
-total = sum(commandCounts.values())
-tableCount = 0
+#total = sum(commandCounts.values())
+#tableCount = 0
 #for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
 
 #    print "{4:3} {3:8.4f} {0:10} {1:10} {2}".format(k,v,commandDB[str(k)],float(v)/total*100,tableCount)
 #    tableCount += 1
 #for k,v in sorted(commandCalls.items(),cmp=lambda x,y: cmp(x[0],y[0])):
-print "writing reports"
-for cmdId in commandCalls:
-    report = open("reports/"+str(cmdId)+".txt","w");
-    for thing in commandCalls[cmdId]:
-        report.write(str(thing)+"\n")
-    report.close()
+#print "writing reports"
+#for cmdId in commandCalls:
+#    report = open("reports/"+str(cmdId)+".txt","w");
+#    for thing in commandCalls[cmdId]:
+#        report.write(str(thing)+"\n")
+#    report.close()
 
 #    for vv in v:
 #        print v
