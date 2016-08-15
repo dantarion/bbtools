@@ -48,3 +48,9 @@ if __name__ == "__main__":
         outJson = open("db/bbcpex/"+character+".json","w")
         outJson.write(json.dumps(compiledData,encoding='cp1252'))
         outJson.close()
+
+    for cmdId in bbscript_parser.commandCalls:
+        report = open("reports/"+str(cmdId)+".txt","w");
+        for thing in bbscript_parser.commandCalls[cmdId]:
+            report.write("{0:15s} {1:15s} {2}\n".format(*thing))
+        report.close()

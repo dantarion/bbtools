@@ -48,14 +48,14 @@
         "name": "gotoLabel2"
     },
     "12": {
-        "size": 4
+        "format":""
     },
     "13": {
         "format": "i",
         "size": 8
     },
     "14": {
-        "size": 4
+        "format":""
     },
     "15": {
         "name":"cond2",
@@ -119,7 +119,7 @@
         "size": 20
     },
     "35": {
-        "size": 4
+        "format":""
     },
     "36": {
         "format": "i",
@@ -245,10 +245,10 @@
         "size": 8
     },
     "1004": {
-        "size": 4
+        "format":""
     },
     "1005": {
-        "size": 4
+        "format":""
     },
     "1006": {
         "format": "i",
@@ -259,10 +259,10 @@
         "size": 8
     },
     "1008": {
-        "size": 4
+        "format":""
     },
     "1009": {
-        "size": 4
+        "format":""
     },
     "1010": {
         "format": "ii",
@@ -293,10 +293,10 @@
         "size": 8
     },
     "1017": {
-        "size": 4
+        "format":""
     },
     "1018": {
-        "size": 4
+        "format":""
     },
     "1019": {
         "format": "i",
@@ -311,10 +311,10 @@
         "size": 8
     },
     "1022": {
-        "size": 4
+        "format":""
     },
     "1023": {
-        "size": 4
+        "format":""
     },
     "1024": {
 		"name": "YAccel",
@@ -349,10 +349,10 @@
         "size": 8
     },
     "1032": {
-        "size": 4
+        "format":""
     },
     "1033": {
-        "size": 4
+        "format":""
     },
     "1034": {
         "format": "i",
@@ -367,10 +367,10 @@
         "size": 8
     },
     "1037": {
-        "size": 4
+        "format":""
     },
     "1038": {
-        "size": 4
+        "format":""
     },
     "1039": {
         "format": "i",
@@ -389,10 +389,10 @@
         "size": 12
     },
     "1043": {
-        "size": 4
+        "format":""
     },
     "1044": {
-        "size": 4
+        "format":""
     },
     "1045": {
         "format": "i",
@@ -411,10 +411,10 @@
         "size": 8
     },
     "1049": {
-        "size": 4
+        "format":""
     },
     "1050": {
-        "size": 4
+        "format":""
     },
     "1051": {
         "format": "i",
@@ -433,7 +433,7 @@
         "size": 12
     },
     "1055": {
-        "size": 4
+        "format":""
     },
     "1056": {
         "format": "i",
@@ -528,7 +528,7 @@
         "size": 12
     },
     "1079": {
-        "size": 4
+        "format":""
     },
     "1080": {
         "format": "i",
@@ -651,13 +651,14 @@
         "size": 12
     },
     "2000": {
-        "size": 4
+        "format":"",
+        "name":"Multihit"
     },
     "2001": {
-        "size": 4
+        "format":""
     },
     "2002": {
-        "size": 4
+        "format":""
     },
     "2003": {
         "format": "i",
@@ -668,28 +669,28 @@
         "size": 12
     },
     "2005": {
-        "size": 4
+        "format":""
     },
     "2006": {
-        "size": 4
+        "format":""
     },
     "2007": {
-        "size": 4
+        "format":""
     },
     "2008": {
-        "size": 4
+        "format":""
     },
     "2009": {
-        "size": 4
+        "format":""
     },
     "2010": {
-        "size": 4
+        "format":""
     },
     "2011": {
-        "size": 4
+        "format":""
     },
     "2012": {
-        "size": 4
+        "format":""
     },
     "2015": {
         "format": "i",
@@ -720,7 +721,7 @@
         "size": 8
     },
     "2022": {
-        "size": 4
+        "format":""
     },
     "2034": {
         "format": "i",
@@ -818,7 +819,8 @@
         "size": 8
     },
     "2060": {
-        "size": 4
+        "name":"Recovery",
+        "format": ""
     },
     "2061": {
         "format": "i",
@@ -958,19 +960,19 @@
         "size": 8
     },
     "3031": {
-        "size": 4
+        "format":""
     },
     "3032": {
-        "size": 4
+        "format":""
     },
     "3033": {
-        "size": 4
+        "format":""
     },
     "3034": {
-        "size": 4
+        "format":""
     },
     "3035": {
-        "size": 4
+        "format":""
     },
     "3038": {
         "format": "i",
@@ -1167,7 +1169,7 @@
         "size": 36
     },
     "4015": {
-        "size": 4
+        "format":""
     },
     "4016": {
         "size": 40
@@ -1230,7 +1232,7 @@
         "size": 8
     },
     "4052": {
-        "size": 4
+        "format":""
     },
     "4053": {
         "format": "ii",
@@ -1260,7 +1262,7 @@
         "size": 8
     },
     "5004": {
-        "size": 4
+        "format":""
     },
     "5005": {
         "format": "i",
@@ -1326,7 +1328,7 @@
         "size": 36
     },
     "7015": {
-        "size": 4
+        "format":""
     },
     "8000": {
         "format": "iii",
@@ -1337,7 +1339,7 @@
         "size": 12
     },
     "8002": {
-        "size": 4
+        "format":""
     },
     "8003": {
         "format": "iii",
@@ -1376,7 +1378,7 @@
         "format": "iii"
     },
     "9000": {
-        "size": 4
+        "format":""
     },
     "9001": {
         "format": "i",
@@ -1391,7 +1393,7 @@
         "format": "i"
     },
     "9004": {
-        "size": 4
+        "format":""
     },
     "9007": {
         "size": 24
@@ -1443,181 +1445,181 @@
         "format": "i"
     },
     "9071": {
-        "size": 4
+        "format":""
     },
     "9072": {
         "format": "i",
         "size": 8
     },
     "9073": {
-        "size": 4
+        "format":""
     },
     "9082": {
         "name": "AirPushbackY",
         "format": "i"
     },
     "9083": {
-        "size": 4
+        "format":""
     },
     "9084": {
         "format": "i"
     },
     "9085": {
-        "size": 4
+        "format":""
     },
     "9094": {
         "format": "i",
         "size": 8
     },
     "9095": {
-        "size": 4
+        "format":""
     },
     "9096": {
         "format": "i",
         "size": 8
     },
     "9097": {
-        "size": 4
+        "format":""
     },
     "9106": {
         "format": "i",
         "size": 8
     },
     "9107": {
-        "size": 4
+        "format":""
     },
     "9108": {
         "format": "i",
         "size": 8
     },
     "9109": {
-        "size": 4
+        "format":""
     },
     "9118": {
         "format": "i",
         "size": 8
     },
     "9119": {
-        "size": 4
+        "format":""
     },
     "9120": {
         "format": "i",
         "size": 8
     },
     "9121": {
-        "size": 4
+        "format":""
     },
     "9130": {
         "format": "i",
         "size": 8
     },
     "9131": {
-        "size": 4
+        "format":""
     },
     "9132": {
         "format": "i",
         "size": 8
     },
     "9133": {
-        "size": 4
+        "format":""
     },
     "9142": {
         "format": "i",
         "size": 8
     },
     "9143": {
-        "size": 4
+        "format":""
     },
     "9144": {
         "format": "i",
         "size": 8
     },
     "9145": {
-        "size": 4
+        "format":""
     },
     "9154": {
         "format": "i",
         "size": 8
     },
     "9155": {
-        "size": 4
+        "format":""
     },
     "9156": {
         "format": "i",
         "size": 8
     },
     "9157": {
-        "size": 4
+        "format":""
     },
     "9166": {
         "name": "AirUntechableTime",
         "format": "i"
     },
     "9167": {
-        "size": 4
+        "format":""
     },
     "9168": {
         "format": "i",
         "size": 8
     },
     "9169": {
-        "size": 4
+        "format":""
     },
     "9178": {
         "format": "i",
         "size": 8
     },
     "9179": {
-        "size": 4
+        "format":""
     },
     "9180": {
         "format": "i",
         "size": 8
     },
     "9181": {
-        "size": 4
+        "format":""
     },
     "9190": {
         "format": "i",
         "size": 8
     },
     "9191": {
-        "size": 4
+        "format":""
     },
     "9192": {
         "format": "i",
         "size": 8
     },
     "9193": {
-        "size": 4
+        "format":""
     },
     "9202": {
         "format": "i",
         "size": 8
     },
     "9203": {
-        "size": 4
+        "format":""
     },
     "9204": {
         "format": "i",
         "size": 8
     },
     "9205": {
-        "size": 4
+        "format":""
     },
     "9214": {
         "name": "PushbackX",
         "format": "i"
     },
     "9215": {
-        "size": 4
+        "format":""
     },
     "9216": {
         "format": "i",
         "size": 8
     },
     "9217": {
-        "size": 4
+        "format":""
     },
     "9218": {
         "format": "i",
@@ -1628,140 +1630,140 @@
         "size": 8
     },
     "9239": {
-        "size": 4
+        "format":""
     },
     "9240": {
         "format": "i",
         "size": 8
     },
     "9241": {
-        "size": 4
+        "format":""
     },
     "9250": {
         "format": "i",
         "size": 8
     },
     "9251": {
-        "size": 4
+        "format":""
     },
     "9252": {
         "format": "i",
         "size": 8
     },
     "9253": {
-        "size": 4
+        "format":""
     },
     "9262": {
         "format": "i",
         "size": 8
     },
     "9263": {
-        "size": 4
+        "format":""
     },
     "9264": {
         "format": "i",
         "size": 8
     },
     "9265": {
-        "size": 4
+        "format":""
     },
     "9274": {
         "name": "AttackP1",
         "format": "i"
     },
     "9275": {
-        "size": 4
+        "format":""
     },
     "9276": {
         "format": "i",
         "size": 8
     },
     "9277": {
-        "size": 4
+        "format":""
     },
     "9286": {
 		"name": "AttackP2",
         "format": "i"
     },
     "9287": {
-        "size": 4
+        "format":""
     },
     "9288": {
         "format": "i",
         "size": 8
     },
     "9289": {
-        "size": 4
+        "format":""
     },
     "9310": {
         "format": "i",
         "size": 8
     },
     "9311": {
-        "size": 4
+        "format":""
     },
     "9312": {
         "format": "i",
         "size": 8
     },
     "9313": {
-        "size": 4
+        "format":""
     },
     "9322": {
         "name": "GroundedHitstunAnimation",
         "format": "i"
     },
     "9323": {
-        "size": 4
+        "format":""
     },
     "9324": {
         "format": "i",
         "size": 8
     },
     "9325": {
-        "size": 4
+        "format":""
     },
     "9334": {
         "name": "AirHitstunAnimation",
         "format": "i"
     },
     "9335": {
-        "size": 4
+        "format":""
     },
     "9336": {
         "format": "i",
         "size": 8
     },
     "9337": {
-        "size": 4
+        "format":""
     },
     "9346": {
         "format": "i",
         "size": 8
     },
     "9347": {
-        "size": 4
+        "format":""
     },
     "9348": {
         "format": "i",
         "size": 8
     },
     "9349": {
-        "size": 4
+        "format":""
     },
     "9358": {
         "format": "i",
         "size": 8
     },
     "9359": {
-        "size": 4
+        "format":""
     },
     "9360": {
         "format": "i",
         "size": 8
     },
     "9361": {
-        "size": 4
+        "format":""
     },
     "9362": {
         "format": "i",
@@ -2206,7 +2208,7 @@
         "size": 20
     },
     "12020": {
-        "size": 4
+        "format":""
     },
     "12021": {
         "format": "i",
@@ -2341,7 +2343,7 @@
         "size": 8
     },
     "12056": {
-        "size": 4
+        "format":""
     },
     "13000": {
         "format": "i",
@@ -2499,7 +2501,7 @@
         "size": 12
     },
     "13042": {
-        "size": 4
+        "format":""
     },
     "13043": {
         "format": "i",
@@ -2514,7 +2516,7 @@
         "size": 8
     },
     "14000": {
-        "size": 4
+        "format":""
     },
     "14001": {
         "name": "Move_Register",
@@ -2638,7 +2640,7 @@
         "size": 40
     },
     "14043": {
-        "size": 4
+        "format":""
     },
     "14044": {
         "size": 44
@@ -2652,7 +2654,7 @@
         "size": 8
     },
     "14047": {
-        "size": 4
+        "format":""
     },
     "14048": {
         "hex":true,
@@ -2755,19 +2757,19 @@
         "size": 8
     },
     "14089": {
-        "size": 4
+        "format":""
     },
     "14090": {
-        "size": 4
+        "format":""
     },
     "14091": {
-        "size": 4
+        "format":""
     },
     "14092": {
-        "size": 4
+        "format":""
     },
     "14093": {
-        "size": 4
+        "format":""
     },
     "15000": {
         "format": "i",
@@ -2798,13 +2800,13 @@
         "size": 8
     },
     "15008": {
-        "size": 4
+        "format":""
     },
     "15009": {
-        "size": 4
+        "format":""
     },
     "15010": {
-        "size": 4
+        "format":""
     },
     "15011": {
         "format": "i",
@@ -2876,37 +2878,37 @@
         "size": 44
     },
     "17000": {
-        "size": 4
+        "format":""
     },
     "17001": {
-        "size": 4
+        "format":""
     },
     "17002": {
-        "size": 4
+        "format":""
     },
     "17003": {
-        "size": 4
+        "format":""
     },
     "17004": {
-        "size": 4
+        "format":""
     },
     "17005": {
-        "size": 4
+        "format":""
     },
     "17006": {
-        "size": 4
+        "format":""
     },
     "17007": {
-        "size": 4
+        "format":""
     },
     "17008": {
-        "size": 4
+        "format":""
     },
     "17009": {
-        "size": 4
+        "format":""
     },
     "17010": {
-        "size": 4
+        "format":""
     },
     "17011": {
         "size": 48
@@ -2916,31 +2918,31 @@
         "size": 16
     },
     "17013": {
-        "size": 4
+        "format":""
     },
     "17014": {
-        "size": 4
+        "format":""
     },
     "17015": {
-        "size": 4
+        "format":""
     },
     "17016": {
-        "size": 4
+        "format":""
     },
     "17017": {
-        "size": 4
+        "format":""
     },
     "17018": {
-        "size": 4
+        "format":""
     },
     "17019": {
-        "size": 4
+        "format":""
     },
     "17020": {
-        "size": 4
+        "format":""
     },
     "18001": {
-        "size": 4
+        "format":""
     },
     "18003": {
         "size": 132
@@ -2962,14 +2964,14 @@
         "size": 16
     },
     "18008": {
-        "size": 4
+        "format":""
     },
     "18009": {
         "format": "i",
         "size": 8
     },
     "18010": {
-        "size": 4
+        "format":""
     },
     "18011": {
         "size": 148
@@ -2983,10 +2985,10 @@
         "size": 8
     },
     "19002": {
-        "size": 4
+        "format":""
     },
     "19003": {
-        "size": 4
+        "format":""
     },
     "19004": {
         "format": "ii",
@@ -3001,10 +3003,10 @@
         "size": 8
     },
     "19007": {
-        "size": 4
+        "format":""
     },
     "19008": {
-        "size": 4
+        "format":""
     },
     "19009": {
         "format": "i",
@@ -3023,10 +3025,10 @@
         "size": 8
     },
     "19013": {
-        "size": 4
+        "format":""
     },
     "19014": {
-        "size": 4
+        "format":""
     },
     "19015": {
         "format": "i",
@@ -3138,14 +3140,14 @@
         "size": 8
     },
     "22000": {
-        "size": 4
+        "format":""
     },
     "22001": {
         "format": "i",
         "size": 8
     },
     "22002": {
-        "size": 4
+        "format":""
     },
     "22003": {
         "format": "i",
@@ -3260,7 +3262,7 @@
         "format": "ii"
     },
     "23002": {
-        "size": 4
+        "format":""
     },
     "23003": {
         "format":"8i",
@@ -3307,14 +3309,14 @@
         "size": 8
     },
     "23014": {
-        "size": 4
+        "format":""
     },
     "23015": {
         "format": "i",
         "size": 8
     },
     "23016": {
-        "size": 4
+        "format":""
     },
     "23017": {
         "format": "i",
@@ -3341,7 +3343,7 @@
         "size": 8
     },
     "23023": {
-        "size": 4
+        "format":""
     },
     "23024": {
         "format": "i",
@@ -3356,7 +3358,7 @@
         "size": 8
     },
     "23027": {
-        "size": 4
+        "format":""
     },
     "23028": {
         "format": "ii",
@@ -3390,10 +3392,10 @@
         "size": 8
     },
     "23036": {
-        "size": 4
+        "format":""
     },
     "23037": {
-        "size": 4
+        "format":""
     },
     "23038": {
         "format": "ii",
@@ -3412,7 +3414,7 @@
         "size": 12
     },
     "23042": {
-        "size": 4
+        "format":""
     },
     "23043": {
         "format": "iii",
@@ -3448,19 +3450,19 @@
         "size": 8
     },
     "23072": {
-        "size": 4
+        "format":""
     },
     "23073": {
-        "size": 4
+        "format":""
     },
     "23074": {
-        "size": 4
+        "format":""
     },
     "23075": {
-        "size": 4
+        "format":""
     },
     "23076": {
-        "size": 4
+        "format":""
     },
     "23077": {
         "format": "i",
@@ -3629,7 +3631,7 @@
         "size": 16
     },
     "23120": {
-        "size": 4
+        "format":""
     },
     "23121": {
         "format": "i",
@@ -3648,7 +3650,7 @@
         "size": 16
     },
     "23131": {
-        "size": 4
+        "format":""
     },
     "23132": {
         "format": "i",
@@ -3678,7 +3680,7 @@
         "size": 40
     },
     "23147": {
-        "size": 4
+        "format":""
     },
     "23148": {
         "format": "32s"
@@ -3749,7 +3751,7 @@
         "size": 8
     },
     "23165": {
-        "size": 4
+        "format":""
     },
     "23166": {
         "auto": "autostr",
@@ -3757,10 +3759,10 @@
         "size": 36
     },
     "23167": {
-        "size": 4
+        "format":""
     },
     "23177": {
-        "size": 4
+        "format":""
     },
     "23178": {
         "format": "i",
@@ -3786,7 +3788,7 @@
         "size": 48
     },
     "30000": {
-        "size": 4
+        "format":""
     },
     "30001": {
         "size": 40

@@ -42,24 +42,32 @@ def parse_bbscript_routine(f,end = -1):
             if log: log.write(indent+"@State()\n".format(loc))
             if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
-            currentContainer = [cmdData[0].strip("\x00")]
-            j["States"].append(currentContainer)
+            currentContainer = []
+            j["Functions"].append({'type':'state','name':cmdData[0].strip("\x00"),'commands':currentContainer})
         elif currentCMD == 8:
             if log: log.write(indent+"\n@Subroutine()\n".format(loc))
             if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
-            currentContainer = [cmdData[0].strip("\x00")]
-            j["Subroutines"].append(currentContainer)
+            currentContainer = []
+            j["Functions"].append({'type':'subroutine','name':cmdData[0].strip("\x00"),'commands':currentContainer})
         elif currentCMD in [1,9]:
             pass
         else:
             if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
-            currentContainer.append([dbData["name"]] + map(sanitizer(currentCMD),cmdData))
+            currentContainer.append({'name':dbData["name"],'params':map(sanitizer(currentCMD),cmdData)})
+        comment = None
         if currentCMD == 2:
+            comment = "Frame {0}->{1}".format(currentFrame,currentFrame+cmdData[1])
+            currentFrame = currentFrame+cmdData[1]
+        if currentCMD == 4:
+            if cmdData[1] == 112:
+                comment = "Always"
+            if cmdData[1] == 112:
+                comment = "Unlimited Character"
+        if comment:
             if log:
                 log.seek(-1,1)
-                log.write("#Frame {0}->{1}\n".format(currentFrame,currentFrame+cmdData[1]))
-            currentFrame = currentFrame+cmdData[1]
+                log.write("#"+comment+"\n")
         if currentCMD in [5,16,57,14002]:
             if log: log.write("\n")
         if currentCMD in [0,4,8,15,54,56,14001]:
@@ -68,10 +76,9 @@ def parse_bbscript_routine(f,end = -1):
 def parse_bbscript(f,basename,filename,filesize):
     global commandDB,log,charName,j
     BASE = f.tell()
-    log = None
+    log = open("pylog/"+filename+".py","w")
     j = OrderedDict()
-    j["Subroutines"] = []
-    j["States"] = []
+    j["Functions"] = []
     outfilename = None
     if outfilename:
         log = open(outfilename,"w+b")
@@ -80,7 +87,7 @@ def parse_bbscript(f,basename,filename,filesize):
     FUNCTION_COUNT, = struct.unpack("<I",f.read(4))
     f.seek(BASE+4+0x20)
     initEnd, = struct.unpack("<I",f.read(4))
-    initEnd = initEnd+4+0x24*FUNCTION_COUNT
+    initEnd = BASE + initEnd+4+0x24*FUNCTION_COUNT
     f.seek(BASE+4+0x24*(FUNCTION_COUNT))
     parse_bbscript_routine(f,initEnd)
     for i in range(0,FUNCTION_COUNT):
