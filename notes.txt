@@ -1,12 +1,5 @@
-cond2(0)
-
 cond(2,54) = OVERDRIVE
-cond(2,112) = UNLIMITED CHARACTER
-Unknown23043(6,-50000,-30000) - physics pull
-Unknown14022 how many times a move can chain?
 Unknown23036 physical vs projectile check
 cond2(41) = counter check
 Unknown30(17,15) LOOP
 cond(2,4)
-
-Unknown2000, 2006 has to do with multihit moves

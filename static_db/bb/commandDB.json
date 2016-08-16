@@ -109,7 +109,8 @@
     },
     "30": {
         "format": "ii",
-        "size": 12
+        "size": 12,
+        "name":"LoopRelated"
     },
     "31": {
         "format": "ii",
@@ -652,13 +653,14 @@
     },
     "2000": {
         "format":"",
-        "name":"Multihit"
+        "name":"RefreshMultihit"
     },
     "2001": {
         "format":""
     },
     "2002": {
-        "format":""
+        "format":"",
+        "name":"StartMultihit"
     },
     "2003": {
         "format": "i",
@@ -2602,7 +2604,8 @@
         "size": 8
     },
     "14022": {
-        "format": "i"
+        "format": "i",
+        "name":"MoveMaxChainRepeat"
     },
     "14023": {
         "format": "i",
@@ -2672,7 +2675,7 @@
         "format": "32s"
     },
     "14069": {
-        "name": "HitCancel",
+        "name": "HitOrBlockCancel",
         "format": "32s"
     },
     "14070": {
@@ -2706,7 +2709,8 @@
     },
     "14076": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"WhiffCancelEnable"
     },
     "14077": {
         "format": "i",
@@ -2714,20 +2718,24 @@
     },
     "14078": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"JumpCancelAir?"
     },
     "14079": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"JumpCancel?"
     },
     "14080": {
         "auto": "autostr",
         "format": "32s",
-        "size": 36
+        "size": 36,
+        "name":"HitCancel"
     },
     "14081": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"JumpCancelOnHit"
     },
     "14082": {
         "format": "i",
@@ -2896,7 +2904,7 @@
         "format":""
     },
     "17005": {
-        "format":"",
+        "format":""
     },
     "17006": {
         "format":"",
@@ -3424,7 +3432,8 @@
     },
     "23043": {
         "format": "iii",
-        "size": 16
+        "size": 16,
+        "name":"PhysicsPull"
     },
     "23044": {
         "format": "ii",

@@ -76,7 +76,7 @@ def parse_bbscript_routine(f,end = -1):
 def parse_bbscript(f,basename,filename,filesize):
     global commandDB,log,charName,j
     BASE = f.tell()
-    log = open("pylog/"+filename+".py","w")
+    log = open("db/bbcpex/"+filename+".py","w")
     j = OrderedDict()
     j["Functions"] = []
     outfilename = None
@@ -97,36 +97,5 @@ def parse_bbscript(f,basename,filename,filesize):
         FUNCTION_OFFSET, = struct.unpack("<I",f.read(4))
         f.seek(BASE+4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine(f)
-#    log.seek(0)
-#    data = log.read()
-#    log.seek(0)
-#    from pygments import highlight
-#    from pygments.lexers import PythonLexer
-#    from pygments.formatters import HtmlFormatter
-#    log.write("<style type='text/css'>\n")
-#    log.write(HtmlFormatter().get_style_defs('.highlight'))
-#    log.write("</style>\n")
-#    log.write(highlight(data, PythonLexer(), HtmlFormatter()))
     if log: log.close()
     return filename,j
-#import glob
-#for filename in glob.glob("output2/char_*/scr_*.bin"):
-#    if "boss" in filename: continue
-#    parse_bbscript(filename, "scr/"+os.path.basename(filename).replace("bin","py"))
-
-#total = sum(commandCounts.values())
-#tableCount = 0
-#for k,v in sorted(commandCounts.items(),cmp=lambda x,y: cmp(-x[1],-y[1])):
-
-#    print "{4:3} {3:8.4f} {0:10} {1:10} {2}".format(k,v,commandDB[str(k)],float(v)/total*100,tableCount)
-#    tableCount += 1
-#for k,v in sorted(commandCalls.items(),cmp=lambda x,y: cmp(x[0],y[0])):
-#print "writing reports"
-#for cmdId in commandCalls:
-#    report = open("reports/"+str(cmdId)+".txt","w");
-#    for thing in commandCalls[cmdId]:
-#        report.write(str(thing)+"\n")
-#    report.close()
-
-#    for vv in v:
-#        print v

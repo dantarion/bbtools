@@ -1,3 +1,7 @@
 *.pyc
+*.exe
 input/
+output/
+output2/
 db/
+reports/

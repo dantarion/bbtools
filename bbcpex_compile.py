@@ -52,7 +52,10 @@ if __name__ == "__main__":
         outJson.close()
 
     for cmdId in bbscript_parser.commandCalls:
-        report = open("reports/"+str(cmdId)+".txt","w");
+        module = (cmdId / 100) * 100
+        if not os.path.isdir("reports/{0}/".format(module)):
+            os.makedirs("reports/{0}/".format(module))
+        report = open("reports/{0}/{1}.txt".format(module,cmdId),"w");
         for thing in bbscript_parser.commandCalls[cmdId]:
-            report.write("{0:15s} {1:15s} {2}\n".format(*thing))
+            report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
         report.close()
