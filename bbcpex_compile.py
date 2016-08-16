@@ -37,7 +37,9 @@ if __name__ == "__main__":
         compiledData["hipoffset"] = {}
         for filename,data in pac.iterpac(img_filename,parse_hipoffset):
             compiledData["hipoffset"][filename] = data
-
+        vri_filename = "input/bbcpex/char_{0}_vri.pac".format(character);
+        for filename,data in pac.iterpac(vri_filename,parse_hipoffset):
+            compiledData["hipoffset"][filename] = data
         #Dantarion: Sprite Chunk Placement, Hit and Hurt boxes
         img_filename = "input/bbcpex/char_{0}_col.pac".format(character);
         compiledData["col"] = OrderedDict()
