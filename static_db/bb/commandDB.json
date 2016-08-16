@@ -2878,13 +2878,16 @@
         "size": 44
     },
     "17000": {
-        "format":""
+        "format":"",
+        "name":"ScriptEndsStanding"
     },
     "17001": {
-        "format":""
+        "format":"",
+        "name":"ScriptEndsAir"
     },
     "17002": {
-        "format":""
+        "format":"",
+        "name":"ScriptEndsAir2"
     },
     "17003": {
         "format":""
@@ -2893,10 +2896,11 @@
         "format":""
     },
     "17005": {
-        "format":""
+        "format":"",
     },
     "17006": {
-        "format":""
+        "format":"",
+        "name":"ScriptEndsCrouching"
     },
     "17007": {
         "format":""
@@ -2936,10 +2940,12 @@
         "format":""
     },
     "17019": {
-        "format":""
+        "format":"",
+          "name":"ScriptEndGroundBOunce?"
     },
     "17020": {
-        "format":""
+        "format":"",
+        "name":"ScriptSameAttackComboNoSpecialCancel"
     },
     "18001": {
         "format":""
