@@ -1,0 +1,1 @@
+aws s3 cp ./db s3://boxdox-bb.dantarion.com/db --recursive
