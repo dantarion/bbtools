@@ -1464,14 +1464,16 @@
         "format":""
     },
     "9084": {
-        "format": "i"
+        "format": "i",
+        "name":"CounterHitAirPushbackY"
     },
     "9085": {
         "format":""
     },
     "9094": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"YImpluseBeforeWallbounce"
     },
     "9095": {
         "format":""
@@ -1485,7 +1487,8 @@
     },
     "9106": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"WallbounceReboundTime"
     },
     "9107": {
         "format":""
@@ -1755,7 +1758,8 @@
     },
     "9358": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"AirHitstunAfterWallbounce"
     },
     "9359": {
         "format":""
@@ -1847,15 +1851,16 @@
         "size": 8
     },
     "11035": {
-        "name": "HitLow?",
+        "name": "HitLow",
         "format": "i"
     },
     "11036": {
         "format": "i",
-        "size": 8
+        "name":"HitOverhead"
     },
     "11037": {
-        "format": "i"
+        "format": "i",
+        "name":"HitAirUnblockable"
     },
     "11038": {
         "format": "i",
@@ -2053,7 +2058,8 @@
     },
     "11088": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"FatalCounter"
     },
     "11089": {
         "format": "i",
