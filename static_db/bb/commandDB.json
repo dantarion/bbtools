@@ -2207,7 +2207,8 @@
         "size": 12
     },
     "12017": {
-        "format": "i"
+        "format": "i",
+        "name":"ComboRate"
     },
     "12018": {
         "format": "i32s"
@@ -2258,7 +2259,8 @@
         "format": "i"
     },
     "12031": {
-        "format": "i"
+        "format": "i",
+        "name":"JumpStartup"
     },
     "12032": {
         "size": 28
@@ -2341,7 +2343,8 @@
         "size": 8
     },
     "12053": {
-        "format": "10i"
+        "format": "10i",
+        "name":"OverdriveDuration"
     },
     "12054": {
         "format": "ii"

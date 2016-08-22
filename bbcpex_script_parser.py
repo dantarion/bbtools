@@ -66,7 +66,7 @@ def parse_bbscript_routine(f,end = -1):
                 comment = "Unlimited Character"
         if comment:
             if log:
-                log.seek(-1,1)
+                log.seek(-2,1)
                 log.write("#"+comment+"\n")
         if currentCMD in [5,16,57,14002]:
             if log: log.write("\n")

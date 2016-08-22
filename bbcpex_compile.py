@@ -1,4 +1,4 @@
-import bbscript_parser,jonbin_parser,pac
+import bbcpex_script_parser,jonbin_parser,pac
 import os,glob,json,struct
 from collections import OrderedDict
 
@@ -16,8 +16,8 @@ json_data=open("static_db/bb/characters.json").read()
 characters = json.loads(json_data)
 
 
-bbscript_parser.commandDB = commandDB
-bbscript_parser.characters = characters
+bbcpex_script_parser.commandDB = commandDB
+bbcpex_script_parser.characters = characters
 if __name__ == "__main__":
     for character in characters:
         scr_filename = "input/bbcpex/char_{0}_scr.pac".format(character);
@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
         #Dantarion: Get all the bbscript info and store it in here
         compiledData["scr"] = []
-        for filename,data in pac.iterpac(scr_filename,bbscript_parser.parse_bbscript):
+        for filename,data in pac.iterpac(scr_filename,bbcpex_script_parser.parse_bbscript):
             compiledData["scr"].append({"filename":filename, "data":data})
 
         #Dantarion: This data is discarded by exah3pac but we need it for arranging sprites later!
@@ -51,11 +51,11 @@ if __name__ == "__main__":
         outJson.write(json.dumps(compiledData,encoding='cp1252'))
         outJson.close()
 
-    for cmdId in bbscript_parser.commandCalls:
+    for cmdId in bbcpex_script_parser.commandCalls:
         module = (cmdId / 100) * 100
         if not os.path.isdir("reports/{0}/".format(module)):
             os.makedirs("reports/{0}/".format(module))
         report = open("reports/{0}/{1}.txt".format(module,cmdId),"w");
-        for thing in bbscript_parser.commandCalls[cmdId]:
+        for thing in bbcpex_script_parser.commandCalls[cmdId]:
             report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
         report.close()
