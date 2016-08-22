@@ -12,7 +12,14 @@ def sanitizer(command):
             s = hex(s)
         return str(s).strip("\x00")
     return sanitize
-
+def pysanitizer(command):
+    def sanitize(s):
+        if isinstance(s,str):
+            s = "{0}".format(s.strip("\x00"))
+        elif command and "hex" in commandDB[str(command)]:
+            s = hex(s)
+        return str(s).strip("\x00")
+    return sanitize
 def parse_bbscript_routine(f,end = -1):
     log,charName,j
     currentCMD = -1
@@ -54,7 +61,7 @@ def parse_bbscript_routine(f,end = -1):
             pass
         else:
             if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
-            currentContainer.append({'name':dbData["name"],'params':map(sanitizer(currentCMD),cmdData)})
+            currentContainer.append({'id':currentCMD,'params':map(pysanitizer(currentCMD),cmdData)})
         comment = None
         if currentCMD == 2:
             comment = "Frame {0}->{1}".format(currentFrame,currentFrame+cmdData[1])
