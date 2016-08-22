@@ -137,7 +137,7 @@
         "format": "iii"
     },
     "40": {
-        "name":"if?",
+        "name":"if",
         "size": 24,
         "format": "iiiii"
     },
@@ -170,7 +170,8 @@
     },
     "49": {
         "size": 24,
-        "format": "iiiii"
+        "format": "iiiii",
+        "name":"ModifyVar?"
     },
     "50": {
         "format": "i",
@@ -189,20 +190,20 @@
         "size": 8
     },
     "54": {
-        "name":"cond3",
+        "name":"or_cond",
         "format": "ii",
         "size": 12
     },
     "55": {
-        "name":"endcond3",
+        "name":"end_or_cond",
         "format":""
     },
     "56": {
-        "name":"else?",
+        "name":"else",
         "format":""
     },
     "57": {
-        "name":"endElse",
+        "name":"end_else",
         "format":""
     },
     "58": {
@@ -216,7 +217,8 @@
         "size": 20
     },
     "61": {
-        "size": 52
+        "size": 52,
+        "format": "12i"
     },
     "62": {
         "size": 28

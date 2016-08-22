@@ -15,7 +15,7 @@ The goal here is analyze the game files of several games made by Arc System Work
 # Secondary Targets
 
 * Arcana Heart 3
-* Dragon Ball Z: Extreme Butōden 
+* Dragon Ball Z: Extreme Butōden
 
 Arcana Heart doesn't use bbscript, but it does use the same sprite format that ArcSys developed games uses.
 The same may be true of Extreme Butoden. Might as well make the code for these tools flexible enough to dump information and sprites for those games too.
@@ -23,7 +23,8 @@ The same may be true of Extreme Butoden. Might as well make the code for these t
 
 # Credits
 * @dantarion, main developer
-* @appleken, for helping on twitter and giving tons of insight and knowledge about these games I don't actually play
+* @bananaken, for helping on twitter and giving tons of insight and knowledge about these games I don't actually play
+* @logichole, for labeling a billion commands less than 24 hours after the public release of boxdox-bb
 
 # Shoutouts
 * AltimorTASDK for creating Xrd hitbox tools and Xrd Decrypter
