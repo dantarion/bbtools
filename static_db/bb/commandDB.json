@@ -16,12 +16,12 @@
         "format": ""
     },
     "4": {
-        "name": "cond",
+        "name": "if",
         "format": "ii",
         "startBlock":true
     },
     "5": {
-        "name": "endcond",
+        "name": "endIf",
         "format": "",
         "endBlock":true
     },
@@ -34,7 +34,7 @@
         "format": "i"
     },
     "8": {
-        "name": "defSubroutine",
+        "name": "startSubroutine",
         "format": "32s"
     },
     "9": {
@@ -42,12 +42,12 @@
         "format": ""
     },
     "10": {
-        "name":"runSubroutine",
+        "name":"callSubroutine",
         "format": "32s"
     },
     "11": {
         "format": "i",
-        "name": "gotoLabel2"
+        "name": "sendToLabel"
     },
     "12": {
         "format":""
@@ -60,11 +60,11 @@
         "format":""
     },
     "15": {
-        "name":"cond2",
+        "name":"upon",
         "format": "i"
     },
     "16": {
-        "name":"endcond2",
+        "name":"endUpon",
         "format": ""
     },
     "17": {
@@ -106,13 +106,13 @@
         "format": "i32s"
     },
     "29": {
-        "name": "jmp2label",
+        "name": "sendToLabelUpon",
         "format": "ii"
     },
     "30": {
         "format": "ii",
         "size": 12,
-        "name":"LoopRelated"
+        "name":"loopRelated"
     },
     "31": {
         "format": "ii",
@@ -137,11 +137,12 @@
         "format": "iii"
     },
     "40": {
-        "name":"if",
+        "name":"op",
         "size": 24,
         "format": "iiiii"
     },
     "41": {
+        "name": "StoreValue",
         "format": "iiii"
     },
     "42": {
@@ -190,12 +191,12 @@
         "size": 8
     },
     "54": {
-        "name":"or_cond",
+        "name":"ifNot",
         "format": "ii",
         "size": 12
     },
     "55": {
-        "name":"end_or_cond",
+        "name":"endIfNot",
         "format":""
     },
     "56": {
@@ -203,7 +204,7 @@
         "format":""
     },
     "57": {
-        "name":"end_else",
+        "name":"endElse ",
         "format":""
     },
     "58": {
