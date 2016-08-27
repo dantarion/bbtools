@@ -14,10 +14,10 @@ for root,dirs,files in os.walk(TARGET_FOLDER):
     for filename in files:
         print os.path.join(root,filename)
         subprocess.call(["ggxrd_decrypter.exe",os.path.join(root,filename)],shell=True)
-        if os.path.isfile("out2/"+filename):
-            os.remove("out2/"+filename)
-        os.rename(os.path.join(root,filename)+".decrypted","out2/"+filename)
-        f = open("out2/"+filename,"r+b")
+        if os.path.isfile("input/bbcp/"+filename):
+            os.remove("input/bbcp/"+filename)
+        os.rename(os.path.join(root,filename)+".decrypted","input/bbcp/"+filename)
+        f = open("input/bbcp/"+filename,"r+b")
         f.seek(0x10)
         data = zlib.decompress(f.read())
         f.seek(0)

@@ -149,8 +149,9 @@
         "size": 20
     },
     "43": {
-        "name":"case",
-        "format": "i"
+        "name":"CheckInput",
+        "format": "i",
+        "hex":true
     },
     "44": {
         "format": "i",
@@ -2734,7 +2735,7 @@
     "14078": {
         "format": "i",
         "size": 8,
-        "name":"JumpCancelAir?"
+        "name":"HitOrBlockJumpCancel"
     },
     "14079": {
         "format": "i",
@@ -2750,7 +2751,7 @@
     "14081": {
         "format": "i",
         "size": 8,
-        "name":"JumpCancelOnHit"
+        "name":"HitJumpCancel"
     },
     "14082": {
         "format": "i",

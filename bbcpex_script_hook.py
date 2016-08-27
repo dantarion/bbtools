@@ -28,7 +28,7 @@ Interceptor.detachAll()
 Interceptor.attach(ptr("%s"), function(args) {
     if(this.context.edi == 0)
             send(Memory.readCString(this.context.esi.add(4)))
-    if(this.context.edi == 9358  )
+    if(this.context.edi == 15014 || this.context.edi == 15013 || this.context.edi == 15012 || this.context.edi == 14024 || this.context.edi == 15025 || this.context.edi == 14015|| this.context.edi == 14003)
     {
         send(this.context.esi);
         this.context.edi = 0xFFFFF;
