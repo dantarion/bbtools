@@ -1,4 +1,5 @@
-import os, struct, json, pac
+import os, struct, json, pac,astor
+from ast import *
 from collections import defaultdict, OrderedDict
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
@@ -21,18 +22,16 @@ def pysanitizer(command):
         return str(s).strip("\x00")
     return sanitize
 def parse_bbscript_routine(f,end = -1):
-    global MODE
-    log,charName,j
+    global MODE,charName,j,astRoot
     currentCMD = -1
     currentIndicator = "_PRE"
     currentFrame = 1
     currentIndent = 0
-    while currentCMD != 1 and f.tell() != end:
+    astStack = [astRoot.body]
+    while f.tell() != end:
 
         loc = f.tell()
         currentCMD, = struct.unpack(MODE+"I",f.read(4))
-        if currentCMD in [4,6,15,14001]:
-            if log: log.write("\n")
         if currentCMD in [1,5,9,16,55,57,14002]:
             currentIndent -= 1
         indent = " "*4*currentIndent
@@ -47,23 +46,66 @@ def parse_bbscript_routine(f,end = -1):
             cmdData = list(struct.unpack(MODE+dbData["format"],f.read(struct.calcsize(dbData["format"]))))
         #commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 0:
-            if log: log.write(indent+"@State()\n".format(loc))
-            if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
             currentContainer = []
             j["Functions"].append({'type':'state','name':cmdData[0].strip("\x00"),'commands':currentContainer})
         elif dbData["name"] == "startSubroutine":
-            if log: log.write(indent+"\n@Subroutine()\n".format(loc))
-            if log: log.write(indent+"def {0}():\n".format(cmdData[0].strip("\x00")))
             currentIndicator = cmdData[0].strip("\x00")
             currentContainer = []
             j["Functions"].append({'type':'subroutine','name':cmdData[0].strip("\x00"),'commands':currentContainer})
         elif dbData["name"] in ["endFunction","endSubroutine"]:
             pass
         else:
-            if log: log.write(indent+"{0}({1})\n".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData))))
             currentContainer.append({'id':currentCMD,'params':map(pysanitizer(currentCMD),cmdData)})
         comment = None
+        #AST STUFF
+        if False:
+            pass
+        elif currentCMD == 0:
+            astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 15:
+            astStack[-1].append(FunctionDef(dbData['name'],arguments(map(sanitizer(currentCMD),cmdData),None,None,[]),[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 4 and cmdData[1] == 0:
+            tmp = astStack[-1].pop()
+            astStack[-1].append(If(tmp.value,[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 4:
+            astStack[-1].append(If(Num(cmdData[1]),[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
+            if(cmdData[1] == 2):
+                lval = Name(id="SLOT_"+str(cmdData[2]))
+            else:
+                lval = Num(cmdData[2])
+            if(cmdData[3] == 2):
+                rval = Name(id="SLOT_"+str(cmdData[4]))
+            else:
+                rval = Num(cmdData[4])
+            if cmdData[0] == 9:
+                op = Eq()
+            if cmdData[0] == 10:
+                op = Gt()
+            if cmdData[0] == 11:
+                op = Lt()
+            if cmdData[0] == 12:
+                op = GtE()
+            if cmdData[0] == 13:
+                op = LtE()
+            tmp = Expr(Compare(lval,[op],[rval]))
+            astStack[-1].append(tmp)
+        elif currentCMD == 54 and cmdData[1] == 0:
+            tmp = astStack[-1].pop()
+            astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 54:
+            astStack[-1].append(If(UnaryOp(Not(),Num(cmdData[1])),[],[]))
+            astStack.append(astStack[-1][-1].body)
+        elif currentCMD in [1,5,16,55]:
+            astStack.pop()
+        else:
+            astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
         '''
         if currentCMD == 2:
             #comment = "Frame {0}->{1}".format(currentFrame,currentFrame+cmdData[1])
@@ -125,22 +167,20 @@ def parse_bbscript_routine(f,end = -1):
             currentIndent += 1
         '''
 def parse_bbscript(f,basename,filename,filesize):
-    global commandDB,log,charName,j,MODE
+    global commandDB,astRoot,charName,j,MODE
     BASE = f.tell()
-    log = open("db/bbcpex/"+filename+".py","w")
+    astRoot = Module(body=[])
     j = OrderedDict()
     j["Functions"] = []
-    outfilename = None
-    if outfilename:
-        log = open(outfilename,"w+b")
     charName = filename[-6:-4]
-    if log: log.write("'''{0}'''\n".format(filename))
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
     f.seek(BASE+4+0x20)
     initEnd, = struct.unpack(MODE+"I",f.read(4))
     initEnd = BASE + initEnd+4+0x24*FUNCTION_COUNT
+    initEnd = BASE+filesize
     f.seek(BASE+4+0x24*(FUNCTION_COUNT))
     parse_bbscript_routine(f,initEnd)
+    '''
     for i in range(0,FUNCTION_COUNT):
         f.seek(BASE+4+0x24*i)
         FUNCTION_NAME = f.read(0x20).split("\x00")[0]
@@ -148,5 +188,8 @@ def parse_bbscript(f,basename,filename,filesize):
         FUNCTION_OFFSET, = struct.unpack(MODE+"I",f.read(4))
         f.seek(BASE+4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine(f)
-    if log: log.close()
+    '''
+    py = open("db/bbcpex/"+filename+".py","w")
+    py.write(astor.to_source(astRoot))
+    py.close()
     return filename,j
