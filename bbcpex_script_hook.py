@@ -27,8 +27,18 @@ script = session.create_script("""
 Interceptor.detachAll()
 Interceptor.attach(ptr("%s"), function(args) {
     if(this.context.edi == 0)
-            send(Memory.readCString(this.context.esi.add(4)))
-    if(this.context.edi == 15014 || this.context.edi == 15013 || this.context.edi == 15012 || this.context.edi == 14024 || this.context.edi == 15025 || this.context.edi == 14015|| this.context.edi == 14003)
+    {
+        send(Memory.readCString(this.context.esi.add(4)))
+        for (var i = 0; i < 0x3B; i++) {
+            var p = 0x207E0478+ 52*i;
+            var data = Memory.readUInt(ptr(p));
+            var s = Memory.readCString(ptr(p+4));
+            if(data != 0 || s != ""){
+                send(["upon...",i,data.toString(16),s]);
+            }
+        }
+    }
+    if(false)
     {
         send(this.context.esi);
         this.context.edi = 0xFFFFF;

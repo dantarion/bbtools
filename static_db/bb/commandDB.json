@@ -1,10 +1,10 @@
 {
     "0": {
-        "name": "startFunction",
+        "name": "startState",
         "format": "32s"
     },
     "1": {
-        "name": "endFunction",
+        "name": "endState",
         "format": ""
     },
     "2": {
@@ -50,7 +50,8 @@
         "name": "sendToLabel"
     },
     "12": {
-        "format":""
+        "format":"",
+        "name":"ExitState"
     },
     "13": {
         "format": "i",
@@ -146,7 +147,8 @@
         "format": "iiii"
     },
     "42": {
-        "size": 20
+        "size": 20,
+        "format":"16s"
     },
     "43": {
         "name":"CheckInput",
@@ -205,7 +207,7 @@
         "format":""
     },
     "57": {
-        "name":"endElse ",
+        "name":"endElse",
         "format":""
     },
     "58": {
@@ -216,7 +218,8 @@
         "size": 20
     },
     "60": {
-        "size": 20
+        "size": 20,
+        "format":"16s"
     },
     "61": {
         "size": 52,
@@ -2903,28 +2906,30 @@
     },
     "17000": {
         "format":"",
-        "name":"ScriptEndsStanding"
+        "name":"AttackDefaults_StandingNormal"
     },
     "17001": {
         "format":"",
-        "name":"ScriptEndsAir"
+        "name":"AttackDefaults_AirNormal"
     },
     "17002": {
         "format":"",
-        "name":"ScriptEndsAir2"
+        "name":"AttackDefaults_StandingSpecial"
     },
     "17003": {
         "format":""
     },
     "17004": {
+        "name":"AttackDefaults_StandingDD",
         "format":""
     },
     "17005": {
+        "name":"AttackDefaults_AirDD",
         "format":""
     },
     "17006": {
         "format":"",
-        "name":"ScriptEndsCrouching"
+        "name":"AttackDefaults_CrouchingNormal"
     },
     "17007": {
         "format":""
@@ -2958,7 +2963,8 @@
         "format":""
     },
     "17017": {
-        "format":""
+        "format":"",
+        "name":"AttackDefaults_Astral"
     },
     "17018": {
         "format":""
@@ -3004,7 +3010,8 @@
         "format":""
     },
     "18011": {
-        "size": 148
+        "size": 148,
+        "format":"16s64h"
     },
     "19000": {
         "format": "i",
