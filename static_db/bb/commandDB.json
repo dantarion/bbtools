@@ -18,12 +18,12 @@
     "4": {
         "name": "if",
         "format": "ii",
-        "startBlock":true
+        "startBlock": true
     },
     "5": {
         "name": "endIf",
         "format": "",
-        "endBlock":true
+        "endBlock": true
     },
     "6": {
         "name": "label",
@@ -42,7 +42,7 @@
         "format": ""
     },
     "10": {
-        "name":"callSubroutine",
+        "name": "callSubroutine",
         "format": "32s"
     },
     "11": {
@@ -50,22 +50,22 @@
         "name": "sendToLabel"
     },
     "12": {
-        "format":"",
-        "name":"ExitState"
+        "format": "",
+        "name": "ExitState"
     },
     "13": {
         "format": "i",
         "size": 8
     },
     "14": {
-        "format":""
+        "format": ""
     },
     "15": {
-        "name":"upon",
+        "name": "upon",
         "format": "i"
     },
     "16": {
-        "name":"endUpon",
+        "name": "endUpon",
         "format": ""
     },
     "17": {
@@ -113,7 +113,7 @@
     "30": {
         "format": "ii",
         "size": 12,
-        "name":"loopRelated"
+        "name": "loopRelated"
     },
     "31": {
         "format": "ii",
@@ -123,7 +123,7 @@
         "size": 20
     },
     "35": {
-        "format":""
+        "format": ""
     },
     "36": {
         "format": "i",
@@ -134,11 +134,11 @@
         "size": 12
     },
     "39": {
-        "name":"random?",
+        "name": "random?",
         "format": "iii"
     },
     "40": {
-        "name":"op",
+        "name": "op",
         "size": 24,
         "format": "iiiii"
     },
@@ -148,12 +148,12 @@
     },
     "42": {
         "size": 20,
-        "format":"16s"
+        "format": "16s"
     },
     "43": {
-        "name":"CheckInput",
+        "name": "CheckInput",
         "format": "i",
-        "hex":true
+        "hex": true
     },
     "44": {
         "format": "i",
@@ -175,7 +175,7 @@
     "49": {
         "size": 24,
         "format": "iiiii",
-        "name":"ModifyVar?"
+        "name": "ModifyVar?"
     },
     "50": {
         "format": "i",
@@ -194,24 +194,24 @@
         "size": 8
     },
     "54": {
-        "name":"ifNot",
+        "name": "ifNot",
         "format": "ii",
         "size": 12
     },
     "55": {
-        "name":"endIfNot",
-        "format":""
+        "name": "endIfNot",
+        "format": ""
     },
     "56": {
-        "name":"else",
-        "format":""
+        "name": "else",
+        "format": ""
     },
     "57": {
-        "name":"endElse",
-        "format":""
+        "name": "endElse",
+        "format": ""
     },
     "58": {
-      "format":"32sii",
+        "format": "32sii",
         "size": 44
     },
     "59": {
@@ -219,7 +219,7 @@
     },
     "60": {
         "size": 20,
-        "format":"16s"
+        "format": "16s"
     },
     "61": {
         "size": 52,
@@ -256,10 +256,10 @@
         "size": 8
     },
     "1004": {
-        "format":""
+        "format": ""
     },
     "1005": {
-        "format":""
+        "format": ""
     },
     "1006": {
         "format": "i",
@@ -270,10 +270,10 @@
         "size": 8
     },
     "1008": {
-        "format":""
+        "format": ""
     },
     "1009": {
-        "format":""
+        "format": ""
     },
     "1010": {
         "format": "ii",
@@ -304,10 +304,10 @@
         "size": 8
     },
     "1017": {
-        "format":""
+        "format": ""
     },
     "1018": {
-        "format":""
+        "format": ""
     },
     "1019": {
         "format": "i",
@@ -322,13 +322,13 @@
         "size": 8
     },
     "1022": {
-        "format":""
+        "format": ""
     },
     "1023": {
-        "format":""
+        "format": ""
     },
     "1024": {
-		"name": "YAccel",
+        "name": "YAccel",
         "format": "i"
     },
     "1025": {
@@ -360,17 +360,17 @@
         "size": 8
     },
     "1032": {
-        "format":""
+        "format": ""
     },
     "1033": {
-        "format":""
+        "format": ""
     },
     "1034": {
         "format": "i",
         "size": 8
     },
     "1035": {
-		"name": "PushY",
+        "name": "setGravity",
         "format": "i"
     },
     "1036": {
@@ -378,10 +378,10 @@
         "size": 8
     },
     "1037": {
-        "format":""
+        "format": ""
     },
     "1038": {
-        "format":""
+        "format": ""
     },
     "1039": {
         "format": "i",
@@ -400,10 +400,10 @@
         "size": 12
     },
     "1043": {
-        "format":""
+        "format": ""
     },
     "1044": {
-        "format":""
+        "format": ""
     },
     "1045": {
         "format": "i",
@@ -422,10 +422,10 @@
         "size": 8
     },
     "1049": {
-        "format":""
+        "format": ""
     },
     "1050": {
-        "format":""
+        "format": ""
     },
     "1051": {
         "format": "i",
@@ -444,7 +444,7 @@
         "size": 12
     },
     "1055": {
-        "format":""
+        "format": ""
     },
     "1056": {
         "format": "i",
@@ -539,7 +539,7 @@
         "size": 12
     },
     "1079": {
-        "format":""
+        "format": ""
     },
     "1080": {
         "format": "i",
@@ -662,15 +662,15 @@
         "size": 12
     },
     "2000": {
-        "format":"",
-        "name":"RefreshMultihit"
+        "format": "",
+        "name": "RefreshMultihit"
     },
     "2001": {
-        "format":""
+        "format": ""
     },
     "2002": {
-        "format":"",
-        "name":"StartMultihit"
+        "format": "",
+        "name": "StartMultihit"
     },
     "2003": {
         "format": "i",
@@ -681,28 +681,28 @@
         "size": 12
     },
     "2005": {
-        "format":""
+        "format": ""
     },
     "2006": {
-        "format":""
+        "format": ""
     },
     "2007": {
-        "format":""
+        "format": ""
     },
     "2008": {
-        "format":""
+        "format": ""
     },
     "2009": {
-        "format":""
+        "format": ""
     },
     "2010": {
-        "format":""
+        "format": ""
     },
     "2011": {
-        "format":""
+        "format": ""
     },
     "2012": {
-        "format":""
+        "format": ""
     },
     "2015": {
         "format": "i",
@@ -733,7 +733,7 @@
         "size": 8
     },
     "2022": {
-        "format":""
+        "format": ""
     },
     "2034": {
         "format": "i",
@@ -831,7 +831,7 @@
         "size": 8
     },
     "2060": {
-        "name":"Recovery",
+        "name": "Recovery",
         "format": ""
     },
     "2061": {
@@ -960,7 +960,7 @@
         "size": 8
     },
     "3028": {
-		"name": "ScreenShake",
+        "name": "ScreenShake",
         "format": "ii"
     },
     "3029": {
@@ -972,19 +972,19 @@
         "size": 8
     },
     "3031": {
-        "format":""
+        "format": ""
     },
     "3032": {
-        "format":""
+        "format": ""
     },
     "3033": {
-        "format":""
+        "format": ""
     },
     "3034": {
-        "format":""
+        "format": ""
     },
     "3035": {
-        "format":""
+        "format": ""
     },
     "3038": {
         "format": "i",
@@ -1125,15 +1125,15 @@
         "size": 8
     },
     "4000": {
-        "name":"GFX_0",
+        "name": "GFX_0",
         "format": "32si"
     },
     "4001": {
-      "name":"GFX_1",
+        "name": "GFX_1",
         "format": "32si"
     },
     "4002": {
-        "name":"GFX_2",
+        "name": "GFX_2",
         "format": "32s",
         "size": 36
     },
@@ -1181,7 +1181,7 @@
         "size": 36
     },
     "4015": {
-        "format":""
+        "format": ""
     },
     "4016": {
         "size": 40
@@ -1244,7 +1244,7 @@
         "size": 8
     },
     "4052": {
-        "format":""
+        "format": ""
     },
     "4053": {
         "format": "ii",
@@ -1274,7 +1274,7 @@
         "size": 8
     },
     "5004": {
-        "format":""
+        "format": ""
     },
     "5005": {
         "format": "i",
@@ -1285,11 +1285,11 @@
         "size": 8
     },
     "7000": {
-        "name":"SFX_0",
+        "name": "SFX_0",
         "format": "32s"
     },
     "7001": {
-        "name":"SFX_1",
+        "name": "SFX_1",
         "format": "16s"
     },
     "7002": {
@@ -1340,7 +1340,7 @@
         "size": 36
     },
     "7015": {
-        "format":""
+        "format": ""
     },
     "8000": {
         "format": "iii",
@@ -1351,7 +1351,7 @@
         "size": 12
     },
     "8002": {
-        "format":""
+        "format": ""
     },
     "8003": {
         "format": "iii",
@@ -1386,11 +1386,11 @@
         "size": 16
     },
     "8011": {
-        "name":"SFX_FOOTSTEP?",
+        "name": "SFX_FOOTSTEP?",
         "format": "iii"
     },
     "9000": {
-        "format":""
+        "format": ""
     },
     "9001": {
         "format": "i",
@@ -1405,7 +1405,7 @@
         "format": "i"
     },
     "9004": {
-        "format":""
+        "format": ""
     },
     "9007": {
         "size": 24
@@ -1457,184 +1457,184 @@
         "format": "i"
     },
     "9071": {
-        "format":""
+        "format": ""
     },
     "9072": {
         "format": "i",
         "size": 8
     },
     "9073": {
-        "format":""
+        "format": ""
     },
     "9082": {
         "name": "AirPushbackY",
         "format": "i"
     },
     "9083": {
-        "format":""
+        "format": ""
     },
     "9084": {
         "format": "i",
-        "name":"CounterHitAirPushbackY"
+        "name": "CounterHitAirPushbackY"
     },
     "9085": {
-        "format":""
+        "format": ""
     },
     "9094": {
         "format": "i",
         "size": 8,
-        "name":"YImpluseBeforeWallbounce"
+        "name": "YImpluseBeforeWallbounce"
     },
     "9095": {
-        "format":""
+        "format": ""
     },
     "9096": {
         "format": "i",
         "size": 8
     },
     "9097": {
-        "format":""
+        "format": ""
     },
     "9106": {
         "format": "i",
         "size": 8,
-        "name":"WallbounceReboundTime"
+        "name": "WallbounceReboundTime"
     },
     "9107": {
-        "format":""
+        "format": ""
     },
     "9108": {
         "format": "i",
         "size": 8
     },
     "9109": {
-        "format":""
+        "format": ""
     },
     "9118": {
         "format": "i",
         "size": 8
     },
     "9119": {
-        "format":""
+        "format": ""
     },
     "9120": {
         "format": "i",
         "size": 8
     },
     "9121": {
-        "format":""
+        "format": ""
     },
     "9130": {
         "format": "i",
         "size": 8
     },
     "9131": {
-        "format":""
+        "format": ""
     },
     "9132": {
         "format": "i",
         "size": 8
     },
     "9133": {
-        "format":""
+        "format": ""
     },
     "9142": {
         "format": "i",
         "size": 8
     },
     "9143": {
-        "format":""
+        "format": ""
     },
     "9144": {
         "format": "i",
         "size": 8
     },
     "9145": {
-        "format":""
+        "format": ""
     },
     "9154": {
         "format": "i",
         "size": 8
     },
     "9155": {
-        "format":""
+        "format": ""
     },
     "9156": {
         "format": "i",
         "size": 8
     },
     "9157": {
-        "format":""
+        "format": ""
     },
     "9166": {
         "name": "AirUntechableTime",
         "format": "i"
     },
     "9167": {
-        "format":""
+        "format": ""
     },
     "9168": {
         "format": "i",
         "size": 8
     },
     "9169": {
-        "format":""
+        "format": ""
     },
     "9178": {
         "format": "i",
         "size": 8
     },
     "9179": {
-        "format":""
+        "format": ""
     },
     "9180": {
         "format": "i",
         "size": 8
     },
     "9181": {
-        "format":""
+        "format": ""
     },
     "9190": {
         "format": "i",
         "size": 8
     },
     "9191": {
-        "format":""
+        "format": ""
     },
     "9192": {
         "format": "i",
         "size": 8
     },
     "9193": {
-        "format":""
+        "format": ""
     },
     "9202": {
         "format": "i",
         "size": 8
     },
     "9203": {
-        "format":""
+        "format": ""
     },
     "9204": {
         "format": "i",
         "size": 8
     },
     "9205": {
-        "format":""
+        "format": ""
     },
     "9214": {
         "name": "PushbackX",
         "format": "i"
     },
     "9215": {
-        "format":""
+        "format": ""
     },
     "9216": {
         "format": "i",
         "size": 8
     },
     "9217": {
-        "format":""
+        "format": ""
     },
     "9218": {
         "format": "i",
@@ -1645,141 +1645,141 @@
         "size": 8
     },
     "9239": {
-        "format":""
+        "format": ""
     },
     "9240": {
         "format": "i",
         "size": 8
     },
     "9241": {
-        "format":""
+        "format": ""
     },
     "9250": {
         "format": "i",
         "size": 8
     },
     "9251": {
-        "format":""
+        "format": ""
     },
     "9252": {
         "format": "i",
         "size": 8
     },
     "9253": {
-        "format":""
+        "format": ""
     },
     "9262": {
         "format": "i",
         "size": 8
     },
     "9263": {
-        "format":""
+        "format": ""
     },
     "9264": {
         "format": "i",
         "size": 8
     },
     "9265": {
-        "format":""
+        "format": ""
     },
     "9274": {
         "name": "AttackP1",
         "format": "i"
     },
     "9275": {
-        "format":""
+        "format": ""
     },
     "9276": {
         "format": "i",
         "size": 8
     },
     "9277": {
-        "format":""
+        "format": ""
     },
     "9286": {
-		"name": "AttackP2",
+        "name": "AttackP2",
         "format": "i"
     },
     "9287": {
-        "format":""
+        "format": ""
     },
     "9288": {
         "format": "i",
         "size": 8
     },
     "9289": {
-        "format":""
+        "format": ""
     },
     "9310": {
         "format": "i",
         "size": 8
     },
     "9311": {
-        "format":""
+        "format": ""
     },
     "9312": {
         "format": "i",
         "size": 8
     },
     "9313": {
-        "format":""
+        "format": ""
     },
     "9322": {
         "name": "GroundedHitstunAnimation",
         "format": "i"
     },
     "9323": {
-        "format":""
+        "format": ""
     },
     "9324": {
         "format": "i",
         "size": 8
     },
     "9325": {
-        "format":""
+        "format": ""
     },
     "9334": {
         "name": "AirHitstunAnimation",
         "format": "i"
     },
     "9335": {
-        "format":""
+        "format": ""
     },
     "9336": {
         "format": "i",
         "size": 8
     },
     "9337": {
-        "format":""
+        "format": ""
     },
     "9346": {
         "format": "i",
         "size": 8
     },
     "9347": {
-        "format":""
+        "format": ""
     },
     "9348": {
         "format": "i",
         "size": 8
     },
     "9349": {
-        "format":""
+        "format": ""
     },
     "9358": {
         "format": "i",
         "size": 8,
-        "name":"AirHitstunAfterWallbounce"
+        "name": "AirHitstunAfterWallbounce"
     },
     "9359": {
-        "format":""
+        "format": ""
     },
     "9360": {
         "format": "i",
         "size": 8
     },
     "9361": {
-        "format":""
+        "format": ""
     },
     "9362": {
         "format": "i",
@@ -1866,11 +1866,11 @@
     },
     "11036": {
         "format": "i",
-        "name":"HitOverhead"
+        "name": "HitOverhead"
     },
     "11037": {
         "format": "i",
-        "name":"HitAirUnblockable"
+        "name": "HitAirUnblockable"
     },
     "11038": {
         "format": "i",
@@ -2069,7 +2069,7 @@
     "11088": {
         "format": "i",
         "size": 8,
-        "name":"FatalCounter"
+        "name": "FatalCounter"
     },
     "11089": {
         "format": "i",
@@ -2218,7 +2218,7 @@
     },
     "12017": {
         "format": "i",
-        "name":"ComboRate"
+        "name": "ComboRate"
     },
     "12018": {
         "format": "i32s"
@@ -2227,7 +2227,7 @@
         "size": 20
     },
     "12020": {
-        "format":""
+        "format": ""
     },
     "12021": {
         "format": "i",
@@ -2270,7 +2270,7 @@
     },
     "12031": {
         "format": "i",
-        "name":"JumpStartup"
+        "name": "JumpStartup"
     },
     "12032": {
         "size": 28
@@ -2321,7 +2321,7 @@
         "size": 8
     },
     "12045": {
-        "format":"16i",
+        "format": "16i",
         "size": 68
     },
     "12046": {
@@ -2354,7 +2354,7 @@
     },
     "12053": {
         "format": "10i",
-        "name":"OverdriveDuration"
+        "name": "OverdriveDuration"
     },
     "12054": {
         "format": "ii"
@@ -2364,7 +2364,7 @@
         "size": 8
     },
     "12056": {
-        "format":""
+        "format": ""
     },
     "13000": {
         "format": "i",
@@ -2522,7 +2522,7 @@
         "size": 12
     },
     "13042": {
-        "format":""
+        "format": ""
     },
     "13043": {
         "format": "i",
@@ -2537,21 +2537,21 @@
         "size": 8
     },
     "14000": {
-        "format":""
+        "format": ""
     },
     "14001": {
         "name": "Move_Register",
         "format": "32si",
-        "hex":true
+        "hex": true
     },
     "14002": {
         "name": "Move_EndRegister",
-        "format":""
+        "format": ""
     },
     "14003": {
         "name": "Move_AirGround?",
         "format": "i",
-        "hex":true
+        "hex": true
     },
     "14004": {
         "format": "i",
@@ -2588,7 +2588,7 @@
     "14012": {
         "name": "Move_Input?",
         "format": "i",
-        "hex":true
+        "hex": true
     },
     "14013": {
         "auto": "autostr",
@@ -2624,7 +2624,7 @@
     },
     "14022": {
         "format": "i",
-        "name":"MoveMaxChainRepeat"
+        "name": "MoveMaxChainRepeat"
     },
     "14023": {
         "format": "i",
@@ -2662,7 +2662,7 @@
         "size": 40
     },
     "14043": {
-        "format":""
+        "format": ""
     },
     "14044": {
         "size": 44
@@ -2676,10 +2676,10 @@
         "size": 8
     },
     "14047": {
-        "format":""
+        "format": ""
     },
     "14048": {
-        "hex":true,
+        "hex": true,
         "format": "32sii"
     },
     "14049": {
@@ -2729,7 +2729,7 @@
     "14076": {
         "format": "i",
         "size": 8,
-        "name":"WhiffCancelEnable"
+        "name": "WhiffCancelEnable"
     },
     "14077": {
         "format": "i",
@@ -2738,23 +2738,23 @@
     "14078": {
         "format": "i",
         "size": 8,
-        "name":"HitOrBlockJumpCancel"
+        "name": "HitOrBlockJumpCancel"
     },
     "14079": {
         "format": "i",
         "size": 8,
-        "name":"JumpCancel?"
+        "name": "JumpCancel?"
     },
     "14080": {
         "auto": "autostr",
         "format": "32s",
         "size": 36,
-        "name":"HitCancel"
+        "name": "HitCancel"
     },
     "14081": {
         "format": "i",
         "size": 8,
-        "name":"HitJumpCancel"
+        "name": "HitJumpCancel"
     },
     "14082": {
         "format": "i",
@@ -2784,19 +2784,19 @@
         "size": 8
     },
     "14089": {
-        "format":""
+        "format": ""
     },
     "14090": {
-        "format":""
+        "format": ""
     },
     "14091": {
-        "format":""
+        "format": ""
     },
     "14092": {
-        "format":""
+        "format": ""
     },
     "14093": {
-        "format":""
+        "format": ""
     },
     "15000": {
         "format": "i",
@@ -2827,13 +2827,13 @@
         "size": 8
     },
     "15008": {
-        "format":""
+        "format": ""
     },
     "15009": {
-        "format":""
+        "format": ""
     },
     "15010": {
-        "format":""
+        "format": ""
     },
     "15011": {
         "format": "i",
@@ -2905,80 +2905,81 @@
         "size": 44
     },
     "17000": {
-        "format":"",
-        "name":"AttackDefaults_StandingNormal"
+        "format": "",
+        "name": "AttackDefaults_StandingNormal"
     },
     "17001": {
-        "format":"",
-        "name":"AttackDefaults_AirNormal"
+        "format": "",
+        "name": "AttackDefaults_AirNormal"
     },
     "17002": {
-        "format":"",
-        "name":"AttackDefaults_StandingSpecial"
+        "format": "",
+        "name": "AttackDefaults_StandingSpecial"
     },
     "17003": {
-        "format":""
+        "format": ""
     },
     "17004": {
-        "name":"AttackDefaults_StandingDD",
-        "format":""
+        "name": "AttackDefaults_StandingDD",
+        "format": ""
     },
     "17005": {
-        "name":"AttackDefaults_AirDD",
-        "format":""
+        "name": "AttackDefaults_AirDD",
+        "format": ""
     },
     "17006": {
-        "format":"",
-        "name":"AttackDefaults_CrouchingNormal"
+        "format": "",
+        "name": "AttackDefaults_CrouchingNormal"
     },
     "17007": {
-        "format":""
+        "format": ""
     },
     "17008": {
-        "format":""
+        "format": ""
     },
     "17009": {
-        "format":""
+        "format": ""
     },
     "17010": {
-        "format":""
+        "format": ""
     },
     "17011": {
-        "size": 48
+        "size": 48,
+        "format": "32siii"
     },
     "17012": {
         "format": "iii",
         "size": 16
     },
     "17013": {
-        "format":""
+        "format": ""
     },
     "17014": {
-        "format":""
+        "format": ""
     },
     "17015": {
-        "format":""
+        "format": ""
     },
     "17016": {
-        "format":""
+        "format": ""
     },
     "17017": {
-        "format":"",
-        "name":"AttackDefaults_Astral"
+        "format": "",
+        "name": "AttackDefaults_Astral"
     },
     "17018": {
-        "format":""
+        "format": ""
     },
     "17019": {
-        "format":"",
-          "name":"ScriptEndGroundBOunce?"
+        "format": "",
+        "name": "ScriptEndGroundBOunce?"
     },
     "17020": {
-        "format":"",
-        "name":"ScriptSameAttackComboNoSpecialCancel"
+        "format": "",
+        "name": "ScriptSameAttackComboNoSpecialCancel"
     },
     "18001": {
-        "format":""
+        "format": ""
     },
     "18003": {
         "size": 132
@@ -3000,18 +3001,18 @@
         "size": 16
     },
     "18008": {
-        "format":""
+        "format": ""
     },
     "18009": {
         "format": "i",
         "size": 8
     },
     "18010": {
-        "format":""
+        "format": ""
     },
     "18011": {
         "size": 148,
-        "format":"16s64h"
+        "format": "16s64h"
     },
     "19000": {
         "format": "i",
@@ -3022,10 +3023,10 @@
         "size": 8
     },
     "19002": {
-        "format":""
+        "format": ""
     },
     "19003": {
-        "format":""
+        "format": ""
     },
     "19004": {
         "format": "ii",
@@ -3040,10 +3041,10 @@
         "size": 8
     },
     "19007": {
-        "format":""
+        "format": ""
     },
     "19008": {
-        "format":""
+        "format": ""
     },
     "19009": {
         "format": "i",
@@ -3062,10 +3063,10 @@
         "size": 8
     },
     "19013": {
-        "format":""
+        "format": ""
     },
     "19014": {
-        "format":""
+        "format": ""
     },
     "19015": {
         "format": "i",
@@ -3177,14 +3178,14 @@
         "size": 8
     },
     "22000": {
-        "format":""
+        "format": ""
     },
     "22001": {
         "format": "i",
         "size": 8
     },
     "22002": {
-        "format":""
+        "format": ""
     },
     "22003": {
         "format": "i",
@@ -3204,7 +3205,7 @@
         "size": 8
     },
     "22007": {
-        "name":"setInvincible",
+        "name": "setInvincible",
         "format": "i",
         "size": 8
     },
@@ -3299,10 +3300,10 @@
         "format": "ii"
     },
     "23002": {
-        "format":""
+        "format": ""
     },
     "23003": {
-        "format":"8i",
+        "format": "8i",
         "size": 36
     },
     "23004": {
@@ -3346,14 +3347,14 @@
         "size": 8
     },
     "23014": {
-        "format":""
+        "format": ""
     },
     "23015": {
         "format": "i",
         "size": 8
     },
     "23016": {
-        "format":""
+        "format": ""
     },
     "23017": {
         "format": "i",
@@ -3380,7 +3381,7 @@
         "size": 8
     },
     "23023": {
-        "format":""
+        "format": ""
     },
     "23024": {
         "format": "i",
@@ -3395,7 +3396,7 @@
         "size": 8
     },
     "23027": {
-        "format":""
+        "format": ""
     },
     "23028": {
         "format": "ii",
@@ -3429,10 +3430,10 @@
         "size": 8
     },
     "23036": {
-        "format":""
+        "format": ""
     },
     "23037": {
-        "format":""
+        "format": ""
     },
     "23038": {
         "format": "ii",
@@ -3451,12 +3452,12 @@
         "size": 12
     },
     "23042": {
-        "format":""
+        "format": ""
     },
     "23043": {
         "format": "iii",
         "size": 16,
-        "name":"PhysicsPull"
+        "name": "PhysicsPull"
     },
     "23044": {
         "format": "ii",
@@ -3488,19 +3489,19 @@
         "size": 8
     },
     "23072": {
-        "format":""
+        "format": ""
     },
     "23073": {
-        "format":""
+        "format": ""
     },
     "23074": {
-        "format":""
+        "format": ""
     },
     "23075": {
-        "format":""
+        "format": ""
     },
     "23076": {
-        "format":""
+        "format": ""
     },
     "23077": {
         "format": "i",
@@ -3669,7 +3670,7 @@
         "size": 16
     },
     "23120": {
-        "format":""
+        "format": ""
     },
     "23121": {
         "format": "i",
@@ -3688,7 +3689,7 @@
         "size": 16
     },
     "23131": {
-        "format":""
+        "format": ""
     },
     "23132": {
         "format": "i",
@@ -3718,7 +3719,7 @@
         "size": 40
     },
     "23147": {
-        "format":""
+        "format": ""
     },
     "23148": {
         "format": "32s"
@@ -3789,7 +3790,7 @@
         "size": 8
     },
     "23165": {
-        "format":""
+        "format": ""
     },
     "23166": {
         "auto": "autostr",
@@ -3797,10 +3798,10 @@
         "size": 36
     },
     "23167": {
-        "format":""
+        "format": ""
     },
     "23177": {
-        "format":""
+        "format": ""
     },
     "23178": {
         "format": "i",
@@ -3826,7 +3827,7 @@
         "size": 48
     },
     "30000": {
-        "format":""
+        "format": ""
     },
     "30001": {
         "size": 40

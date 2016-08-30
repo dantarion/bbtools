@@ -5,6 +5,28 @@ commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
 GAME = "bb"
+def getUponName(cmdData):
+    if cmdData == 0:
+        return "IMMEDIATE"
+    if cmdData == 1:
+        return "STATE_END"
+    if cmdData == 2:
+        return "LANDING"
+    if cmdData == 10:
+        return "ON_HIT_OR_BLOCK"
+    return str(cmdData)
+def getCondName(cmdData):
+    if cmdData == 47:
+        return "IsInOverdrive"
+    if cmdData == 54:
+        return "IsInOverdrive2"
+    if cmdData == 106:
+        return "IsInOverdrive3"
+    if cmdData == 91:
+        return "IsPlayer2"
+    if cmdData == 112:
+        return "IsUnlimitedCharacter"
+    return str(cmdData)
 def sanitizer(command):
     def sanitize(s):
         if isinstance(s,str):
@@ -68,7 +90,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 15:
-            astStack[-1].append(FunctionDef(dbData['name'],arguments(map(sanitizer(currentCMD),cmdData),None,None,[]),[],[]))
+            astStack[-1].append(FunctionDef(dbData['name']+"_"+getUponName(cmdData[0]),arguments([],None,None,[]),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4 and cmdData[1] == 0:
             tmp = astStack[-1].pop()
@@ -77,7 +99,8 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(tmp.value,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4:
-            astStack[-1].append(If(Num(cmdData[1]),[],[]))
+            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+            astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
             if(cmdData[1] == 2):
@@ -137,7 +160,8 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 54:
-            astStack[-1].append(If(UnaryOp(Not(),Num(cmdData[1])),[],[]))
+            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+            astStack[-1].append(If(UnaryOp(Not(),tmp),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 56:
             ifnode = astStack[-1][-1]
