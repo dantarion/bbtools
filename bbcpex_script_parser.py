@@ -102,6 +102,16 @@ def parse_bbscript_routine(f,end = -1):
             tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
+        elif currentCMD == 18 and cmdData[2] == 0:
+            tmp = astStack[-1].pop()
+            if not hasattr(tmp,"value"):
+                tmp = Expr(tmp)
+            astStack[-1].append(If(tmp.value,[],[]))
+            astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
+        elif currentCMD == 18:
+            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+            astStack[-1].append(If(tmp,[],[]))
+            astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
             if(cmdData[1] == 2):
                 lval = Name(id="SLOT_"+str(cmdData[2]))

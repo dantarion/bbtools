@@ -84,7 +84,8 @@
         "size": 16
     },
     "21": {
-        "format": "32s"
+        "format": "32s",
+        "name":"enterState"
     },
     "22": {
         "auto": "autostr",
@@ -134,7 +135,7 @@
         "size": 12
     },
     "39": {
-        "name": "random?",
+        "name": "random_",
         "format": "iii"
     },
     "40": {
@@ -175,7 +176,7 @@
     "49": {
         "size": 24,
         "format": "iiiii",
-        "name": "ModifyVar?"
+        "name": "ModifyVar_"
     },
     "50": {
         "format": "i",
@@ -1386,7 +1387,7 @@
         "size": 16
     },
     "8011": {
-        "name": "SFX_FOOTSTEP?",
+        "name": "SFX_FOOTSTEP_",
         "format": "iii"
     },
     "9000": {
@@ -1397,7 +1398,7 @@
         "size": 8
     },
     "9002": {
-        "name": "AttackLevel?",
+        "name": "AttackLevel_",
         "format": "i"
     },
     "9003": {
@@ -2549,7 +2550,7 @@
         "format": ""
     },
     "14003": {
-        "name": "Move_AirGround?",
+        "name": "Move_AirGround_",
         "format": "i",
         "hex": true
     },
@@ -2586,7 +2587,7 @@
         "size": 8
     },
     "14012": {
-        "name": "Move_Input?",
+        "name": "Move_Input_",
         "format": "i",
         "hex": true
     },
@@ -2743,7 +2744,7 @@
     "14079": {
         "format": "i",
         "size": 8,
-        "name": "JumpCancel?"
+        "name": "JumpCancel_"
     },
     "14080": {
         "auto": "autostr",
@@ -2973,7 +2974,7 @@
     },
     "17019": {
         "format": "",
-        "name": "ScriptEndGroundBOunce?"
+        "name": "ScriptEndGroundBOunce_"
     },
     "17020": {
         "format": "",
