@@ -70,7 +70,8 @@
     },
     "17": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"clearUponHandler"
     },
     "18": {
         "format": "iii"
@@ -3224,7 +3225,8 @@
     },
     "22020": {
         "format": "i",
-        "size": 8
+        "size": 8,
+        "name":"GuardPoint_"
     },
     "22021": {
         "format": "i",
