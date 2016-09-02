@@ -178,7 +178,9 @@ def parse_bbscript_routine(f,end = -1):
             astStack.append(ifnode.orelse)
         elif currentCMD in [1,5,9,16,55,57]:
             if len(astStack) > 1:
-                astStack.pop()
+                tmp = astStack.pop()
+                if len(astStack) == 1:
+                    j["FunctionsPySrc"].append(astor.to_source(astStack[-1][-1]))
             else:
                 print "\tasterror",currentIndicator
         else:
@@ -245,6 +247,7 @@ def parse_bbscript(f,basename,filename,filesize):
     astRoot = Module(body=[])
     j = OrderedDict()
     j["Functions"] = []
+    j["FunctionsPySrc"] = []
     charName = filename[-6:-4]
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
     f.seek(BASE+4+0x20)
