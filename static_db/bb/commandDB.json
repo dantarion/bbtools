@@ -103,7 +103,8 @@
         "size": 40
     },
     "26": {
-        "format": "32s"
+        "format": "32s",
+        "name": "RemoveGfx"
     },
     "28": {
         "format": "i32s"
@@ -1368,6 +1369,7 @@
         "size": 16
     },
     "8006": {
+        "name": "STAGE_SFX_",
         "format": "iii",
         "size": 16
     },
@@ -1388,7 +1390,7 @@
         "size": 16
     },
     "8011": {
-        "name": "SFX_FOOTSTEP_",
+        "name": "STAGE_SFX_2",
         "format": "iii"
     },
     "9000": {
@@ -3221,7 +3223,9 @@
         "size": 8
     },
     "22019": {
-        "size": 20
+        "size": 20,
+        "format":"4i",
+        "name":"defineInvincibility"
     },
     "22020": {
         "format": "i",
