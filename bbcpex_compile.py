@@ -19,7 +19,7 @@ characters = json.loads(json_data)
 bbcpex_script_parser.commandDB = commandDB
 bbcpex_script_parser.characters = characters
 if __name__ == "__main__":
-    for game in ["bbcp","bbcpex"]:
+    for game in ["bbcsex","bbcp","bbcpex"]:
         for character in characters:
             scr_filename = "input/{0}/char_{1}_scr.pac".format(game,character);
             if not os.path.isfile(scr_filename): continue
@@ -42,7 +42,10 @@ if __name__ == "__main__":
             for filename,data in pac.iterpac(vri_filename,parse_hipoffset):
                 compiledData["hipoffset"][filename] = data
             #Dantarion: Sprite Chunk Placement, Hit and Hurt boxes
-            img_filename = "input/bbcpex/char_{0}_col.pac".format(character);
+            if game != "bbcsex":
+                img_filename = "input/bbcpex/char_{0}_col.pac".format(character);
+            else:
+                img_filename = "input/bbcsex/char_{0}_col.pac".format(character);
             compiledData["col"] = OrderedDict()
             for filename,data in pac.iterpac(img_filename,jonbin_parser.parse):
                 compiledData["col"][filename] = data

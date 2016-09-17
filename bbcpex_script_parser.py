@@ -81,7 +81,7 @@ def parse_bbscript_routine(f,end = -1):
             currentContainer.append({'id':currentCMD,'params':map(pysanitizer(currentCMD),cmdData)})
         comment = None
         #AST STUFF
-        if False:
+        if GAME != "bb":
             pass
         elif currentCMD == 0:
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[]))
@@ -179,6 +179,9 @@ def parse_bbscript_routine(f,end = -1):
         elif currentCMD in [1,5,9,16,55,57]:
             if len(astStack) > 1:
                 astStack.pop()
+                if len(astStack) == 1:
+                    lastFunc = j["Functions"][-1]
+                    j["FunctionsPy"].append({"type":lastFunc["type"],"name":lastFunc["name"],"src":astor.to_source(astStack[-1][-1])})
             else:
                 print "\tasterror",currentIndicator
         else:
@@ -234,10 +237,10 @@ def parse_bbscript_routine(f,end = -1):
                 if cmdData[0] == 0xF8:
                     comment = "632146"
 
-            if comment:
-                currentContainer[-1]['comment'] = comment
-            if currentCMD in [0,4,8,15,54,56,14001]:
-                currentIndent += 1
+                if comment:
+                    currentContainer[-1]['comment'] = comment
+                if currentCMD in [0,4,8,15,54,56,14001]:
+                    currentIndent += 1
 
 def parse_bbscript(f,basename,filename,filesize):
     global commandDB,astRoot,charName,j,MODE
@@ -245,6 +248,7 @@ def parse_bbscript(f,basename,filename,filesize):
     astRoot = Module(body=[])
     j = OrderedDict()
     j["Functions"] = []
+    j["FunctionsPy"] = []
     charName = filename[-6:-4]
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
     f.seek(BASE+4+0x20)

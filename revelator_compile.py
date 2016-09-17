@@ -19,11 +19,12 @@ characters = json.loads(json_data)
 bbcpex_script_parser.commandDB = commandDB
 bbcpex_script_parser.characters = characters
 bbcpex_script_parser.MODE = ">"
+bbcpex_script_parser.GAME = "gg"
 if __name__ == "__main__":
-    for game,outputdir,srcdir in [["gg_revelator","gg_revelator_103","SF"],["gg_revelator","gg_revelator_102","20_SF"]]:
+    for game,outputdir,srcdir,srcdir2 in [["gg_revelator","gg_revelator_103","SF","dat"],["gg_revelator","gg_revelator_102","20_SF","dat_20"]]:
         for character in characters:
-            scr_filename = "input/{0}/{1}_DAT_SF/{1}_dat/Script/BBS_{1}.REDAssetCharaScript".format(game,character,srcdir);
-            scr_filename2 = "input/{0}/{1}_DAT_SF/{1}_dat/Script/BBS_{1}EF.REDAssetCharaScript".format(game,character,srcdir);
+            scr_filename = "input/{0}/{1}_DAT_{2}/{1}_{3}/Script/BBS_{1}.REDAssetCharaScript".format(game,character,srcdir,srcdir2);
+            scr_filename2 = "input/{0}/{1}_DAT_{2}/{1}_{3}/Script/BBS_{1}EF.REDAssetCharaScript".format(game,character,srcdir,srcdir2);
             if not os.path.isfile(scr_filename): continue
             print outputdir,character
 
@@ -33,24 +34,15 @@ if __name__ == "__main__":
             #Dantarion: Get all the bbscript info and store it in here
             compiledData["scr"] = []
             for _filename in [scr_filename,scr_filename2]:
+                print "\t",_filename
                 f = open(_filename,"rb")
                 f.seek(0,2)
-                filesize = f.tell()
+                filesize = f.tell()-0x48
                 f.seek(0x48)
                 filename, data = bbcpex_script_parser.parse_bbscript(f,"","char",filesize)
                 compiledData["scr"].append({"filename":os.path.basename(_filename), "data":data})
-            '''
-            #Dantarion: This data is discarded by exah3pac but we need it for arranging sprites later!
-            img_filename = "input/bbcpex/char_{0}_img.pac".format(character);
-            compiledData["hipoffset"] = {}
-            for filename,data in pac.iterpac(img_filename,parse_hipoffset):
-                compiledData["hipoffset"][filename] = data
-            vri_filename = "input/bbcpex/char_{0}_vri.pac".format(character);
-            for filename,data in pac.iterpac(vri_filename,parse_hipoffset):
-                compiledData["hipoffset"][filename] = data
-            '''
             #Dantarion: Sprite Chunk Placement, Hit and Hurt boxes
-            col_filename = "input/{0}/{1}_DAT_SF/{1}_dat/Collision/COL_{1}.REDAssetCollision".format(game,character,srcdir);
+            col_filename = "input/{0}/{1}_DAT_{2}/{1}_{3}/Collision/COL_{1}.REDAssetCollision".format(game,character,srcdir,srcdir2);
 
             compiledData["col"] = OrderedDict()
             jonbin_parser.GAME = "gg"
