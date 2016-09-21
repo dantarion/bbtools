@@ -7,6 +7,19 @@ commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
 GAME = "bb"
+uponLookup = {
+    0:"IMMEDIATE",
+    1:"STATE_END",
+    2:"LANDING",
+    10:"ON_HIT_OR_BLOCK"
+}
+slotLookup = {
+    47: "IsInOverdrive",
+    54: "IsInOverdrive2",
+    106: "IsInOverdrive3",
+    91: "IsPlayer2",
+    112:"IsUnlimitedCharacter"
+}
 def getUponName(cmdData):
     if cmdData == 0:
         return "IMMEDIATE"
@@ -104,7 +117,7 @@ def parse_bbscript_routine(f,end = -1):
             tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
-        elif currentCMD == 18 and cmdData[2] == 0:
+        elif currentCMD == 18 and cmdData[1] == 0:
             tmp = astStack[-1].pop()
             if not hasattr(tmp,"value"):
                 tmp = Expr(tmp)
@@ -112,7 +125,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 18:
 
-            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
+            tmp = Name(id="SLOT_"+getSlotName(cmdData[2]))
             astStack[-1].append(If(tmp,[],[]))
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
@@ -182,8 +195,6 @@ def parse_bbscript_routine(f,end = -1):
         elif currentCMD in [1,5,9,16,55,57]:
             if len(astStack[-1]) == 0:
                 astStack[-1].append(Pass())
-            elif len(astStack[-1][-1]) == 0:
-                astStack[-1][-1].append(Pass())
             if len(astStack) > 1:
                 astStack.pop()
                 if len(astStack) == 1:
