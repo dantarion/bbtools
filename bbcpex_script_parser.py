@@ -1,6 +1,8 @@
 import os, struct, json, pac,astor
 from ast import *
 from collections import defaultdict, OrderedDict
+
+
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
@@ -15,7 +17,7 @@ def getUponName(cmdData):
     if cmdData == 10:
         return "ON_HIT_OR_BLOCK"
     return str(cmdData)
-def getCondName(cmdData):
+def getSlotName(cmdData):
     if cmdData == 47:
         return "IsInOverdrive"
     if cmdData == 54:
@@ -81,13 +83,13 @@ def parse_bbscript_routine(f,end = -1):
             currentContainer.append({'id':currentCMD,'params':map(pysanitizer(currentCMD),cmdData)})
         comment = None
         #AST STUFF
-        if False:
+        if GAME != "bb":
             pass
         elif currentCMD == 0:
-            astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[]))
+            astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 8:
-            astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[]))
+            astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 15:
             astStack[-1].append(FunctionDef(dbData['name']+"_"+getUponName(cmdData[0]),arguments([],None,None,[]),[],[]))
@@ -99,7 +101,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(tmp.value,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4:
-            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 18 and cmdData[2] == 0:
@@ -109,7 +111,8 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(tmp.value,[],[]))
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 18:
-            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+
+            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(tmp,[],[]))
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
@@ -170,15 +173,22 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 54:
-            tmp = Call(Name(id="Cond_"+getCondName(cmdData[1])),[],[],None,None)
+            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(UnaryOp(Not(),tmp),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 56:
             ifnode = astStack[-1][-1]
             astStack.append(ifnode.orelse)
         elif currentCMD in [1,5,9,16,55,57]:
+            if len(astStack[-1]) == 0:
+                astStack[-1].append(Pass())
+            elif len(astStack[-1][-1]) == 0:
+                astStack[-1][-1].append(Pass())
             if len(astStack) > 1:
                 astStack.pop()
+                if len(astStack) == 1:
+                    lastFunc = j["Functions"][-1]
+                    j["FunctionsPy"].append({"type":lastFunc["type"],"name":lastFunc["name"],"src":astor.to_source(astStack[-1][-1])})
             else:
                 print "\tasterror",currentIndicator
         else:
@@ -234,10 +244,10 @@ def parse_bbscript_routine(f,end = -1):
                 if cmdData[0] == 0xF8:
                     comment = "632146"
 
-            if comment:
-                currentContainer[-1]['comment'] = comment
-            if currentCMD in [0,4,8,15,54,56,14001]:
-                currentIndent += 1
+                if comment:
+                    currentContainer[-1]['comment'] = comment
+                if currentCMD in [0,4,8,15,54,56,14001]:
+                    currentIndent += 1
 
 def parse_bbscript(f,basename,filename,filesize):
     global commandDB,astRoot,charName,j,MODE
@@ -245,6 +255,7 @@ def parse_bbscript(f,basename,filename,filesize):
     astRoot = Module(body=[])
     j = OrderedDict()
     j["Functions"] = []
+    j["FunctionsPy"] = []
     charName = filename[-6:-4]
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
     f.seek(BASE+4+0x20)

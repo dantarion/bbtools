@@ -43,7 +43,7 @@ def iterpac(filename,func):
 
 #for filename in glob.glob("disc/P4AU/char/char_kk_*.pac"):
 if __name__ == "__main__":
-    for filename in glob.glob("input/gg_revelator/KUM_DAT_SF/kum_dat/Collision/*"):
+    for filename in glob.glob("input/bbcpex/char_*_scr.pac"):
         print filename
         for thing in iterpac(filename,dump_pac):
             print thing
