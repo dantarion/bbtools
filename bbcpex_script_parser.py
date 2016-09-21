@@ -68,7 +68,7 @@ def parse_bbscript_routine(f,end = -1):
             cmdData = [f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")]
         else:
             cmdData = list(struct.unpack(MODE+dbData["format"],f.read(struct.calcsize(dbData["format"]))))
-        #commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
+        commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 0:
             currentIndicator = cmdData[0].strip("\x00")
             currentContainer = []
@@ -191,6 +191,7 @@ def parse_bbscript_routine(f,end = -1):
                     j["FunctionsPy"].append({"type":lastFunc["type"],"name":lastFunc["name"],"src":astor.to_source(astStack[-1][-1])})
             else:
                 print "\tasterror",currentIndicator
+                astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
         else:
             astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
 
@@ -198,7 +199,10 @@ def parse_bbscript_routine(f,end = -1):
             if currentCMD == 2:
                 #comment = "Frame {0}->{1}".format(currentFrame,currentFrame+cmdData[1])
                 currentFrame = currentFrame+cmdData[1]
-            if currentCMD == 15:
+            if currentCMD in [15,29]:
+                param = 0
+                if currentCMD == 29:
+                    param = 1
                 if cmdData[0] == 0:
                     comment = "immediate"
                 if cmdData[0] == 1:

@@ -33,7 +33,7 @@ if __name__ == "__main__":
             compiledData["scr"] = []
             for filename,data in pac.iterpac(scr_filename,bbcpex_script_parser.parse_bbscript):
                 compiledData["scr"].append({"filename":filename, "data":data})
-
+            '''
             #Dantarion: This data is discarded by exah3pac but we need it for arranging sprites later!
             img_filename = "input/bbcpex/char_{0}_img.pac".format(character);
             compiledData["hipoffset"] = {}
@@ -50,17 +50,17 @@ if __name__ == "__main__":
             compiledData["col"] = OrderedDict()
             for filename,data in pac.iterpac(img_filename,jonbin_parser.parse):
                 compiledData["col"][filename] = data
-
+            '''
             #This creates a single monolithic json file with all data needed for boxdox.bb
             outJson = open("db/{0}/{1}.json".format(game,character),"w")
             outJson.write(json.dumps(compiledData,encoding='cp1252'))
             outJson.close()
 
-    for cmdId in bbcpex_script_parser.commandCalls:
-        module = (cmdId / 100) * 100
-        if not os.path.isdir("reports/{0}/".format(module)):
-            os.makedirs("reports/{0}/".format(module))
-        report = open("reports/{0}/{1}.txt".format(module,cmdId),"w");
-        for thing in bbcpex_script_parser.commandCalls[cmdId]:
-            report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
-        report.close()
+for cmdId in bbcpex_script_parser.commandCalls:
+    module = (cmdId / 100) * 100
+    if not os.path.isdir("reports/{0}/".format(module)):
+        os.makedirs("reports/{0}/".format(module))
+    report = open("reports/{0}/{1}.txt".format(module,cmdId),"w");
+    for thing in bbcpex_script_parser.commandCalls[cmdId]:
+        report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
+    report.close()
