@@ -82,6 +82,8 @@ class Rebuilder(astor.ExplicitNodeVisitor):
         output.write(struct.pack(MODE+"I",stateCount))
         for childNode in node.body:
             self.visit_RootFunctionDef(childNode)
+    def visit_Str(self,node):
+        pass
     def visit_RootFunctionDef(self,node):
         global output,root
         output.seek(0,2)
@@ -219,19 +221,17 @@ class Rebuilder(astor.ExplicitNodeVisitor):
 def rebuild_bbscript(sourceFilename,outFilename):
     global output
     sourceAST = astor.parsefile(sourceFilename)
-    f = open(outFilename+".txt","w")
-    f.write(astor.dump(sourceAST))
-    f.close()
     output = open(outFilename,"wb")
     Rebuilder().visit(sourceAST)
     output.close()
-    output = open(outFilename,"rb")
-    output.seek(0,2)
-    filesize = output.tell()
-    output.seek(0)
-    bbcpex_script_parser.parse_bbscript(output,"","reb_kk.bin",filesize)
-    output.close()
+    #output = open(outFilename,"rb")
+    #output.seek(0,2)
+    #filesize = output.tell()
+    #output.seek(0)
+    #bbcpex_script_parser.parse_bbscript(output,"","../../"+outFilename,filesize)
+    #output.close()
 
 
 
-rebuild_bbscript("db/bbcpex/scr_kk.bin.py","test_rebuild/scr_kk.bin")
+rebuild_bbscript("test_rebuild/src/scr_kk.bin.py","test_rebuild/bin/scr_kk.bin")
+print "complete"

@@ -55,7 +55,7 @@ if __name__ == "__main__":
             outJson = open("db/{0}/{1}.json".format(game,character),"w")
             outJson.write(json.dumps(compiledData,encoding='cp1252'))
             outJson.close()
-
+'''
 for cmdId in bbcpex_script_parser.commandCalls:
     module = (cmdId / 100) * 100
     if not os.path.isdir("reports/{0}/".format(module)):
@@ -64,3 +64,4 @@ for cmdId in bbcpex_script_parser.commandCalls:
     for thing in bbcpex_script_parser.commandCalls[cmdId]:
         report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
     report.close()
+'''
