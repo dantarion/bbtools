@@ -2,11 +2,13 @@
   "0": {
     "size": 36,
     "format": "32s",
-    "name":"startFunction"
+    "name":"startState",
+    "startBlock": true
   },
   "1": {
     "size": 4,
-    "name":"endFunction"
+    "name":"endState",
+    "endBlock": true
   },
   "2": {
       "name": "sprite",
@@ -23,36 +25,47 @@
   "5": {
     "name": "endIf",
     "format":"",
+    "size": 4,
     "endBlock": true
   },
   "6": {
-    "name": "if",
+    "name": "op",
     "format":"iiiii",
     "startBlock": true
   },
   "7": {
-    "size": 12
-  },
+    "name": "ifNot",
+    "size": 12,
+    "format": "ii",
+    "startBlock": true
+  },  
   "8": {
-    "size": 20
+    "size": 20,
+    "format": "16s"
   },
   "9": {
-    "size": 4
+    "name": "else",
+    "size": 4,
+    "startBlock": true
   },
   "10": {
-    "size": 4
+    "name": "endElse",
+    "size": 4,
+    "endBlock": true
   },
-  "11": {
+  "11": { 
     "format": "32s"
   },
   "12": {
     "format": "32s"
   },
   "13": {
-    "size": 56
+    "size": 56,
+    "format": "32siiiii"
   },
   "14": {
-    "size": 36
+    "size": 36,
+    "format": "32s"
   },
   "15": {
     "size": 36,
@@ -61,7 +74,9 @@
   },
   "16": {
     "size": 4,
-    "name":"endSubroutine"
+    "format": "",
+    "name": "endSubroutine",
+    "endBlock": true
   },
   "17": {
     "size": 36
@@ -82,7 +97,9 @@
   },
   "22": {
     "name": "endUpon",
-    "format":""
+    "format":"",
+    "size": 4,
+    "endBlock": true
   },
   "23": {
     "format": "i",
@@ -119,7 +136,8 @@
     "size": 40
   },
   "35": {
-    "size": 40
+    "size": 40,
+    "format": "i32s"
   },
   "36": {
     "size": 12
@@ -147,16 +165,22 @@
     "size": 16
   },
   "45": {
-    "size": 24
+    "name": "ModifyVar_",
+    "size": 24,
+    "format": "iiiii"
   },
   "46": {
-    "size": 20
+    "name": "StoreValue",
+    "size": 20,
+    "format": "iiii"
   },
   "47": {
     "size": 20
   },
   "48": {
+    "name": "CheckInput",
     "format": "i",
+    "hex": true,
     "size": 8
   },
   "49": {
@@ -177,7 +201,8 @@
     "size": 28
   },
   "54": {
-    "size": 24
+    "size": 24,
+    "format": "iiiii"
   },
   "56": {
     "format": "i",
@@ -249,7 +274,9 @@
     "size": 12
   },
   "105": {
-    "format": "i"
+    "name": "physicsXImpulse",
+    "format": "i",
+    "size": 8
   },
   "106": {
     "format": "i",
@@ -274,6 +301,7 @@
     "size": 8
   },
   "112": {
+    "name": "physicsYImpulse",
     "format": "i",
     "size": 8
   },
@@ -599,6 +627,7 @@
   },
   "235": {
     "name": "recoveryState",
+    "size": 4,
     "format": ""
   },
   "236": {
@@ -953,14 +982,14 @@
   },
   "445": {
     "name": "createObject1",
-    "format": "32s"
+    "format": "32si"
   },
   "446": {
     "name": "createObject2",
-    "format": "32s"
+    "format": "32si"
   },
   "448": {
-    "format": "32s"
+    "format": "32si"
   },
   "449": {
     "size": 40
@@ -1214,7 +1243,7 @@
     "size": 8
   },
   "754": {
-    "name": "airPushbackX",
+    "name": "hitAirPushbackX",
     "format": "i"
   },
   "755": {
@@ -1228,7 +1257,7 @@
     "size": 4
   },
   "766": {
-    "name":"hitPushbackY",
+    "name":"hitAirPushbackY",
     "format":"i"
   },
   "767": {
@@ -1699,6 +1728,7 @@
     "size": 8
   },
   "1098": {
+    "name": "hitHighLow",
     "format": "i",
     "size": 8
   },
@@ -2131,10 +2161,12 @@
     "size": 8
   },
   "1240": {
+    "name": "doubleJumpCount",
     "format": "i",
     "size": 8
   },
   "1241": {
+    "name": "airDashCount",
     "format": "i",
     "size": 8
   },
@@ -2226,7 +2258,8 @@
     "format": "i"
   },
   "1264": {
-    "size": 20
+    "size": 20,
+    "format": "16s"
   },
   "1265": {
     "format": "i",
@@ -2403,6 +2436,7 @@
     "size": 8
   },
   "1379": {
+    "name": "move_airGround",
     "format": "i",
     "size": 8
   },
@@ -2458,6 +2492,7 @@
   },
   "1393": {
     "format": "i",
+    "name": "move_input",
     "size": 8
   },
   "1394": {
@@ -3200,7 +3235,7 @@
   },
   "1886": {
     "name": "callSubroutine",
-    "format": "32s"
+    "format": "32siiiiiiii"
   },
   "1887": {
     "format": "i",
@@ -3493,7 +3528,7 @@
     "size": 36
   },
   "2013": {
-    "format": "32s"
+    "format": "32si"
   },
   "2014": {
     "format": "i",
@@ -3519,7 +3554,7 @@
     "size": 8
   },
   "2020": {
-    "format": "32s"
+    "format": "32siii"
   },
   "2021": {
     "format": "i",
@@ -3562,7 +3597,8 @@
     "size": 36
   },
   "2033": {
-    "size": 4
+    "size": 4,
+    "format": ""
   },
   "2034": {
     "size": 4
@@ -3905,7 +3941,8 @@
   },
   "2141": {
     "name": "endCounterHitState",
-    "format":""
+    "size": 4,
+    "format": ""
   },
   "2142": {
     "size": 4
@@ -4220,7 +4257,7 @@
     "size": 40
   },
   "2247": {
-    "format": "32s",
+    "format": "iiii",
     "size": 20
   },
   "2248": {

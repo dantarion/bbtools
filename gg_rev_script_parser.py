@@ -2,9 +2,9 @@ import os, struct, json, astor, sys
 from ast import *
 from collections import defaultdict, OrderedDict
 
-json_data = open('static_db/gg_rev/commandDB.json').read()
+json_data = open('static_db/gg_revelator/commandDB.json').read()
 commandDB = json.loads(json_data)
-json_data = open('static_db/gg_rev/characters.json').read()
+json_data = open('static_db/gg_revelator/characters.json').read()
 characters = json.loads(json_data)
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
