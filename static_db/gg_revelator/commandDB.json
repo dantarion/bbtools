@@ -2161,12 +2161,12 @@
     "size": 8
   },
   "1240": {
-    "name": "doubleJumpCount",
+    "name": "airDashCount",
     "format": "i",
     "size": 8
   },
   "1241": {
-    "name": "airDashCount",
+    "name": "doubleJumpCount",
     "format": "i",
     "size": 8
   },
