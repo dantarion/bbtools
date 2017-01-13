@@ -3,10 +3,10 @@ import sys
 from ast import *
 from collections import defaultdict, OrderedDict
 import gg_rev_script_parser
-json_data=open("commandDB.json").read()
+json_data=open("static_db/gg_rev/commandDB.json").read()
 commandDB = json.loads(json_data)
 
-json_data=open("characters.json").read()
+json_data=open("static_db/gg_rev/characters.json").read()
 characters = json.loads(json_data)
 commandDBLookup = {}
 gg_rev_script_parser.commandDB = commandDB
