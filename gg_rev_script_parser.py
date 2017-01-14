@@ -12,6 +12,7 @@ MODE = "<"
 GAME = "gg_rev"
 uponLookup = {
     0:"IMMEDIATE"
+    23:"ON_HIT_OR_BLOCK"
 }
 slotLookup = {
     212:"IS_STYLISH"
@@ -19,6 +20,8 @@ slotLookup = {
 def getUponName(cmdData):
     if cmdData == 0:
         return "IMMEDIATE"
+    if cmdData == 23:
+        return "ON_HIT_OR_BLOCK"
     return str(cmdData)
 def getSlotName(cmdData):
     if cmdData == 212:
@@ -83,9 +86,13 @@ def parse_bbscript_routine(f,end = -1):
         if GAME != "gg_rev":
             pass
         elif dbData['name'] == 'startState':
+            if cmdData[0][0].isdigit():
+                cmdData[0] = '_' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'startSubroutine':
+            if cmdData[0][0].isdigit():
+                cmdData[0] = '_' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'upon':
