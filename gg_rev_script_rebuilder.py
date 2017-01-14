@@ -3,10 +3,10 @@ import sys
 from ast import *
 from collections import defaultdict, OrderedDict
 import gg_rev_script_parser
-json_data=open("static_db/gg_rev/commandDB.json").read()
+json_data=open("static_db/gg_revelator/commandDB.json").read()
 commandDB = json.loads(json_data)
 
-json_data=open("static_db/gg_rev/characters.json").read()
+json_data=open("static_db/gg_revelator/characters.json").read()
 characters = json.loads(json_data)
 commandDBLookup = {}
 gg_rev_script_parser.commandDB = commandDB
@@ -96,10 +96,14 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                 output.seek(4+36*node._index+32)
                 output.write(struct.pack(MODE+"I",startOffset))
                 output.seek(0,2)
+                if(node.name[0] == '_'):
+                    node.name = node.name[1:]
                 writeCommandByName("startState",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endState",[])
             else:
+                if(node.name[0] == '_'):
+                    node.name = node.name[1:]
                 writeCommandByName("startSubroutine",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endSubroutine",[])
