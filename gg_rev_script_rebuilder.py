@@ -76,6 +76,8 @@ class Rebuilder(astor.ExplicitNodeVisitor):
         for function in node.body:
             if type(function) != FunctionDef:
                 raise Exception("Root level elements must be functions")
+            if function.name[:2] == '__' and function.name[2].isdigit():
+                function.name = function.name[2:]
             if function.decorator_list[0].id != "State":
                 continue
             function._index = stateCount
@@ -89,21 +91,20 @@ class Rebuilder(astor.ExplicitNodeVisitor):
     def visit_RootFunctionDef(self,node):
         global output,root
         output.seek(0,2)
+
         if len(node.decorator_list) == 1:
+            if node.name[:2] == '__' and function.name[2].isdigit():
+                node.name = node.name[2:]
             if node.decorator_list[0].id == "State":
                 #Write offset into state table
                 startOffset = output.tell()-root._dataStart
                 output.seek(4+36*node._index+32)
                 output.write(struct.pack(MODE+"I",startOffset))
                 output.seek(0,2)
-                if(node.name[0] == '_'):
-                    node.name = node.name[1:]
                 writeCommandByName("startState",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endState",[])
             else:
-                if(node.name[0] == '_'):
-                    node.name = node.name[1:]
                 writeCommandByName("startSubroutine",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endSubroutine",[])
@@ -220,9 +221,9 @@ class Rebuilder(astor.ExplicitNodeVisitor):
 def rebuild_bbscript(sourceFilename,outFilename):
     global output
     sourceAST = astor.parsefile(sourceFilename)
-    if(os.path.isfile(outFilename+".txt")):
-        os.remove(outFilename+".txt")
-    f = open(outFilename+".txt","w")
+    if(os.path.isfile(sourceFilename+".txt")):
+        os.remove(sourceFilename+".txt")
+    f = open(sourceFilename+".txt","w")
     f.write(astor.dump(sourceAST))
     f.close()
     output = open(outFilename,"wb")

@@ -1115,7 +1115,9 @@
     "format": "32s"
   },
   "613": {
-    "size": 20
+    "name": "playVoice",
+    "size": 20,
+    "format": "16s"
   },
   "614": {
     "size": 36
@@ -2161,12 +2163,12 @@
     "size": 8
   },
   "1240": {
-    "name": "airDashCount",
+    "name": "doubleJumpCount",
     "format": "i",
     "size": 8
   },
   "1241": {
-    "name": "doubleJumpCount",
+    "name": "airDashCount",
     "format": "i",
     "size": 8
   },
@@ -2294,7 +2296,8 @@
     "size": 8
   },
   "1286": {
-    "size": 40
+    "size": 40,
+    "format": "i32s"
   },
   "1287": {
     "size": 4
@@ -2441,7 +2444,8 @@
     "size": 8
   },
   "1380": {
-    "size": 36
+    "size": 36,
+    "format": "32s"
   },
   "1381": {
     "format": "i",
@@ -2452,7 +2456,8 @@
     "format": "32s"
   },
   "1383": {
-    "size": 4
+    "size": 4,
+    "name": "endMoveRegister"
   },
   "1384": {
     "format": "i",
@@ -2624,7 +2629,8 @@
     "size": 16
   },
   "1498": {
-    "size": 20
+    "size": 20,
+    "format": "iiii"
   },
   "1510": {
     "format": "i",

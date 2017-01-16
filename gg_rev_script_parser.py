@@ -11,7 +11,7 @@ commandCalls = defaultdict(list)
 MODE = "<"
 GAME = "gg_rev"
 uponLookup = {
-    0:"IMMEDIATE"
+    0:"IMMEDIATE",
     23:"ON_HIT_OR_BLOCK"
 }
 slotLookup = {
@@ -44,7 +44,7 @@ def pysanitizer(command):
         return str(s).strip("\x00")
     return sanitize
 def parse_bbscript_routine(f,end = -1):
-    global MODE,charName,j,astRoot
+    global MODE,j,astRoot
     currentCMD = -1
     currentIndicator = "_PRE"
     currentFrame = 1
@@ -57,10 +57,7 @@ def parse_bbscript_routine(f,end = -1):
 
         loc = f.tell()
         currentCMD, = struct.unpack(MODE+"I",f.read(4))
-        if 'endBlock' in commandDB[str(currentCMD)]:
-                currentIndent -= 1
         commandCounts[currentCMD] += 1
-
         dbData = commandDB[str(currentCMD)]
         if "name" not in dbData:
             dbData["name"] = "Unknown{0}".format(currentCMD)
@@ -68,7 +65,6 @@ def parse_bbscript_routine(f,end = -1):
             cmdData = [f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")]
         else:
             cmdData = list(struct.unpack(MODE+dbData["format"],f.read(struct.calcsize(dbData["format"]))))
-        commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if dbData['name'] == 'startState':
             currentContainerntIndicator = cmdData[0].strip("\x00")
             currentContainer = []
@@ -87,12 +83,12 @@ def parse_bbscript_routine(f,end = -1):
             pass
         elif dbData['name'] == 'startState':
             if cmdData[0][0].isdigit():
-                cmdData[0] = '_' + cmdData[0]
+                cmdData[0] = '__' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'startSubroutine':
             if cmdData[0][0].isdigit():
-                cmdData[0] = '_' + cmdData[0]
+                cmdData[0] = '__' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'upon':
@@ -132,6 +128,7 @@ def parse_bbscript_routine(f,end = -1):
             tmp = Expr(Compare(lval,[op],[rval]))
             astStack[-1].append(If(tmp.value,[],[]))
             astStack.append(astStack[-1][-1].body)
+            inIf += 1
         elif dbData['name'] == 'StoreValue':
             if(cmdData[0] == 2):
                 lval = Name(id="SLOT_"+str(cmdData[1]))
@@ -177,9 +174,9 @@ def parse_bbscript_routine(f,end = -1):
             astStack.append(ifnode.orelse)
         elif 'endBlock' in dbData:
             if inIf == 0 and dbData['name'] == 'endIf':
-                continue
+                astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
             elif inUpon == 0 and dbData['name'] == 'endUpon':
-                continue
+                astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
             else:
                 if len(astStack[-1]) == 0:
                     astStack[-1].append(Pass())
@@ -213,7 +210,7 @@ def parse_bbscript_routine(f,end = -1):
                 param = 1
                 if cmdData[0] == 0:
                     comment = "immediate"
-            if dbData['name'] == 1393:
+            if dbData['name'] == "move_input":
                 if cmdData[0] == 0x4:
                     comment = "P_BUTTON"
                 if cmdData[0] == 0xD:
@@ -222,6 +219,8 @@ def parse_bbscript_routine(f,end = -1):
                     comment = "S_BUTTON"
                 if cmdData[0] == 0x1F:
                     comment = "H_BUTTON"
+                if cmdData[0] == 0x28:
+                    comment == "D_BUTTON"
                 if cmdData[0] == 0xAC:
                     comment = "236"
                 if cmdData[0] == 0xAD:
@@ -247,22 +246,21 @@ def parse_bbscript_routine(f,end = -1):
                 currentContainer[-1]['comment'] = comment
             if 'startBlock' in dbData:
                 currentIndent += 1
-            if dbData['name'] in ['if','op','ifNot']:
+            if dbData['name'] in ['if','ifNot']:
                 inIf += 1
             if dbData['name'] == 'upon':
                 inUpon += 1
 
-def parse_bbscript(f,basename,filename,filesize):
-    global commandDB,astRoot,charName,j,MODE
+def parse_bbscript(f,basename,dirname):
+    global commandDB,astRoot,j,MODE
     BASE = f.tell()
-    charName = f.name[:3]
     astRoot = Module(body=[])
     j = OrderedDict()
     j["Functions"] = []
     j["FunctionsPy"] = []
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
-    f.seek(0x24*(FUNCTION_COUNT), 1)
-    parse_bbscript_routine(f, os.stat(filename).st_size)
+    f.seek(0x24*(FUNCTION_COUNT)+4)
+    parse_bbscript_routine(f, os.path.getsize(f.name))
     '''
     for i in range(0,FUNCTION_COUNT):
         f.seek(BASE+4+0x24*i)
@@ -272,9 +270,11 @@ def parse_bbscript(f,basename,filename,filesize):
         f.seek(BASE+4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine(f)
     '''
-    py = open(os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])),filename+".py"),"w")
+    py = open(os.path.join(dirname, basename) + ".py","w")
     py.write(astor.to_source(astRoot))
     py.close()
-    return filename,j
+    return j
+
 if __name__ == '__main__':
-    parse_bbscript(open(sys.argv[1], 'rb'), '',sys.argv[1], os.stat(sys.argv[1]).st_size)
+    f = open(sys.argv[1], 'rb')
+    parse_bbscript(f,os.path.basename(f.name),os.path.dirname(os.path.abspath(f.name)))
