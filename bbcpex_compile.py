@@ -21,7 +21,7 @@ bbcpex_script_parser.characters = characters
 if __name__ == "__main__":
     for game in ["bbcsex","bbcp","bbcpex"]:
         for character in characters:
-            if character != "kk": continue
+            #if character != "e0": continue
             scr_filename = "input/{0}/char_{1}_scr.pac".format(game,character);
             if not os.path.isfile(scr_filename): continue
             print game,character
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             outJson = open("db/{0}/{1}.json".format(game,character),"w")
             outJson.write(json.dumps(compiledData,encoding='cp1252'))
             outJson.close()
-'''
+
 for cmdId in bbcpex_script_parser.commandCalls:
     module = (cmdId / 100) * 100
     if not os.path.isdir("reports/{0}/".format(module)):
@@ -64,4 +64,3 @@ for cmdId in bbcpex_script_parser.commandCalls:
     for thing in bbcpex_script_parser.commandCalls[cmdId]:
         report.write("{0:15s} {1:15s} {2} {3}\n".format(*thing))
     report.close()
-'''

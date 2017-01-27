@@ -14,33 +14,40 @@ uponLookup = {
     10:"ON_HIT_OR_BLOCK"
 }
 slotLookup = {
+    8: "XVelocity",
+    9: "YVelocity",
+    15: "XPos",
+    16: "YPos",
+    18: "XDistanceFromCenterOfStage",
+    19: "YDistanceFromFloor",
+    21: "XDistanceFromFowardCorner",
+    22: "XDistanceFromBackCorner",
+    27: "CharSpecificCounter",
+    32: "Airborne",
+    33: "Grounded",
+    34: "CharacterFacingDirection",
+    35: "InputsFacingDirection",
+    36: "XDistanceToEnemy",
+    37: "YDistanceToEnemy",
+    71: "CurrentHealth",
+    72: "MaxHealth",
+    74: "Meter",
+    75: "CurrentMeter",
+    92: "DistanceToEnemy",
+    106: "OverdriveTimer",
+    107: "OverdriveLength",
     47: "IsInOverdrive",
     54: "IsInOverdrive2",
-    106: "IsInOverdrive3",
     91: "IsPlayer2",
     112:"IsUnlimitedCharacter"
 }
 def getUponName(cmdData):
-    if cmdData == 0:
-        return "IMMEDIATE"
-    if cmdData == 1:
-        return "STATE_END"
-    if cmdData == 2:
-        return "LANDING"
-    if cmdData == 10:
-        return "ON_HIT_OR_BLOCK"
+    if cmdData in uponLookup:
+        return uponLookup[cmdData]
     return str(cmdData)
 def getSlotName(cmdData):
-    if cmdData == 47:
-        return "IsInOverdrive"
-    if cmdData == 54:
-        return "IsInOverdrive2"
-    if cmdData == 106:
-        return "IsInOverdrive3"
-    if cmdData == 91:
-        return "IsPlayer2"
-    if cmdData == 112:
-        return "IsUnlimitedCharacter"
+    if cmdData in slotLookup:
+        return slotLookup[cmdData]
     return str(cmdData)
 def sanitizer(command):
     def sanitize(s):
