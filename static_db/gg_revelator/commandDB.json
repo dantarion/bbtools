@@ -123,8 +123,7 @@
   },
   "33": {
     "size": 48
-  },
-  "34": {
+  },  "34": {
     "size": 40
   },
   "35": {
@@ -658,8 +657,8 @@
     "size": 8
   },
   "251": {
-    "format": "i",
-    "size": 8
+    "name":"setNoCollision",
+    "format": "i"
   },
   "253": {
     "format": "i",
@@ -1563,8 +1562,8 @@
     "size": 8
   },
   "1049": {
-    "format": "i",
-    "size": 8
+    "name": "throwRange",
+    "format": "i"
   },
   "1050": {
     "format": "i",
@@ -1820,12 +1819,12 @@
     "size": 8
   },
   "1122": {
-    "format": "i",
-    "size": 8
+    "name": "riscPlus",
+    "format": "i"
   },
   "1123": {
-    "format": "i",
-    "size": 8
+    "name": "riscMinus",
+    "format": "i"
   },
   "1124": {
     "format": "i",
@@ -2107,7 +2106,7 @@
     "format": "i"
   },
   "1227": {
-    "name": "dashResistance",
+    "name": "dashFriction",
     "format": "i"
   },
   "1228": {
@@ -2151,20 +2150,20 @@
     "format": "i"
   },
   "1238": {
-    "format": "i",
-    "size": 8
+    "name": "gutsLevel",
+    "format": "i"
   },
   "1239": {
-    "format": "i",
-    "size": 8
+    "name": "weight",
+    "format": "i"
   },
   "1240": {
-    "format": "i",
-    "size": 8
+    "name": "airDashes",
+    "format": "i"
   },
   "1241": {
-    "format": "i",
-    "size": 8
+    "name": "airJumps",
+    "format": "i"
   },
   "1242": {
     "format": "i",
@@ -4087,8 +4086,8 @@
     "size": 4
   },
   "2179": {
-    "format": "i",
-    "size": 8
+    "name": "numberOfHits",
+    "format": "i"
   },
   "2180": {
     "format": "i",
@@ -4555,6 +4554,7 @@
     "size": 4
   },
   "2344": {
+    "name": "disableAirThrow",
     "size": 4
   },
   "2345": {
