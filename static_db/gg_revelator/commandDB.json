@@ -1261,6 +1261,7 @@
     "size": 4
   },
   "756": {
+    "name": "counterhitAirPushbackX",
     "format": "i",
     "size": 8
   },
@@ -1275,6 +1276,7 @@
     "size": 4
   },
   "768": {
+    "name": "counterhitAirPushbackY",
     "format": "i",
     "size": 8
   },
@@ -1296,6 +1298,7 @@
     "size": 4
   },
   "790": {
+    "name": "wallBounceXVelocityPercent",
     "format": "i",
     "size": 8
   },
@@ -1359,6 +1362,7 @@
     "size": 4
   },
   "844": {
+    "name": "counterhitWallBounceCount",
     "format": "i",
     "size": 8
   },
@@ -1373,6 +1377,7 @@
     "size": 4
   },
   "856": {
+    "name": "counterhitGroundBounceCount",
     "format": "i",
     "size": 8
   },
@@ -1747,6 +1752,7 @@
     "size": 8
   },
   "1099": {
+    "name": "isAirUnblockable",
     "format": "i",
     "size": 8
   },
@@ -1819,6 +1825,7 @@
     "size": 8
   },
   "1117": {
+    "name": "tensionGainOnConnect",
     "format": "i",
     "size": 8
   },
@@ -1967,6 +1974,7 @@
     "size": 8
   },
   "1156": {
+    "name": "lifeStealPercent",
     "format": "i",
     "size": 8
   },
@@ -2467,7 +2475,7 @@
     "size": 8
   },
   "1382": {
-    "name":"addNeutralOption",
+    "name":"addMove",
     "format": "32s"
   },
   "1383": {
@@ -2483,6 +2491,7 @@
     "size": 8
   },
   "1386": {
+    "name": "isFollowupMove",
     "format": "i",
     "size": 8
   },
@@ -2819,6 +2828,7 @@
     "format": "i"
   },
   "1621": {
+    "name": "specialCancelEnabled",
     "format": "i",
     "size": 8
   },
@@ -3075,6 +3085,7 @@
     "size": 8
   },
   "1795": {
+    "name": "superArmorEnabled",
     "format": "i",
     "size": 8
   },
@@ -3368,6 +3379,7 @@
     "size": 8
   },
   "1942": {
+    "name": "ignorePushback",
     "format": "i",
     "size": 8
   },
@@ -4200,6 +4212,7 @@
     "size": 8
   },
   "2203": {
+    "name": "yrcWindowLength",
     "format": "i",
     "size": 8
   },
