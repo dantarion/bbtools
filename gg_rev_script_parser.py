@@ -2,10 +2,10 @@ import os, struct, json, astor, sys
 from ast import *
 from collections import defaultdict, OrderedDict
 
-json_data = open('static_db/gg_revelator/commandDB.json').read()
-commandDB = json.loads(json_data)
-json_data = open('static_db/gg_revelator/characters.json').read()
-characters = json.loads(json_data)
+commandDB  = json.loads(open('static_db/gg_revelator/commandDB.json').read())
+characters = json.loads(open('static_db/gg_revelator/characters.json').read())
+moveInputs = json.loads(open('static_db/gg_revelator/named_values/move_inputs.json').read())
+
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
@@ -33,7 +33,13 @@ def sanitizer(command):
             s = "'{0}'".format(s.strip("\x00"))
         elif command and "hex" in commandDB[str(command)]:
             s = hex(s)
-        return str(s).strip("\x00")
+
+        string = str(s).strip("\x00")
+        const = findNamedValue(command, string)
+        if const:
+            string = const
+
+        return string
     return sanitize
 def pysanitizer(command):
     def sanitize(s):
@@ -43,6 +49,10 @@ def pysanitizer(command):
             s = hex(s)
         return str(s).strip("\x00")
     return sanitize
+def findNamedValue(command, value):
+    if commandDB[str(command)]['name'] == 'move_input':
+        if value in moveInputs:
+            return moveInputs[value]
 def parse_bbscript_routine(f,end = -1):
     global MODE,j,astRoot
     currentCMD = -1
