@@ -1,5 +1,7 @@
 *.pyc
 *.exe
+*.ggscript
+*.ggscript.py
 input/
 output/
 output2/

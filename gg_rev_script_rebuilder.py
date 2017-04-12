@@ -3,20 +3,27 @@ import sys
 from ast import *
 from collections import defaultdict, OrderedDict
 import gg_rev_script_parser
-json_data=open("static_db/gg_revelator/commandDB.json").read()
-commandDB = json.loads(json_data)
 
-json_data=open("static_db/gg_revelator/characters.json").read()
-characters = json.loads(json_data)
+commandDB  = json.loads(open("static_db/gg_revelator/commandDB.json").read())
+characters = json.loads(open("static_db/gg_revelator/characters.json").read())
+moveInputs = json.loads(open("static_db/gg_revelator/named_values/move_inputs.json").read())
+
 commandDBLookup = {}
+namedValueLookup = {}
+
 gg_rev_script_parser.commandDB = commandDB
 gg_rev_script_parser.characters = characters
+
 for key,data in commandDB.items():
     data["id"] = int(key)
     if "name" in data:
         commandDBLookup[data["name"]] = data
     else:
         commandDBLookup["Unknown"+key] = data
+
+for k,v in moveInputs.items():
+    namedValueLookup[v] = k
+
 uponLookup = {v: k for k, v in gg_rev_script_parser.uponLookup.items()}
 slotLookup = {v: k for k, v in gg_rev_script_parser.slotLookup.items()}
 commandCounts = defaultdict(int)
@@ -54,6 +61,8 @@ def writeCommandByID(id,params):
             myParams[index] = oValue.s
         elif isinstance(oValue,Num):
             myParams[index] = oValue.n
+        elif isinstance(oValue,Name):
+            myParams[index] = int(namedValueLookup[oValue.id])
         else:
             raise Exception("Unknown Type" + str(type(oValue)))
     output.write(struct.pack(MODE+"I",id))
