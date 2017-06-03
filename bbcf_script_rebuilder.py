@@ -96,7 +96,7 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                 output.seek(0,2)
                 if node.name[:2] == '__':
                     node.name = node.name[2:]
-                if '__sp__' in node.name
+                if '__sp__' in node.name:
                     node.name.replace('__sp__',' ')
                 writeCommandByName("startState",[node.name])
                 self.visit_body(node.body)
