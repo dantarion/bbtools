@@ -1,4 +1,4 @@
-import os,struct,glob,gzip,zlib,json
+    import os,struct,glob,gzip,zlib,json
 from cStringIO import StringIO
 from PIL import Image
 for filename in glob.glob("output2/char_*_img.pac.extracted/*.hip"):

@@ -210,7 +210,7 @@ class Rebuilder(astor.ExplicitNodeVisitor):
         elif isinstance(node.ops[0],LtE):
             params.append(13)
         elif isinstance(node.ops[0],NotEq):
-            params.append(16)
+            params.append(15)
         else:
             print "UNIMPLEMENTED BINOP",astor.dump(node)
             raise Exception("Unknown Compare")

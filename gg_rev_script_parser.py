@@ -93,12 +93,12 @@ def parse_bbscript_routine(f,end = -1):
             pass
         elif dbData['name'] == 'startState':
             if cmdData[0][0].isdigit():
-                cmdData[0] = '__' + cmdData[0]
+                cmdData[0]= '__' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'startSubroutine':
             if cmdData[0][0].isdigit():
-                cmdData[0] = '__' + cmdData[0]
+                cmdData[0]= '__' + cmdData[0]
             astStack[-1].append(FunctionDef(cmdData[0].strip("\x00"),arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'upon':
@@ -114,7 +114,7 @@ def parse_bbscript_routine(f,end = -1):
             tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
-        elif dbData['name'] == 'op' and cmdData[0] in [9,10,11,12,13,16]:
+        elif dbData['name'] == 'op' and cmdData[0]in [9,10,11,12,13,15]:
             if(cmdData[1] == 2):
                 lval = Name(id="SLOT_"+str(cmdData[2]))
             else:
@@ -123,24 +123,24 @@ def parse_bbscript_routine(f,end = -1):
                 rval = Name(id="SLOT_"+str(cmdData[4]))
             else:   
                 rval = Num(cmdData[4])
-            if cmdData[0] == 9:
+            if cmdData[0]== 9:
                 op = Eq()
-            if cmdData[0] == 10:
+            if cmdData[0]== 10:
                 op = Gt()
-            if cmdData[0] == 11:
+            if cmdData[0]== 11:
                 op = Lt()
-            if cmdData[0] == 12:
+            if cmdData[0]== 12:
                 op = GtE()
-            if cmdData[0] == 13:
+            if cmdData[0]== 13:
                 op = LtE()
-            if cmdData[0] == 16:
+            if cmdData[0]== 15:
                 op = NotEq()
             tmp = Expr(Compare(lval,[op],[rval]))
             astStack[-1].append(If(tmp.value,[],[]))
             astStack.append(astStack[-1][-1].body)
             inIf += 1
         elif dbData['name'] == 'StoreValue':
-            if(cmdData[0] == 2):
+            if(cmdData[0]== 2):
                 lval = Name(id="SLOT_"+str(cmdData[1]))
             else:
                 lval = Num(cmdData[1])
@@ -150,7 +150,7 @@ def parse_bbscript_routine(f,end = -1):
                 rval = Num(cmdData[3])
             tmp = Assign([lval],rval)
             astStack[-1].append(tmp)
-        elif dbData['name'] == 'ModifyVar_' and cmdData[0] in [0,1,2,3]:
+        elif dbData['name'] == 'ModifyVar_' and cmdData[0]in [0,1,2,3]:
             if(cmdData[1] == 2):
                 lval = Name(id="SLOT_"+str(cmdData[2]))
             else:
@@ -159,13 +159,13 @@ def parse_bbscript_routine(f,end = -1):
                 rval = Name(id="SLOT_"+str(cmdData[4]))
             else:
                 rval = Num(cmdData[4])
-            if cmdData[0] == 0:
+            if cmdData[0]== 0:
                 op = Add()
-            if cmdData[0] == 1:
+            if cmdData[0]== 1:
                 op = Sub()
-            if cmdData[0] == 2:
+            if cmdData[0]== 2:
                 op = Mult()
-            if cmdData[0] == 3:
+            if cmdData[0]== 3:
                 op = Div()
             tmp = Assign([lval],BinOp(lval,op,rval))
             astStack[-1].append(tmp)
@@ -180,7 +180,17 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(UnaryOp(Not(),tmp),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif dbData['name'] == 'else':
-            ifnode = astStack[-1][-1]
+            if(hasattr(astStack[-1][-1], 'orelse')):
+            	ifnode = astStack[-1][-1]
+            else:
+            	first = True
+            	for node in astStack[-1][::-1]:
+            		if first:
+            			first = False
+            			continue
+            		if hasattr(node, 'orelse'):
+            			ifnode = node
+            			break
             astStack.append(ifnode.orelse)
         elif 'endBlock' in dbData:
             if inIf == 0 and dbData['name'] == 'endIf':
@@ -203,7 +213,7 @@ def parse_bbscript_routine(f,end = -1):
                         lastFunc = j["Functions"][-1]
                         j["FunctionsPy"].append({"type":lastFunc["type"],"name":lastFunc["name"],"src":astor.to_source(astStack[-1][-1])})
                 else:
-                    print "\tasterror",currentIndicator
+                    print("\tasterror",currentIndicator)
                     astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
                 if dbData['name'] == 'endUpon':
                     inUpon -= 1
@@ -218,38 +228,38 @@ def parse_bbscript_routine(f,end = -1):
                 currentFrame = currentFrame+cmdData[1]
             if dbData['name'] == "upon":
                 param = 1
-                if cmdData[0] == 0:
+                if cmdData[0]== 0:
                     comment = "immediate"
             if dbData['name'] == "move_input":
-                if cmdData[0] == 0x4:
+                if cmdData[0]== 0x4:
                     comment = "P_BUTTON"
-                if cmdData[0] == 0xD:
+                if cmdData[0]== 0xD:
                     comment = "K_BUTTON"
-                if cmdData[0] == 0x16:
+                if cmdData[0]== 0x16:
                     comment = "S_BUTTON"
-                if cmdData[0] == 0x1F:
+                if cmdData[0]== 0x1F:
                     comment = "H_BUTTON"
-                if cmdData[0] == 0x28:
+                if cmdData[0]== 0x28:
                     comment == "D_BUTTON"
-                if cmdData[0] == 0xAC:
+                if cmdData[0]== 0xAC:
                     comment = "236"
-                if cmdData[0] == 0xAD:
+                if cmdData[0]== 0xAD:
                     comment = "623"
-                if cmdData[0] == 0xAE:
+                if cmdData[0]== 0xAE:
                     comment = "214"
-                if cmdData[0] == 0xAF:
+                if cmdData[0]== 0xAF:
                     comment = "41236"
-                if cmdData[0] == 0xB0:
+                if cmdData[0]== 0xB0:
                     comment = "421"
-                if cmdData[0] == 0xB1:  
+                if cmdData[0]== 0xB1:  
                     comment = "63214"
-                if cmdData[0] == 0xB2:
+                if cmdData[0]== 0xB2:
                     comment = "236236"
-                if cmdData[0] == 0xB3:
+                if cmdData[0]== 0xB3:
                     comment = "214214"
-                if cmdData[0] == 0xBA:
+                if cmdData[0]== 0xBA:
                     comment = "22"
-                if cmdData[0] == 0xF8:
+                if cmdData[0]== 0xF8:
                     comment = "632146"
 
             if comment:

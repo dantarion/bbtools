@@ -5,10 +5,15 @@ from collections import defaultdict, OrderedDict
 import bbcpex_script_parser
 json_data=open("static_db/bbcf/commandDB.json").read()
 commandDB = json.loads(json_data)
-
 json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
+moveInputs = json.loads(open("static_db/bbcf/named_values/move_inputs.json").read())
+normalInputs = json.loads(open("static_db/bbcf/named_values/normal_inputs.json"))
+
 commandDBLookup = {}
+namedValueLookup = {}
+namedButtonLookup = {}
+namedDirectionLookup = {}
 bbcpex_script_parser.commandDB = commandDB
 bbcpex_script_parser.characters = characters
 for key,data in commandDB.items():
@@ -19,6 +24,14 @@ for key,data in commandDB.items():
         commandDBLookup["Unknown"+key] = data
 uponLookup = {v: k for k, v in bbcpex_script_parser.uponLookup.items()}
 slotLookup = {v: k for k, v in bbcpex_script_parser.slotLookup.items()}
+for k,v in moveInputs.items():
+    namedValueLookup[v] = k
+for k,v in normalInputs['grouped_values'].items():
+    namedValueLookup[v] = k
+for k,v in normalInputs['buttonbyte'].items():
+    namedButtonLookup[v] = k
+for k,v in normalInputs['directionbyte'].items():
+    namedDirectionLookup[v] = k
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
@@ -54,6 +67,14 @@ def writeCommandByID(id,params):
             myParams[index] = oValue.s
         elif isinstance(oValue,Num):
             myParams[index] = oValue.n
+        elif isinstance(oValue,Name):
+            temp = namedValueLookup.get(oValue.id)
+            if temp is not None:
+                myParams[index] = int(temp)
+            else:
+                buttonstr = oValue.id[-1]
+                directionstr = oValue.id[:-1]
+                myparams[index] = int(namedButtonLookup[buttonstr]) << 8 + int(namedDirectionLookup[directionstr])
         else:
             raise Exception("Unknown Type" + str(type(oValue)))
     output.write(struct.pack(MODE+"I",id))
@@ -98,6 +119,8 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                     node.name = node.name[2:]
                 if '__sp__' in node.name:
                     node.name.replace('__sp__',' ')
+                if '__qu__' in node.name:
+                    node.name.replace('__qu__','?')
                 writeCommandByName("startState",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endState",[])

@@ -6,6 +6,10 @@ json_data=open("static_db/bbcf/commandDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
+json_data=open("static_db/bbcf/named_values/move_inputs.json").read()
+moveInputs = json.loads(json_data)
+json_data=open("static_db/bbcf/named_values/normal_inputs.json").read()
+normalInputs = json.loads(json_data)
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
@@ -23,6 +27,23 @@ slotLookup = {
     91: "IsPlayer2",
     112:"IsUnlimitedCharacter"
 }
+def findNamedValue(command, value):
+    if commandDB[str(command)]['name'] == 'Move_Input_' or commandDB[str(command)]['name'] == 'CheckInput':
+        if str(value) in moveInputs:
+            return moveInputs[str(value)]
+        return hex(value)
+    elif commandDB[str(command)]['name'] == 'Move_Register' and isinstance(value, int):
+        hexstr = hex(value)
+        if hexstr in normalInputs['grouped_values']:
+            return normalInputs['grouped_values'][hexstr]
+        s = struct.pack('>H', value)
+        button_byte, dir_byte = struct.unpack('>BB', s)
+        if str(button_byte) in normalInputs['buttonbyte'] and str(dir_byte) in normalInputs['directionbyte']:
+            return normalInputs['directionbyte'][str(dir_byte)] + normalInputs['buttonbyte'][str(button_byte)]
+        return hexstr
+    elif commandDB[str(command)]['name'] == 'Move_Register' and isinstance(value,str):
+        return value
+
 def getUponName(cmdData):
     if cmdData == 0:
         return "IMMEDIATE"
@@ -47,7 +68,9 @@ def getSlotName(cmdData):
     return str(cmdData)
 def sanitizer(command):
     def sanitize(s):
-        if isinstance(s,str):
+        if command in [34,14012,14001]:
+            s = findNamedValue(command, s)
+        elif isinstance(s,str):
             s = "'{0}'".format(s.strip("\x00"))
         elif command and "hex" in commandDB[str(command)]:
             s = hex(s)

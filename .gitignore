@@ -2,8 +2,12 @@
 *.exe
 *.ggscript
 *.ggscript.py
+*.pdb
 input/
 output/
 output2/
 db/
 reports/
+ah3/
+bbcf/
+*.txt
