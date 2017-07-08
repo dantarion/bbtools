@@ -8,7 +8,7 @@ commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
 moveInputs = json.loads(open("static_db/bbcf/named_values/move_inputs.json").read())
-normalInputs = json.loads(open("static_db/bbcf/named_values/normal_inputs.json"))
+normalInputs = json.loads(open("static_db/bbcf/named_values/normal_inputs.json").read())
 
 commandDBLookup = {}
 namedValueLookup = {}
