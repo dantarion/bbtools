@@ -70,11 +70,11 @@ def writeCommandByID(id,params):
         elif isinstance(oValue,Name):
             temp = namedValueLookup.get(oValue.id)
             if temp is not None:
-                myParams[index] = int(temp)
+                myParams[index] = int(temp, 16)
             else:
                 buttonstr = oValue.id[-1]
                 directionstr = oValue.id[:-1]
-                myparams[index] = int(namedButtonLookup[buttonstr]) << 8 + int(namedDirectionLookup[directionstr])
+                myParams[index] = (int(namedButtonLookup[buttonstr]) << 8) + int(namedDirectionLookup[directionstr])
         else:
             raise Exception("Unknown Type" + str(type(oValue)))
     output.write(struct.pack(MODE+"I",id))

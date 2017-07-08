@@ -68,7 +68,7 @@ def getSlotName(cmdData):
     return str(cmdData)
 def sanitizer(command):
     def sanitize(s):
-        if command in [34,14012,14001]:
+        if command in [34,14012,14001] and isinstance(s, int):
             s = findNamedValue(command, s)
         elif isinstance(s,str):
             s = "'{0}'".format(s.strip("\x00"))
