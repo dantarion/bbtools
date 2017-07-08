@@ -25,7 +25,10 @@ The same may be true of Extreme Butoden. Might as well make the code for these t
 * @dantarion, main developer
 * @bananaken, for helping on twitter and giving tons of insight and knowledge about these games I don't actually play
 * @logichole, for labeling a billion commands less than 24 hours after the public release of boxdox-bb
+* @labreezy, for labeling half of revelator and updating the parser/rebuilder to bbcf steam version
+* @geo, for helping out @labreezy with BB normal/special inputs
 
 # Shoutouts
 * AltimorTASDK for creating Xrd hitbox tools and Xrd Decrypter
+* gdkchan for creating an Xrd Revelator decrypter
 * asmodean for creating exah3pac
