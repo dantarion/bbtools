@@ -70,7 +70,7 @@ def writeCommandByID(id,params):
         elif isinstance(oValue,Name):
             temp = namedValueLookup.get(oValue.id)
             if temp is not None:
-                myParams[index] = int(temp, 16)
+                myParams[index] = int(temp)
             else:
                 buttonstr = oValue.id[-1]
                 directionstr = oValue.id[:-1]
