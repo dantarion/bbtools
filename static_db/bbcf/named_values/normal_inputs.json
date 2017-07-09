@@ -1,9 +1,9 @@
 {
 
 "grouped_values": {
-	"0x2": "INPUT_SPECIALMOVE",
-	"0x606": "INPUT_DISTORTION",
-	"0x607": "INPUT_ASTRAL"
+	"2": "INPUT_SPECIALMOVE",
+	"1542": "INPUT_DISTORTION",
+	"1543": "INPUT_ASTRAL"
 },
 "buttonbyte": {
 	"1": "A",
