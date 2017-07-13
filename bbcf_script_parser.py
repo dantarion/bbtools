@@ -33,14 +33,14 @@ def findNamedValue(command, value):
             return moveInputs[str(value)]
         return hex(value)
     elif commandDB[str(command)]['name'] == 'Move_Register' and isinstance(value, int):
-        hexstr = hex(value)
-        if hexstr in normalInputs['grouped_values']:
-            return normalInputs['grouped_values'][hexstr]
+        decstr = str(value)
+        if decstr in normalInputs['grouped_values']:
+            return normalInputs['grouped_values'][decstr]
         s = struct.pack('>H', value)
         button_byte, dir_byte = struct.unpack('>BB', s)
         if str(button_byte) in normalInputs['buttonbyte'] and str(dir_byte) in normalInputs['directionbyte']:
             return normalInputs['directionbyte'][str(dir_byte)] + normalInputs['buttonbyte'][str(button_byte)]
-        return hexstr
+        return hex(value)
     elif commandDB[str(command)]['name'] == 'Move_Register' and isinstance(value,str):
         return value
 
@@ -110,14 +110,22 @@ def parse_bbscript_routine(f,end = -1):
         commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 0:
             currentIndicator = cmdData[0].strip("\x00")
-            if currentIndicator[:1].isdigit():
+            if currentIndicator[0].isdigit():
                 currentIndicator = "__"+currentIndicator
             if " " in currentIndicator:
                 currentIndicator = currentIndicator.replace(" ","__sp__")
+            if '?' in currentIndicator:
+                currentIndicator = currentIndicator.replace("?","__qu__")
             currentContainer = []
             j["Functions"].append({'type':'state','name':currentIndicator,'commands':currentContainer})
         elif dbData["name"] == "startSubroutine":
             currentIndicator = cmdData[0].strip("\x00")
+            if currentIndicator[0].isdigit():
+                currentIndicator = "__"+currentIndicator
+            if " " in currentIndicator:
+                currentIndicator = currentIndicator.replace(" ","__sp__")
+            if '?' in currentIndicator:
+                currentIndicator = currentIndicator.replace("?","__qu__")
             currentContainer = []
             j["Functions"].append({'type':'subroutine','name':currentIndicator,'commands':currentContainer})
         elif dbData["name"] in ["endFunction","endSubroutine"]:
@@ -130,18 +138,22 @@ def parse_bbscript_routine(f,end = -1):
             pass
         elif currentCMD == 0:
             currentIndicator = cmdData[0].strip("\x00")
-            if currentIndicator[:1].isdigit():
+            if currentIndicator[0].isdigit():
                 currentIndicator = "__"+currentIndicator
             if " " in currentIndicator:
                 currentIndicator = currentIndicator.replace(" ","__sp__")
+            if '?' in currentIndicator:
+                currentIndicator = currentIndicator.replace("?","__qu__")
             astStack[-1].append(FunctionDef(currentIndicator,arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 8:
             currentIndicator = cmdData[0].strip("\x00")
-            if currentIndicator[:1].isdigit():
+            if currentIndicator[0].isdigit():
                 currentIndicator = "__"+currentIndicator
             if " " in currentIndicator:
                 currentIndicator = currentIndicator.replace(" ","__sp__")
+            if '?' in currentIndicator:
+                currentIndicator = currentIndicator.replace("?","__qu__")
             astStack[-1].append(FunctionDef(currentIndicator,arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 15:
