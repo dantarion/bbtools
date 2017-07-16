@@ -1311,6 +1311,7 @@
     "size": 4
   },
   "802": {
+    "name": "groundBounceYVelocityPercent",
     "format": "i",
     "size": 8
   },
@@ -1318,6 +1319,7 @@
     "size": 4
   },
   "804": {
+    "name": "counterhitGroundBounceYVelocityPercent",
     "format": "i",
     "size": 8
   },
@@ -1346,6 +1348,7 @@
     "size": 4
   },
   "832": {
+    "name": "counterhitUntechableTime",
     "format": "i",
     "size": 8
   },
@@ -1353,6 +1356,7 @@
     "size": 4
   },
   "842": {
+    "name": "wallBounceCount",
     "format": "i",
     "size": 8
   },
@@ -1368,6 +1372,7 @@
     "size": 4
   },
   "854": {
+    "name": "groundBounceCount",
     "format": "i",
     "size": 8
   },
@@ -1397,7 +1402,7 @@
     "size": 4
   },
   "882": {
-    "name": "hitStunAnimation",
+    "name": "groundHitEffect",
     "format": "i",
     "size": 8
   },
@@ -1405,6 +1410,7 @@
     "size": 4
   },
   "884": {
+    "name": "groundCounterhitEffect",
     "format": "i",
     "size": 8
   },
@@ -1412,6 +1418,7 @@
     "size": 4
   },
   "894": {
+    "name": "airHitEffect",
     "format": "i",
     "size": 8
   },
@@ -1419,6 +1426,7 @@
     "size": 4
   },
   "896": {
+    "name": "airCounterhitEffect",
     "format": "i",
     "size": 8
   },
@@ -1433,6 +1441,7 @@
     "size": 4
   },
   "900": {
+    "name": "counterhitWallStickDuration",
     "format": "i",
     "size": 8
   },
@@ -1440,6 +1449,7 @@
     "size": 4
   },
   "902": {
+    "name": "wallBounceInCornerOnly",
     "format": "i",
     "size": 8
   },
@@ -1447,6 +1457,7 @@
     "size": 4
   },
   "904": {
+    "name": "counterhitWallBounceInCornerOnly",
     "format": "i",
     "size": 8
   },
@@ -1468,6 +1479,7 @@
     "size": 4
   },
   "933": {
+    "name": "tumbleDuration",
     "format": "i",
     "size": 8
   },
@@ -1475,7 +1487,7 @@
     "size": 4
   },
   "935": {
-    "name": "tumbleDuration",
+    "name": "counterhitTumbleDuration",
     "format": "i"
   },
   "936": {
@@ -1745,7 +1757,7 @@
     "size": 8
   },
   "1098": {
-    "name": "hitHighLow",
+    "name": "guardType",
     "format": "i",
     "size": 8
   },
@@ -2096,34 +2108,42 @@
     "size": 8
   },
   "1218": {
+    "name": "forwardJumpXSpeed",
     "format": "i",
     "size": 8
   },
   "1219": {
+    "name": "backwardJumpXSpeed",
     "format": "i",
     "size": 8
   },
   "1220": {
+    "name": "jumpYSpeed",
     "format": "i",
     "size": 8
   },
   "1221": {
+    "name": "gravity",
     "format": "i",
     "size": 8
   },
   "1222": {
+    "name": "forwardHighJumpXSpeed",
     "format": "i",
     "size": 8
   },
   "1223": {
+    "name": "backwardHighJumpXSpeed",
     "format": "i",
     "size": 8
   },
   "1224": {
+    "name": "highJumpYSpeed",
     "format": "i",
     "size": 8
   },
   "1225": {
+    "name": "highJumpGravity",
     "format": "i",
     "size": 8
   },
@@ -2456,6 +2476,7 @@
     "size": 8
   },
   "1378": {
+    "name": "move_type",
     "format": "i",
     "size": 8
   },
@@ -4431,6 +4452,7 @@
     "size": 40
   },
   "2293": {
+    "name": "screenShake",
     "format": "ii",
     "size": 12
   },
