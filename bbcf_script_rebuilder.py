@@ -100,9 +100,9 @@ class Rebuilder(astor.ExplicitNodeVisitor):
             if function.name.startswith('__') and function.name[2].isdigit():
                 function.name = function.name[2:]
             if '__sp__' in function.name:
-                function.name.replace('__sp__',' ')
+                function.name = function.name.replace('__sp__',' ')
             if '__qu__' in function.name:
-                function.name.replace('__qu__','?')
+                function.name = function.name.replace('__qu__','?')
             output.write(struct.pack(MODE+"32sI",function.name,0xFADEF00D))
         node._dataStart = output.tell()
         output.seek(0)
@@ -124,9 +124,9 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                 if node.name.startswith('__') and node.name[2].isdigit():
                     node.name = node.name[2:]
                 if '__sp__' in node.name:
-                    node.name.replace('__sp__',' ')
+                    node.name = node.name.replace('__sp__',' ')
                 if '__qu__' in node.name:
-                    node.name.replace('__qu__','?')
+                    node.name = node.name.replace('__qu__','?')
                 writeCommandByName("startState",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endState",[])
@@ -134,9 +134,9 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                 if node.name.startswith('__') and node.name[2].isdigit():
                     node.name = node.name[2:]
                 if '__sp__' in node.name:
-                    node.name.replace('__sp__',' ')
+                    node.name = node.name.replace('__sp__',' ')
                 if '__qu__' in node.name:
-                    node.name.replace('__qu__','?')
+                    node.name = node.name.replace('__qu__','?')
                 writeCommandByName("startSubroutine",[node.name])
                 self.visit_body(node.body)
                 writeCommandByName("endSubroutine",[])
