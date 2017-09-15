@@ -21,7 +21,7 @@ bbcpex_script_parser.characters = characters
 bbcpex_script_parser.MODE = ">"
 bbcpex_script_parser.GAME = "gg"
 if __name__ == "__main__":
-    for game,outputdir,srcdir,srcdir2 in [["gg_revelator","gg_revelator_103","SF","dat"],["gg_revelator","gg_revelator_102","20_SF","dat_20"]]:
+    for game,outputdir,srcdir,srcdir2 in [["gg_revelator","gg_revelator_104","SF","dat"],["gg_revelator","gg_revelator_103","20A_SF","dat_20a"],["gg_revelator","gg_revelator_102","20_SF","dat_20"]]:
         for character in characters:
             scr_filename = "input/{0}/{1}_DAT_{2}/{1}_{3}/Script/BBS_{1}.REDAssetCharaScript".format(game,character,srcdir,srcdir2);
             scr_filename2 = "input/{0}/{1}_DAT_{2}/{1}_{3}/Script/BBS_{1}EF.REDAssetCharaScript".format(game,character,srcdir,srcdir2);

@@ -7,6 +7,7 @@ commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
 GAME = "bb"
+PYOUT = ""
 uponLookup = {
     0:"IMMEDIATE",
     1:"STATE_END",
@@ -88,7 +89,7 @@ def parse_bbscript_routine(f,end = -1):
             cmdData = [f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")]
         else:
             cmdData = list(struct.unpack(MODE+dbData["format"],f.read(struct.calcsize(dbData["format"]))))
-        commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
+        #commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 0:
             currentIndicator = cmdData[0].strip("\x00")
             currentContainer = []
@@ -115,7 +116,10 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(FunctionDef(dbData['name']+"_"+getUponName(cmdData[0]),arguments([],None,None,[]),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4 and cmdData[1] == 0:
-            tmp = astStack[-1].pop()
+            if len(astStack[-1]) > 0:
+                tmp = astStack[-1].pop()
+            else:
+                tmp = Str("CF_ERROR")
             if not hasattr(tmp,"value"):
                 tmp = Expr(tmp)
             astStack[-1].append(If(tmp.value,[],[]))
@@ -209,7 +213,7 @@ def parse_bbscript_routine(f,end = -1):
                     j["FunctionsPy"].append({"type":lastFunc["type"],"name":lastFunc["name"],"src":astor.to_source(astStack[-1][-1])})
             else:
                 print "\tasterror",currentIndicator
-                astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
+                #astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
         else:
             astStack[-1].append(Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None)))
 
@@ -295,7 +299,7 @@ def parse_bbscript(f,basename,filename,filesize):
         f.seek(BASE+4+0x24*FUNCTION_COUNT+FUNCTION_OFFSET)
         parse_bbscript_routine(f)
     '''
-    py = open("db/bbcpex/"+filename+".py","w")
+    py = open("db/"+PYOUT+"/"+filename+".py","w")
     py.write(astor.to_source(astRoot))
     py.close()
     return filename,j
