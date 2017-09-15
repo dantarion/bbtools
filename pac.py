@@ -1,6 +1,6 @@
 import os,struct,glob,zlib,subprocess
-OUT_PATH = "bbcf/"
-IN_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\BlazBlue Centralfiction\data\Char"
+OUT_PATH = "bbcf2/"
+IN_PATH = r"G:\SteamLibrary\steamapps\common\BlazBlue Centralfiction\data\Char"
 MODE = "<"
 def dump_pac(f,basename,filename,filesize):
     if not os.path.isdir(OUT_PATH+basename+".extracted"):
@@ -44,7 +44,7 @@ def iterpac(filename,func):
 
 #for filename in glob.glob("disc/P4AU/char/char_kk_*.pac"):
 if __name__ == "__main__":
-    for filename in glob.glob(os.path.join(IN_PATH, 'char_*_scr.pac')):
+    for filename in glob.glob(os.path.join(IN_PATH, 'char_jb_*.pac')):
         print filename
         for thing in iterpac(filename,dump_pac):
             print thing
