@@ -7,7 +7,7 @@ http://asmodean.reverse.net/pages/exah3pac.html
 '''
 import os, struct,zlib
 import subprocess
-TARGET_FOLDER = "input/bbcpex/"
+TARGET_FOLDER = "input/bbcf2/"
 for root,dirs,files in os.walk(TARGET_FOLDER):
     for filename in files:
         if "_img." not in filename:

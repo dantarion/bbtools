@@ -7,7 +7,7 @@ def parse_hipoffset(f,basename,filename,filesize):
         raise Exception("This isn't a HIP file")
     DATA = struct.unpack(pac.MODE+"3I4I4I4I",f.read(0x3C))
     return filename,[DATA[9],DATA[10]]
-games = {
+'''
     "bbcf_100":{
         "MODE": ">",
         "sourcePath":"bbcf/100/"
@@ -16,12 +16,20 @@ games = {
         "MODE": ">",
         "sourcePath":"bbcf/102/"
     }
+'''
+games = {
+
+
+    "bbcf_200":{
+        "MODE": "<",
+        "sourcePath":"bbcf/steam/"
+    }
 }
 
-json_data=open("static_db/bb/commandDB.json").read()
+json_data=open("static_db/bbcf/commandDB.json").read()
 commandDB = json.loads(json_data)
 
-json_data=open("static_db/bb/characters.json").read()
+json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
 bbcpex_script_parser.commandDB = commandDB
 bbcpex_script_parser.characters = characters
@@ -31,16 +39,17 @@ if __name__ == "__main__":
         pac.MODE = gameData["MODE"]
         bbcpex_script_parser.MODE = gameData["MODE"]
         jonbin_parser.MODE = gameData["MODE"]
-        jonbin_parser.GAME = game[0:4]
+        jonbin_parser.GAME = 'bbcp'
         bbcpex_script_parser.PYOUT = game
         if game.startswith("bbcf"):
             commandDB["22019"] = {"format":"5i","name":"defineInvincibility"}
             commandDB["11058"] = {"size": 24}
         for character in characters:
-            #if character != "kk": continue
+            #if character != "jb": continue
             scr_filename = "input/{0}/char_{1}_scr.pac".format(gameData["sourcePath"],character);
             if not os.path.isfile(scr_filename): continue
             print game,character
+            print scr_filename
 
 
             compiledData = OrderedDict()

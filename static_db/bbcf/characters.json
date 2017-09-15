@@ -6,6 +6,7 @@
 "bn": "Bang",
 "ca": "Carl",
 "ce": "Celica",
+"ct": "CT_CHAR",
 "es": "Es",
 "ha": "Hakumen",
 "hb": "Hibiki",
@@ -37,5 +38,6 @@
 "tm": "Terumi",
 "vh": "Valkenhayn",
 "ea": "EA_CHAR",
-"e0": "E0_CHAR"
+"e0": "E0_CHAR",
+"jb": "Jubei"
 }

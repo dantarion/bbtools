@@ -44,7 +44,7 @@ def iterpac(filename,func):
 
 #for filename in glob.glob("disc/P4AU/char/char_kk_*.pac"):
 if __name__ == "__main__":
-    for filename in glob.glob(os.path.join(IN_PATH, 'char_jb_*.pac')):
+    for filename in glob.glob(os.path.join(IN_PATH, 'char_*_pal.pac')):
         print filename
         for thing in iterpac(filename,dump_pac):
             print thing

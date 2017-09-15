@@ -1,11 +1,11 @@
-    import os,struct,glob,gzip,zlib,json
+import os,struct,glob,gzip,zlib,json
 from cStringIO import StringIO
 from PIL import Image
-for filename in glob.glob("output2/char_*_img.pac.extracted/*.hip"):
+for filename in glob.glob("bbcf2/char_ct_img.pac.extracted/*.hip"):
     outname = os.path.split(filename)[1].replace(".hip",".png")
-    if not os.path.isdir("db/bbcpex/img/"+outname[0:2]):
-        os.makedirs("db/bbcpex/img/"+outname[0:2])
-    outfile = "db/bbcpex/img/"+outname[0:2]+"/"+os.path.split(filename)[1].replace(".hip",".png")
+    if not os.path.isdir("db/bbcf_200/img/"+outname[0:2]):
+        os.makedirs("db/bbcf_200/img/"+outname[0:2])
+    outfile = "db/bbcf_200/img/"+outname[0:2]+"/"+os.path.split(filename)[1].replace(".hip",".png")
     if os.path.isfile(outfile) or "dmy_camera.hip" in filename:
         continue
     f = open(filename,"rb")
