@@ -116,6 +116,8 @@ def parse_bbscript_routine(f,end = -1):
                 currentIndicator = currentIndicator.replace(" ","__sp__")
             if '?' in currentIndicator:
                 currentIndicator = currentIndicator.replace("?","__qu__")
+            if '@' in currentIndicator:
+                currentIndicator = currentIndicator.replace("@","__at__")
             currentContainer = []
             j["Functions"].append({'type':'state','name':currentIndicator,'commands':currentContainer})
         elif dbData["name"] == "startSubroutine":
@@ -126,6 +128,8 @@ def parse_bbscript_routine(f,end = -1):
                 currentIndicator = currentIndicator.replace(" ","__sp__")
             if '?' in currentIndicator:
                 currentIndicator = currentIndicator.replace("?","__qu__")
+            if '@' in currentIndicator:
+                currentIndicator = currentIndicator.replace("@","__at__")
             currentContainer = []
             j["Functions"].append({'type':'subroutine','name':currentIndicator,'commands':currentContainer})
         elif dbData["name"] in ["endFunction","endSubroutine"]:
@@ -144,6 +148,8 @@ def parse_bbscript_routine(f,end = -1):
                 currentIndicator = currentIndicator.replace(" ","__sp__")
             if '?' in currentIndicator:
                 currentIndicator = currentIndicator.replace("?","__qu__")
+            if '@' in currentIndicator:
+                currentIndicator = currentIndicator.replace("@","__at__")
             astStack[-1].append(FunctionDef(currentIndicator,arguments([],None,None,[]),[],[Name(id="State")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 8:
@@ -154,6 +160,8 @@ def parse_bbscript_routine(f,end = -1):
                 currentIndicator = currentIndicator.replace(" ","__sp__")
             if '?' in currentIndicator:
                 currentIndicator = currentIndicator.replace("?","__qu__")
+            if '@' in currentIndicator:
+                currentIndicator = currentIndicator.replace("@","__at__")
             astStack[-1].append(FunctionDef(currentIndicator,arguments([],None,None,[]),[],[Name(id="Subroutine")]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 15:
