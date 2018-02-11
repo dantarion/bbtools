@@ -11,6 +11,7 @@ The goal here is analyze the game files of several games made by Arc System Work
 * Blazblue: All versions (Original CT release all the way through the upcoming Central Fiction version)
 * Persona 4 Arena and Persona 4 Arena Ultimax
 * Guilty Gear Xrd and Guilty Gear Xrd: Revelator
+* Dragon Ball FighterZ (new!)
 
 # Secondary Targets
 
@@ -25,7 +26,7 @@ The same may be true of Extreme Butoden. Might as well make the code for these t
 * @dantarion, main developer
 * @bananaken, for helping on twitter and giving tons of insight and knowledge about these games I don't actually play
 * @logichole, for labeling a billion commands less than 24 hours after the public release of boxdox-bb
-* @labreezy, for labeling half of revelator and updating the parser/rebuilder to bbcf steam version
+* @labreezy, for labeling half of revelator and updating the parser/rebuilder to bbcf steam version, as well as getting the ball rolling on DBFZ.
 * @geo, for helping out @labreezy with BB normal/special inputs
 
 # Shoutouts
