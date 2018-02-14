@@ -171,9 +171,14 @@ class Rebuilder(astor.ExplicitNodeVisitor):
                 self.visit_body(node.orelse)
                 writeCommandByName("endElse",[])
         elif (isinstance(node.test,Call) or isinstance(node.test,Compare)):
-            self.visit(node.test)
-            if(isinstance(node.test,Call)):
+            if isinstance(node.test,Compare):
+                self.visit(node.test)
+            elif(isinstance(node.test,Call) and not node.test.func.id.startswith('conditional') and not node.test.func.id == 'op'):
+                self.visit(node.test)
                 writeCommandByName("if",[2,0])
+            elif isinstance(node.test,Call) and (node.test.func.id.startswith('conditional') or node.test.func.id == 'op'):
+                cmdId = commandDBLookup[node.test.func.id]["id"]
+                writeCommandByID(cmdId,node.test.args)
             self.visit_body(node.body)
             writeCommandByName("endIf",[])
             if len(node.orelse) > 0:

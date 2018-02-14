@@ -109,6 +109,11 @@ def parse_dbscript_routine(f,end = -1):
             tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
+        elif currentCMD in [2498, 2499, 2500] or dbData['name'] == 'op' and cmdData[0] not in [9,10,11,12,13,15]:
+            tmp = Expr(Call(Name(id=dbData["name"]),map(sanitizer(currentCMD),cmdData),[],None,None))
+            astStack[-1].append(If(tmp.value,[],[]))
+            astStack.append(astStack[-1][-1].body)
+            inIf += 1
         elif dbData['name'] == 'op' and cmdData[0]in [9,10,11,12,13,15]:
             if(cmdData[1] == 2):
                 lval = Name(id="SLOT_"+str(cmdData[2]))
