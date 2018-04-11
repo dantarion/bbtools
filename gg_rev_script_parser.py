@@ -1,28 +1,35 @@
 import os, struct, json, astor, sys
 from ast import *
 from collections import defaultdict, OrderedDict
+import named_value_lookup
 
 commandDB  = json.loads(open('static_db/gg_revelator/commandDB.json').read())
 characters = json.loads(open('static_db/gg_revelator/characters.json').read())
-moveInputs = json.loads(open('static_db/gg_revelator/named_values/move_inputs.json').read())
 
 commandCounts = defaultdict(int)
 commandCalls = defaultdict(list)
 MODE = "<"
 GAME = "gg_rev"
 uponLookup = {
-    0:"IMMEDIATE",
-    23:"ON_HIT_OR_BLOCK"
+    0: "IMMEDIATE",
+    1: "BEFORE_EXIT",
+    3: "FRAME",
+    8: "HIT_OR_GUARD",
+    10: "HIT",
+    11: "RECEIVE_ATTACK",
+    23: "ON_HIT_OR_BLOCK",
+    47: "AFTER_EXIT",
+    53: "START",
+    74: "GUARD"
 }
 slotLookup = {
     212:"IS_STYLISH"
 }
 def getUponName(cmdData):
-    if cmdData == 0:
-        return "IMMEDIATE"
-    if cmdData == 23:
-        return "ON_HIT_OR_BLOCK"
-    return str(cmdData)
+    if uponLookup.has_key(cmdData):
+        return uponLookup[cmdData]
+    else:
+        return str(cmdData)
 def getSlotName(cmdData):
     if cmdData == 212:
         return "IS_STYLISH"
@@ -33,11 +40,9 @@ def sanitizer(command):
             s = "'{0}'".format(s.strip("\x00"))
         elif command and "hex" in commandDB[str(command)]:
             s = hex(s)
-
+        command_name = commandDB[str(command)].get("name")
         string = str(s).strip("\x00")
-        const = findNamedValue(command, string)
-        if const:
-            string = const
+        string = named_value_lookup.name_for_value(command_name, string) or string
 
         return string
     return sanitize
@@ -49,10 +54,6 @@ def pysanitizer(command):
             s = hex(s)
         return str(s).strip("\x00")
     return sanitize
-def findNamedValue(command, value):
-    if commandDB[str(command)]['name'] == 'move_input':
-        if value in moveInputs:
-            return moveInputs[value]
 def parse_bbscript_routine(f,end = -1):
     global MODE,j,astRoot
     currentCMD = -1
