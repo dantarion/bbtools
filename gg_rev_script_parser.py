@@ -279,9 +279,12 @@ def parse_bbscript(f,basename,dirname):
     j = OrderedDict()
     j["Functions"] = []
     j["FunctionsPy"] = []
+    f.seek(0x30)
+    filesize = struct.unpack(MODE+"I",f.read(4))[0]
+    f.seek(0x38)
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
-    f.seek(0x24*(FUNCTION_COUNT)+4)
-    parse_bbscript_routine(f, os.path.getsize(f.name))
+    f.seek(0x24*(FUNCTION_COUNT),1)
+    parse_bbscript_routine(f, filesize + 0x38)
     '''
     for i in range(0,FUNCTION_COUNT):
         f.seek(BASE+4+0x24*i)

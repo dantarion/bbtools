@@ -2,6 +2,10 @@ import os,struct,glob,zlib,subprocess
 OUT_PATH = "bbcf2/"
 IN_PATH = r"G:\SteamLibrary\steamapps\common\BlazBlue Centralfiction\data\Char"
 MODE = "<"
+def find_active(f,basename,filename,filesize):
+    f.seek(0x2F,1)
+    if struct.unpack("B", f.read(1))[0] != 0:
+        print filename[:-7]
 def dump_pac(f,basename,filename,filesize):
     if not os.path.isdir(OUT_PATH+basename+".extracted"):
         os.makedirs(OUT_PATH+basename+".extracted")
@@ -35,7 +39,7 @@ def iterpac(filename,func):
     #STRING_SIZE = (STRING_SIZE + 15) & ~15
 
     for i in range(0,FILE_COUNT):
-        f.seek(BASE+0x20+i*(ENTRY_SIZE))
+        f.seek(BASE+0x20+i*(ENTRY_SIZE)+0x10)
         FILE_NAME,FILE_ID,FILE_OFFSET,FILE_SIZE,UNK = struct.unpack(MODE+str(STRING_SIZE)+"s4I",f.read(0x10+STRING_SIZE))
         FILE_NAME = FILE_NAME.split("\x00")[0]
         f.seek(BASE+DATA_START+FILE_OFFSET)
