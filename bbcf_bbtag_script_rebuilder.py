@@ -3,10 +3,9 @@ import sys
 from ast import *
 from collections import defaultdict, OrderedDict
 import bbcpex_script_parser
-json_data=open("static_db/bbcf/commandDB.json").read()
+json_data=open("newbbtagcommandDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
-characters = json.loads(json_data)
 moveInputs = json.loads(open("static_db/bbcf/named_values/move_inputs.json").read())
 normalInputs = json.loads(open("static_db/bbcf/named_values/normal_inputs.json").read())
 
@@ -15,7 +14,6 @@ namedValueLookup = {}
 namedButtonLookup = {}
 namedDirectionLookup = {}
 bbcpex_script_parser.commandDB = commandDB
-bbcpex_script_parser.characters = characters
 for key,data in commandDB.items():
     data["id"] = int(key)
     if "name" in data:
@@ -80,7 +78,7 @@ def writeCommandByID(id,params):
     output.write(struct.pack(MODE+"I",id))
     if "format" in cmdData:
         output.write(struct.pack(MODE+cmdData["format"],*myParams))
-    else:
+    elif cmdData["size"] > 4:
         output.write(myParams[0].decode('hex'))
 
 class Rebuilder(astor.ExplicitNodeVisitor):

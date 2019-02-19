@@ -2,7 +2,7 @@ import os, struct, json, astor,sys
 from ast import *
 from collections import defaultdict, OrderedDict
 
-json_data=open("static_db/bbcf/commandDB.json").read()
+json_data=open("static_db/bbcf/newbbtagcommandDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
@@ -55,20 +55,10 @@ def getUponName(cmdData):
         return "ON_HIT_OR_BLOCK"
     return str(cmdData)
 def getSlotName(cmdData):
-    if cmdData == 47:
-        return "IsInOverdrive"
-    if cmdData == 54:
-        return "IsInOverdrive2"
-    if cmdData == 106:
-        return "IsInOverdrive3"
-    if cmdData == 91:
-        return "IsPlayer2"
-    if cmdData == 112:
-        return "IsUnlimitedCharacter"
-    return str(cmdData)
+    return cmdData
 def sanitizer(command):
     def sanitize(s):
-        if command in [34,14012,14001] and isinstance(s, int):
+        if command in [43,14012,14001] and isinstance(s, int):
             s = findNamedValue(command, s)
         elif isinstance(s,str):
             s = "'{0}'".format(s.strip("\x00"))
@@ -107,7 +97,7 @@ def parse_bbscript_routine(f,end = -1):
             cmdData = [f.read(commandDB[str(currentCMD)]["size"]-4).encode("hex")]
         else:
             cmdData = list(struct.unpack(MODE+dbData["format"],f.read(struct.calcsize(dbData["format"]))))
-        commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
+        #commandCalls[currentCMD].append((characters[charName],currentIndicator,currentFrame,"{0}({1})".format(dbData["name"],",".join(map(sanitizer(currentCMD),cmdData)))))
         if currentCMD == 0:
             currentIndicator = cmdData[0].strip("\x00")
             if currentIndicator[0].isdigit():
@@ -169,7 +159,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4 and cmdData[1] == 0:
             if astStack[-1] == []:
-                tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
+                tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
                 astStack[-1].append(If(tmp,[],[]))
             else:        
                 tmp = astStack[-1].pop()
@@ -178,7 +168,7 @@ def parse_bbscript_routine(f,end = -1):
                 astStack[-1].append(If(tmp.value,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 4:
-            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
+            tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 18 and cmdData[1] == 0:
@@ -189,7 +179,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 18:
 
-            tmp = Name(id="SLOT_"+getSlotName(cmdData[2]))
+            tmp = Name(id="SLOT_"+str(getSlotName(cmdData[2])))
             astStack[-1].append(If(tmp,[],[]))
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 40 and cmdData[0] in [9,10,11,12,13]:
@@ -250,7 +240,7 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 54:
-            tmp = Name(id="SLOT_"+getSlotName(cmdData[1]))
+            tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
             astStack[-1].append(If(UnaryOp(Not(),tmp),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 56:
@@ -337,12 +327,12 @@ def parse_bbscript(f,basename,filename,filesize):
     j["FunctionsPy"] = []
     charName = filename[-6:-4]
     FUNCTION_COUNT, = struct.unpack(MODE+"I",f.read(4))
-    f.seek(BASE+4+0x20)
-    initEnd, = struct.unpack(MODE+"I",f.read(4))
-    initEnd = BASE + initEnd+4+0x24*FUNCTION_COUNT
-    initEnd = BASE+filesize
+   # f.seek(BASE+4+0x20)
+   # initEnd, = struct.unpack(MODE+"I",f.read(4))
+   # initEnd = BASE + initEnd+4+0x24*FUNCTION_COUNT
+   # initEnd = BASE+filesize
     f.seek(BASE+4+0x24*(FUNCTION_COUNT))
-    parse_bbscript_routine(f,initEnd)
+    parse_bbscript_routine(f,os.path.getsize(f.name))
     '''
     for i in range(0,FUNCTION_COUNT):
         f.seek(BASE+4+0x24*i)
