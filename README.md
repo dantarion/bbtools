@@ -53,7 +53,7 @@ scr_xx.bin is the main script file, and controls anything that's directly attach
 
 scr_xxea.bin is called upon by scr_xx.bin when a projectile/visual effect needs to be spawned, and the sprite/collision durations and other properties of said projectiles are found there.
 
-To decompile a script file, it's recommended you put the bin in a new folder inside the bbtools folder with bbcf_script_parser.py in it.  Then start up your cmd again (if it's not still open) and type in these two lines:
+To decompile a script file, it's recommended you put the bin in a new folder inside the bbtools folder with bbcf_bbtag_script_parser.py in it.  Then start up your cmd again (if it's not still open) and type in these two lines:
 
 ```
 cd C:\path\to\bbtools
