@@ -3,7 +3,7 @@ import sys
 from ast import *
 from collections import defaultdict, OrderedDict
 import bbcpex_script_parser
-json_data=open("newbbtagcommandDB.json").read()
+json_data=open("static_db/bbcf/commandsDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
 moveInputs = json.loads(open("static_db/bbcf/named_values/move_inputs.json").read())

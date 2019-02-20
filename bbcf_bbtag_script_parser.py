@@ -2,7 +2,7 @@ import os, struct, json, astor,sys
 from ast import *
 from collections import defaultdict, OrderedDict
 
-json_data=open("static_db/bbcf/newbbtagcommandDB.json").read()
+json_data=open("static_db/bbcf/commandsDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
 characters = json.loads(json_data)
