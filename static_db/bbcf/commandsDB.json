@@ -155,6 +155,7 @@
         "format": "i"
     },
     "22008": {
+        "name": "setInvincibleFor",
         "size": 8,
         "format": "i"
     },
@@ -430,6 +431,7 @@
         "format": "i"
     },
     "9154": {
+        "name": "hitstun",
         "size": 8,
         "format": "i"
     },
@@ -467,6 +469,7 @@
         "format": ""
     },
     "9250": {
+        "name": "FreezeCount",
         "size": 8,
         "format": "i"
     },
@@ -729,9 +732,7 @@
         "format": "32s"
     },
     "7005": {
-        "size": 72,
-        "name": "tag_voice",
-        "format": "i16s16s16s16s"
+        "size": 72
     },
     "7004": {
         "name": "SFX_4",
@@ -744,6 +745,7 @@
         "format": "16s4i4i4i4i"
     },
     "12051": {
+        "name": "StarterRating",
         "size": 8,
         "format": "i"
     },
@@ -1031,6 +1033,7 @@
         "format": "i"
     },
     "23027": {
+        "name": "DisableAttackRestOfMove",
         "format": ""
     },
     "9205": {
@@ -1195,6 +1198,7 @@
         "format": "i"
     },
     "2017": {
+        "name": "EnableCollision",
         "size": 8,
         "format": "i"
     },
@@ -1665,6 +1669,7 @@
         "format": "i"
     },
     "2058": {
+        "name": "ConsumeSuperMeter",
         "size": 8,
         "format": "i"
     },
@@ -2300,6 +2305,7 @@
         "format": "i"
     },
     "11028": {
+        "name": "blockstun",
         "size": 8,
         "format": "i"
     },
@@ -2578,10 +2584,12 @@
         "format": "ii"
     },
     "11090": {
+        "name": "BonusProrationPct",
         "size": 8,
         "format": "i"
     },
     "11091": {
+        "name": "MinimumDamagePct",
         "size": 8,
         "format": "i"
     },
@@ -2685,6 +2693,7 @@
         "format": "i"
     },
     "12036": {
+        "name": "SuperFreezeDuration",
         "size": 8,
         "format": "i"
     },
@@ -3576,6 +3585,7 @@
         "format": ""
     },
     "9262": {
+        "name": "FreezeDuration",
         "size": 8,
         "format": "i"
     },
@@ -3653,6 +3663,7 @@
         "size": 20
     },
     "11033": {
+        "name": "ProjectileDurabilityLvl",
         "size": 8,
         "format": "i"
     },
@@ -3661,6 +3672,7 @@
         "format": "i"
     },
     "11031": {
+        "name": "ChipDamagePct",
         "size": 8,
         "format": "i"
     },
@@ -4188,6 +4200,7 @@
         "format": ""
     },
     "11001": {
+        "name": "AdditionalHitstopOpponent",
         "size": 16,
         "format": "iii"
     },
