@@ -732,7 +732,9 @@
         "format": "32s"
     },
     "7005": {
-        "size": 72
+        "size": 72,
+        "name": "tag_voice",
+        "format": "i16s16s16s16s"
     },
     "7004": {
         "name": "SFX_4",
