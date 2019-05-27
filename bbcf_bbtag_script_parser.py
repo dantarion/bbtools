@@ -172,10 +172,14 @@ def parse_bbscript_routine(f,end = -1):
             astStack[-1].append(If(tmp,[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 18 and cmdData[1] == 0:
-            tmp = astStack[-1].pop()
-            if not hasattr(tmp,"value"):
-                tmp = Expr(tmp)
-            astStack[-1].append(If(tmp.value,[],[]))
+            if astStack[-1] == []:
+                tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
+                astStack[-1].append(If(tmp,[],[]))
+            else: 
+                tmp = astStack[-1].pop()
+                if not hasattr(tmp,"value"):
+                    tmp = Expr(tmp)
+                astStack[-1].append(If(tmp.value,[],[]))
             astStack[-1][-1].body = [Expr(Call(Name(id="_gotolabel"),[cmdData[0]],[],None,None))]
         elif currentCMD == 18:
 
@@ -234,10 +238,14 @@ def parse_bbscript_routine(f,end = -1):
             tmp = Assign([lval],BinOp(lval,op,rval))
             astStack[-1].append(tmp)
         elif currentCMD == 54 and cmdData[1] == 0:
-            tmp = astStack[-1].pop()
-            if not hasattr(tmp,"value"):
-                tmp = Expr(tmp)
-            astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
+            if astStack[-1] == []:
+                tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
+                astStack[-1].append(If(tmp,[],[]))
+            else: 
+                tmp = astStack[-1].pop()
+                if not hasattr(tmp,"value"):
+                    tmp = Expr(tmp)
+                astStack[-1].append(If(UnaryOp(Not(),tmp.value),[],[]))
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 54:
             tmp = Name(id="SLOT_"+str(getSlotName(cmdData[1])))
@@ -245,7 +253,10 @@ def parse_bbscript_routine(f,end = -1):
             astStack.append(astStack[-1][-1].body)
         elif currentCMD == 56:
             ifnode = astStack[-1][-1]
-            astStack.append(ifnode.orelse)
+            if(isinstance(ifnode, If)):
+                astStack.append(ifnode.orelse)
+            else:
+                astStack.append([])
         elif currentCMD in [1,5,9,16,55,57]:
             if len(astStack[-1]) == 0:
                 astStack[-1].append(Pass())
