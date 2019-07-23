@@ -18,9 +18,12 @@ uponLookup = {
     0:"IMMEDIATE",
     1:"STATE_END",
     2:"LANDING",
-    10:"ON_HIT_OR_BLOCK"
+    3:"CLEAR_OR_EXIT",
+    10:"ON_HIT_OR_BLOCK",
 }
 slotLookup = {
+    0: "ReturnVal",
+    18: "FrameCounter",
     47: "IsInOverdrive",
     54: "IsInOverdrive2",
     106: "IsInOverdrive3",
