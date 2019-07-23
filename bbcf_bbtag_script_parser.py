@@ -48,17 +48,11 @@ def findNamedValue(command, value):
         return value
 
 def getUponName(cmdData):
-    if cmdData == 0:
-        return "IMMEDIATE"
-    if cmdData == 1:
-        return "STATE_END"
-    if cmdData == 2:
-        return "LANDING"
-    if cmdData == 10:
-        return "ON_HIT_OR_BLOCK"
-    return str(cmdData)
+    return uponLookup.get(cmdData,str(cmdData))
+
 def getSlotName(cmdData):
-    return cmdData
+    return slotLookup.get(cmdData,str(cmdData))
+
 def sanitizer(command):
     def sanitize(s):
         if command in [43,14012,14001] and isinstance(s, int):
@@ -69,6 +63,7 @@ def sanitizer(command):
             s = hex(s)
         return str(s).strip("\x00")
     return sanitize
+
 def pysanitizer(command):
     def sanitize(s):
         if isinstance(s,str):
