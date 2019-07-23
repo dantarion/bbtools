@@ -2,7 +2,7 @@ import os, struct, json, pac,astor, fnmatch
 import sys
 from ast import *
 from collections import defaultdict, OrderedDict
-import bbcpex_script_parser
+import bbcf_bbtag_script_parser
 json_data=open("static_db/bbcf/commandsDB.json").read()
 commandDB = json.loads(json_data)
 json_data=open("static_db/bbcf/characters.json").read()
@@ -13,15 +13,15 @@ commandDBLookup = {}
 namedValueLookup = {}
 namedButtonLookup = {}
 namedDirectionLookup = {}
-bbcpex_script_parser.commandDB = commandDB
+bbcf_bbtag_script_parser.commandDB = commandDB
 for key,data in commandDB.items():
     data["id"] = int(key)
     if "name" in data:
         commandDBLookup[data["name"]] = data
     else:
         commandDBLookup["Unknown"+key] = data
-uponLookup = {v: k for k, v in bbcpex_script_parser.uponLookup.items()}
-slotLookup = {v: k for k, v in bbcpex_script_parser.slotLookup.items()}
+uponLookup = {v: k for k, v in bbcf_bbtag_script_parser.uponLookup.items()}
+slotLookup = {v: k for k, v in bbcf_bbtag_script_parser.slotLookup.items()}
 for k,v in moveInputs.items():
     namedValueLookup[v] = k
 for k,v in normalInputs['grouped_values'].items():
