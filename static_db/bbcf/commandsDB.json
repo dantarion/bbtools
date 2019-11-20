@@ -4385,5 +4385,29 @@
     "30093": {
     	"size": 24,
     	"format": "iiiii"
+    },
+    "2068": {
+    	"size": 8,
+    	"format": "i"
+    },
+    "9366": {
+    	"size": 8,
+    	"format": "i"
+    },
+    "2074": {
+    	"size": 8,
+    	"format": "i"
+    },
+    "103": {
+    	"size": 12,
+    	"format": "ii"
+    },
+    "12060": {
+    	"size": 8,
+    	"format": "i"
+    },
+    "2075": {
+    	"size": 8,
+    	"format": "i"
     }
 }
